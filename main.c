@@ -3,9 +3,9 @@
 #include <math.h>
 #include <stdbool.h>
 #include "list.h"
-
+#include "funciones_answer.h"
 
 int main(void) {
-  printf("Hello World\n");
+  mostrarMenu();
   return 0;
 }
