@@ -4,20 +4,7 @@
 #include "list.h"
 
 typedef struct Node Node;
-
-struct Node {
-    void * data;
-    Node * next;
-    Node * prev;
-};
-
-struct List {
-    Node * head;
-    Node * tail;
-    Node * current;
-};
-
-typedef List List;
+typedef struct List List;
 
 Node * createNode(void * data) {
     Node * new = (Node *)malloc(sizeof(Node));
@@ -93,6 +80,14 @@ void pushBack(List * list, void * data) {
         list->tail = nuevoNodo;
         nuevoNodo->prev = list->current;
     }
+    list->current = nuevoNodo;
+}
+
+void replace(List * list, void * data){
+    Node *nuevoNodo = createNode(data);
+    list->current->prev->next = nuevoNodo;
+    list->current->next->prev = nuevoNodo;
+    list->current = nuevoNodo;
 }
 
 void * popFront(List * list) {
@@ -140,3 +135,14 @@ void cleanList(List * list) {
         popFront(list);
     }
 }
+
+/*void display(List* list) {
+
+    Node* current = list->head;
+
+    while(current != NULL) {
+        printf("");
+        current = current->next;
+    }
+
+} */
