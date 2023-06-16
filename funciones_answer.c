@@ -12,23 +12,29 @@
 #define CODELEN 8
 
 typedef struct{
-    char nombre[MAXLEN];
+    char nombre[MAXLEN + 1];
     char codigo[CODELEN];
     char precio[9];
+    //char marca[MAXLEN];
     //int precio;
-    char categoria[MAXLEN];
+    char categoria[MAXLEN + 1];
     List *supermercados;
 }tipoProducto;
 
 typedef struct{
-    char nombre[MAXLEN];
+    char nombre[MAXLEN + 1];
     List *productos;
 }tipoCategoria;
 
 typedef struct{
-    char nombre[MAXLEN];
+    char nombre[MAXLEN + 1];
     List *productos;
 }tipoSupermercado;
+
+typedef struct{
+    char rut[MAXLEN + 1];
+    char password[MAXLEN + 1];
+}tipoAdministrador;
 
 void mostrarOpciones()
 {
@@ -64,7 +70,7 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMa
         token = strtok(linea, ",");
         strncpy(nuevoProducto->codigo, token, sizeof(nuevoProducto->codigo));
         
-        token = strtok(linea, ",");
+        token = strtok(NULL, ",");
         strncpy(nuevoProducto->nombre, token, sizeof(nuevoProducto->nombre));
     
         token = strtok(NULL, ",");
@@ -74,6 +80,7 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMa
         tipoCategoria* nuevaCategoria = (tipoCategoria*) malloc(sizeof(tipoCategoria));
         strncpy(nuevoProducto->categoria, token, sizeof(nuevoProducto->categoria));
         strncpy(nuevaCategoria->nombre, token, sizeof(nuevaCategoria->nombre));
+        nuevaCategoria->productos = createList();
         pushBack(nuevaCategoria->productos, nuevoProducto);
         insertMap(mapaCategorias, nuevaCategoria->nombre, NULL, nuevaCategoria);
         
@@ -98,7 +105,9 @@ void mostrarMenu()
     HashMap* mapaProductos;
     HashMap* mapaSupermercados;
     HashMap* mapaCategorias;
-    importarDatosCSV(mapaProductos, mapaSupermercados, mapaCategorias);
+
+    HashMap* mapaAdmin;
+    //importarDatosCSV(mapaProductos, mapaSupermercados, mapaCategorias);
     
     List* canasta = createList();
     int opcion;
@@ -113,7 +122,7 @@ void mostrarMenu()
             break;
         case 2:
             printf("OPCION 2 INGRESADA\n\n");
-            //printAllP(productos);
+            printAllP(mapaProductos);
             break;
         case 3:
             printf("OPCION 3 INGRESADA\n\n");
@@ -129,6 +138,8 @@ void mostrarMenu()
             break;
         case 7:
             printf("OPCION 7 INGRESADA\n\n");
+            if(loginAdmin(mapaAdmin) != 0)
+                menuAdmin(mapaProductos,mapaSupermercados,mapaCategorias,mapaAdmin);
 
             break;
         case 0:
@@ -145,14 +156,13 @@ void armarCanasta(List* canasta, HashMap* mapaProductos, HashMap* mapaSupermerca
         getchar();
     }while(strlen(nomProducto) > MAXLEN);
 
-    tipoProducto* current;
+    Pair* current;
     if( (current = searchMap(mapaProductos,nomProducto)) == NULL) {
         printf("EL PRODUCTO A BUSCAR NO SE ENCUENTRA EN LA BASE DE DATOS\n");
         return;
     }
-
     printf("Lista de supermercados que contienen el producto: %s\n",nomProducto);
-    printListS(current->supermercados);
+    printListS(((tipoProducto *)current->value)->supermercados);
     
     char nomSupermercado[MAXLEN + 1];
     do{
@@ -168,7 +178,6 @@ void armarCanasta(List* canasta, HashMap* mapaProductos, HashMap* mapaSupermerca
     }
     
     pushBack(canasta,current);
-    
 }
 
 void printListS(List* Super) {
@@ -182,9 +191,80 @@ void printListS(List* Super) {
 }
 
 
-/*
-void printAllP(HashMap* productos) {
 
+void printAllP(HashMap* productos) {
+    Pair* current = firstMap(productos);
+    if(current == NULL) {
+        printf("NO HAY PRODUCTOS EN LA BASE DE DATOS\n");
+        return;
+    }
+
+    printf("LISTA DE PRODUCTOS A NIVEL NACIONAL:\n");
+    
+    int cont = 1;
+     while(current != NULL) {
+        tipoProducto* producto = (tipoProducto*) current->value;
+        printf("%d. %s %s %s\n",cont,producto->nombre,producto->categoria,producto->precio);
+        cont++;
+        current = nextMap(productos);
+     }
     
 }
-*/
+
+int loginAdmin(HashMap* mapaAdmin) {
+
+    while(1) {
+        char rut[MAXLEN + 1];
+        do{
+            printf("INGRESE RUT PARA INICIAR SESIÓN\n");
+            scanf("%s",rut);
+            getchar();
+        }while(strlen(rut) > MAXLEN);
+    
+        char password[MAXLEN + 1];
+        do{
+            printf("INGRESE CONTRASEÑA PARA INICIAR SESIÓN\n");
+            scanf("%s",password);
+            getchar();
+        }while(strlen(password) > MAXLEN);
+
+        if (successLogin(searchMap(mapaAdmin,rut)->value,rut,password)) {
+            printf("SE HA INICIADO SESION EXITOSAMENTE\n");
+            
+            return 1;
+        } 
+    }
+    
+}
+
+int successLogin(Pair* adminItem, char* rut, char* password) {
+    if(adminItem == NULL)
+        return 0;
+
+    tipoAdministrador* admin = (tipoAdministrador *) adminItem->value;
+    
+    if(strcmp(admin->rut,rut) != 0 || strcmp(admin->password,password) != 0)
+        return 0;
+
+    return 1;
+}
+
+
+
+
+void mostrarMenuAdmin()
+{
+    printf("*****************************************************************\n");
+    printf("1. INGRESE 1 SI DESEA AGREGAR PRODUCTOS\n");
+    printf("2. INGRESE 2 SI DESEA AGREGAR SUPERMERCADOS\n");
+    printf("3. INGRESE 3 SI DESEA AGREGAR CATEGORIA\n");
+    printf("4. INGRESE 4 SI DESEA QUITAR PRODUCTOS\n");
+    printf("5. INGRESE 5 SI DESEA SALIR AL MENU PRINICIPAL\n");
+    printf("*****************************************************************\n\n");
+    
+}
+
+void menuAdmin(HashMap* mapaProductos,HashMap* mapaSupermercados,HashMap* mapaCategorias,HashMap* mapaAdmin)
+{
+    mostrarMenuAdmin();
+}
