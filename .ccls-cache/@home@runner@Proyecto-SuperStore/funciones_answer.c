@@ -102,11 +102,12 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMa
 
 void mostrarMenu()
 {
-    HashMap* mapaProductos;
-    HashMap* mapaSupermercados;
-    HashMap* mapaCategorias;
-
-    HashMap* mapaAdmin;
+    HashMap* mapaProductos=createMap(5);
+    HashMap* mapaSupermercados=createMap(5);
+    HashMap* mapaCategorias=createMap(5);
+    
+    HashMap* mapaAdmin=createMap(5);
+    
     //importarDatosCSV(mapaProductos, mapaSupermercados, mapaCategorias);
     
     List* canasta = createList();
@@ -139,7 +140,7 @@ void mostrarMenu()
         case 7:
             printf("OPCION 7 INGRESADA\n\n");
             if(loginAdmin(mapaAdmin) != 0)
-                menuAdmin(mapaProductos,mapaSupermercados,mapaCategorias,mapaAdmin);
+                menuAdmin(mapaProductos,mapaSupermercados,mapaCategorias);
 
             break;
         case 0:
@@ -254,17 +255,42 @@ int successLogin(Pair* adminItem, char* rut, char* password) {
 
 void mostrarMenuAdmin()
 {
-    printf("*****************************************************************\n");
+    printf("***********************************************\n");
     printf("1. INGRESE 1 SI DESEA AGREGAR PRODUCTOS\n");
     printf("2. INGRESE 2 SI DESEA AGREGAR SUPERMERCADOS\n");
     printf("3. INGRESE 3 SI DESEA AGREGAR CATEGORIA\n");
     printf("4. INGRESE 4 SI DESEA QUITAR PRODUCTOS\n");
     printf("5. INGRESE 5 SI DESEA SALIR AL MENU PRINICIPAL\n");
-    printf("*****************************************************************\n\n");
+    printf("***********************************************\n");
     
 }
 
-void menuAdmin(HashMap* mapaProductos,HashMap* mapaSupermercados,HashMap* mapaCategorias,HashMap* mapaAdmin)
+void menuAdmin(HashMap* mapaProductos,HashMap* mapaSupermercados,HashMap* mapaCategorias)
 {
     mostrarMenuAdmin();
+    int opcion;
+    scanf("%d", &opcion);
+    switch (opcion) {
+    case 1:
+        printf("OPCION 1 INGRESADA\n\n");
+        
+        break;
+    case 2:
+        printf("OPCION 2 INGRESADA\n\n");
+        
+        break;
+    case 3:
+        printf("OPCION 3 INGRESADA\n\n");
+        
+        break;
+    case 4:
+        printf("OPCION 4 INGRESADA\n\n");
+        
+        break;
+    case 5:
+        printf("OPCION 5 INGRESADA\n\n");
+        
+        printf("GURDANDO CAMBIOS ...");
+        break;
+    }
 }
