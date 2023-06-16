@@ -18,6 +18,7 @@ typedef struct{
     //char marca[MAXLEN];
     //int precio;
     char categoria[MAXLEN + 1];
+    int cantSupermercados;
     List *supermercados;
 }tipoProducto;
 
@@ -64,37 +65,63 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMa
     int test;
     
     
-    while (fgets(linea, sizeof(linea), file) != NULL) {
+    while (fgets(linea, sizeof(linea), file) != NULL) {   
         tipoProducto* nuevoProducto = (tipoProducto*) malloc(sizeof(tipoProducto));
-        
+
         token = strtok(linea, ",");
         strncpy(nuevoProducto->codigo, token, sizeof(nuevoProducto->codigo));
         
         token = strtok(NULL, ",");
         strncpy(nuevoProducto->nombre, token, sizeof(nuevoProducto->nombre));
-    
+
         token = strtok(NULL, ",");
         strncpy(nuevoProducto->precio, token, sizeof(nuevoProducto->precio));
         
         token = strtok(NULL, ",");
+        
         tipoCategoria* nuevaCategoria = (tipoCategoria*) malloc(sizeof(tipoCategoria));
         strncpy(nuevoProducto->categoria, token, sizeof(nuevoProducto->categoria));
         strncpy(nuevaCategoria->nombre, token, sizeof(nuevaCategoria->nombre));
         nuevaCategoria->productos = createList();
+        
         pushBack(nuevaCategoria->productos, nuevoProducto);
-        insertMap(mapaCategorias, nuevaCategoria->nombre, NULL, nuevaCategoria);
+        insertMap(mapaCategorias, nuevaCategoria->nombre, nuevaCategoria->nombre, nuevaCategoria);
+        
+        token = strtok(NULL, ",");
+        nuevoProducto->cantSupermercados = atoi(token);
         
         nuevoProducto->supermercados = createList();
         
-        for (size_t i = 0; (token = strtok(NULL, ",")) != NULL; i++) {
+        for (unsigned short i = 0; i < nuevoProducto->cantSupermercados; i++) {
             token = strtok(NULL, ",");
             tipoSupermercado *nuevoSupermercado = (tipoSupermercado*) malloc(sizeof(nuevoSupermercado));
-            strncpy(nuevoSupermercado->nombre, token, sizeof(nuevoSupermercado->nombre));
+            long long longitud = sizeof(nuevoSupermercado->nombre);
+            for (unsigned short i = 0; i < sizeof(nuevoSupermercado->nombre); i++)
+            {
+                if (token[i] == '\0')    break;
+                nuevoSupermercado->nombre[i] = token[i];
+            }
             pushBack(nuevoProducto->supermercados, nuevoSupermercado);
+            nuevoSupermercado->productos = createList();
             pushBack(nuevoSupermercado->productos, nuevoProducto);
-            replace(nuevoProducto->supermercados, nuevoSupermercado);
-            insertMap(mapaSupermercados, nuevoSupermercado->nombre, NULL, nuevoSupermercado);
+            insertMap(mapaSupermercados, nuevoSupermercado->nombre, nuevoSupermercado->nombre, nuevoSupermercado);
         }
+        
+        tipoSupermercado* supermercadoAux = firstList(nuevoProducto->supermercados);
+        scanf("%d", &test);
+        printf("%s,%s,%s,%s,", nuevoProducto->codigo, nuevoProducto->nombre, nuevoProducto->precio, nuevoProducto->categoria);
+        printf("%s", supermercadoAux->nombre);
+        
+        int sizeListaSupermercados = get_size_list(nuevoProducto->supermercados);
+        printf("%d", sizeListaSupermercados);
+        scanf("%d", &test);
+        for (unsigned short i = 1; i < sizeListaSupermercados; i++)
+        {
+            supermercadoAux = nextList(nuevoProducto->supermercados);
+            printf("%s", supermercadoAux->nombre);
+        }
+        scanf("%d", &test);
+        
         insertMap(mapaProductos, nuevoProducto->nombre, nuevoProducto->codigo, nuevoProducto);
     }
     fclose(file);

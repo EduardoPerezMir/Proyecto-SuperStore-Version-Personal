@@ -41,6 +41,8 @@ void display(List* list);
 
 void replace(List * list, void * data);
 
+unsigned short get_size_list(List* list);
+
 #endif /* List_h */
 
 

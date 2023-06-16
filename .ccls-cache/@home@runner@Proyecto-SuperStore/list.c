@@ -3,9 +3,6 @@
 #include <assert.h>
 #include "list.h"
 
-typedef struct Node Node;
-typedef struct List List;
-
 Node * createNode(void * data) {
     Node * new = (Node *)malloc(sizeof(Node));
     assert(new != NULL);
@@ -81,13 +78,7 @@ void pushBack(List * list, void * data) {
         nuevoNodo->prev = list->current;
     }
     list->current = nuevoNodo;
-}
-
-void replace(List * list, void * data){
-    Node *nuevoNodo = createNode(data);
-    list->current->prev->next = nuevoNodo;
-    list->current->next->prev = nuevoNodo;
-    list->current = nuevoNodo;
+    nuevoNodo->next = NULL;
 }
 
 void * popFront(List * list) {
@@ -146,3 +137,28 @@ void cleanList(List * list) {
     }
 
 } */
+
+
+void replace(List * list, void * data){
+    Node *nuevoNodo = createNode(data);
+    list->current->prev->next = nuevoNodo;
+    list->current->next->prev = nuevoNodo;
+    nuevoNodo->prev = list->current->prev;
+    nuevoNodo->next = list->current->next;
+    list->current = nuevoNodo;
+    
+}
+
+unsigned short get_size_list(List* list)
+{
+    unsigned short cont = 0;
+    if (list->head == NULL)    return 0;
+    
+    list->current = list->head;
+    while (list->current != NULL)
+    {
+        cont++;
+        list->current = list->current->next;
+    }
+    return cont;
+}
