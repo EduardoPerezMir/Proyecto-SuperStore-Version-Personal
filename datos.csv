@@ -1,3 +1,34 @@
-producto,precio,categoria,supermecado
-1234567G,camion,3500,juguete,1,santa isabel
-8765432T,yogurt,3600,alimento,2,lider,santa isabel
+clave,nombre,precio,categoria,cantidad de supermercados,supermecado
+6543298F,Cereal de maíz,2500,alimento,1,Lider
+1293847G,Martillo,1200,herramienta,2,Jumbo,Paris
+9812734H,Jabón de manos,500,higiene,3,Santa Isabel,Lider,Jumbo
+2398476I,Limones,800,fruta,2,Lider,Jumbo
+7892345J,Pan blanco,1500,alimento,1,Santa Isabel
+9827364K,Licor,5000,bebida,2,Paris,Santa Isabel
+3289475L,Calcetines,1000,vestuario,3,Jumbo,Lider,Santa Isabel
+7129384M,Cuchara,300,utensilio,1,Jumbo
+9384756N,Pizza,4500,alimento,2,Santa Isabel,Jumbo
+9827364O,Pintura acrílica,2000,arte,1,Paris
+2384756P,Detergente,2500,limpieza,3,Lider,Jumbo,Santa Isabel
+7892374Q,Melón,2000,fruta,1,Jumbo
+9273645R,Aceite de oliva,3500,condimento,2,Lider,Santa Isabel
+3847563S,Toallas de papel,800,limpieza,1,Santa Isabel
+2938475T,Pantalones,35000,vestuario,3,Lider,Jumbo,Santa Isabel
+9847562U,Cepillo de uñas,200,higiene,2,Lider,Santa Isabel
+7829345V,Jabón en barra,1000,higiene,1,Jumbo
+6738459W,Mantequilla,1800,alimento,3,Santa Isabel,Jumbo,Lider
+4759362X,Esponja,500,lavado,1,Santa Isabel
+3847592Y,Tostadas,1200,snack,2,Lider,Jumbo
+6927384Z,Máquina de coser,90000,electrodomestico,1,Lider
+9283645A,Pimiento,1000,verdura,3,Santa Isabel,Jumbo,Lider
+2938475B,Esmalte de uñas,1500,belleza,1,Santa Isabel
+8475632C,Cable HDMI,500,electrónica,2,Lider,Jumbo
+3748592D,Tomates,800,fruta,1,Jumbo
+7463928E,Manteles,2000,hogar,3,Lider,Jumbo,Santa Isabel
+9283475F,Queso crema,1800,alimento,2,Lider,Jumbo
+2938476G,Vasos desechables,500,utensilio,1,Jumbo
+8475632H,Auriculares inalámbricos,3000,electrónica,3,Jumbo,Santa Isabel,Lider
+3748592I,Pepino,500,verdura,1,Santa Isabel
+7463928J,Velas perfumadas,1000,hogar,2,Jumbo,Lider
+9283475K,Papel aluminio,800,utensilio,3,Lider,Jumbo,Santa Isabel
+
