@@ -39,26 +39,18 @@ int is_equal(void* key1, void* key2){
 }
 
 
-void insertMap(HashMap * map, char * key, char* key2, void * value) {
+void insertMap(HashMap * map, char * key, void * value) {
     if (map->size >= 0.70 * map->capacity)
         enlarge(map);
     
     long indice = hash(key,map->capacity);
-    if (key2 == NULL){
-        while (map->buckets[indice]!=NULL && map->buckets[indice]->key!=NULL)
-        {
-            if (is_equal(key,map->buckets[indice]->key)==1)return;
-            indice=(indice+1) % map->capacity;
-        }
-    }
-    else
+
+    while (map->buckets[indice]!=NULL && map->buckets[indice]->key!=NULL)
     {
-        while (map->buckets[indice]!=NULL && map->buckets[indice]->key2!=NULL)
-        {
-            if (is_equal(key,map->buckets[indice]->key2)==1)return;
-            indice=(indice+1) % map->capacity;
-        }
+        if (is_equal(key,  map->buckets[indice]->key) == 0)return;
+        indice=(indice+1) % map->capacity;
     }
+
     map->buckets[indice] = createPair(key,value);
     map->current = indice;
     map->size++;
@@ -78,7 +70,7 @@ void enlarge(HashMap * map) {
     for (long k = 0 ; k < sizeAux ; k++)
     {
         if (aux[k] !=NULL && aux[k]->key != NULL)
-            insertMap(map,aux[k]->key,NULL,aux[k]->value); 
+            insertMap(map,aux[k]->key,aux[k]->value); 
     }
     free(aux); 
 }
@@ -114,7 +106,7 @@ Pair * searchMap(HashMap * map,  char * key) {
     
     while (map->buckets[indice] != NULL) // Mapea por la clave
     {
-        if (is_equal(key,map->buckets[indice]->key))
+        if (is_equal(key,map->buckets[indice]->key) == 1)
         {
             map->current=indice;
             return map->buckets[indice];

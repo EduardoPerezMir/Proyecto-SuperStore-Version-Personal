@@ -7,13 +7,12 @@ typedef struct HashMap HashMap;
 
 typedef struct Pair {
   char *key;
-  char *key2;
   void *value;
 } Pair;
 
 HashMap *createMap(long capacity);
 
-void insertMap(HashMap *table, char *key, char *key2, void *value);
+void insertMap(HashMap *table, char *key, void *value);
 
 void eraseMap(HashMap *table, char *key);
 
