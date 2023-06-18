@@ -5,7 +5,7 @@
 
 Node * createNode(void * data) {
     Node * new = (Node *)malloc(sizeof(Node));
-    assert(new != NULL);
+    if (new == NULL)    exit(EXIT_FAILURE);
     new->data = data;
     new->prev = NULL;
     new->next = NULL;
@@ -62,23 +62,19 @@ void * prevList(List * list) {
 
 void pushBack(List * list, void * data) {
     Node *nuevoNodo = createNode(data);
-    
-    if (list->head == NULL)
-    {
-        nuevoNodo->next = nuevoNodo;
-        nuevoNodo->prev = nuevoNodo;
+    nuevoNodo->next = NULL;
+
+    if (list->head == NULL) {
+        nuevoNodo->prev = NULL;
         list->head = nuevoNodo;
         list->tail = nuevoNodo;
-    }
-    else
-    {
-        list->current = list->tail;
+    } else {
         list->tail->next = nuevoNodo;
+        nuevoNodo->prev = list->tail;
         list->tail = nuevoNodo;
-        nuevoNodo->prev = list->current;
     }
+
     list->current = nuevoNodo;
-    nuevoNodo->next = NULL;
 }
 
 void * popFront(List * list) {
@@ -113,18 +109,27 @@ void * popCurrent(List * list) {
     list->current->prev->next = list->current->next;
     list->current->next->prev = list->current->prev;
   }
-  
+    
+  list->current = NULL;
+    
   free(list->current);
-  
-  list->current = list->head;
   
   return dato;
 }
 
 void cleanList(List * list) {
-    while (list->head != NULL) {
-        popFront(list);
+    Node *current = list->head;
+    Node *next;
+    
+    while (current != NULL) {
+        next = current->next;
+        free(current);
+        current = next;
     }
+
+    list->head = NULL;
+    list->tail = NULL;
+    list->current = NULL;
 }
 
 /*void display(List* list) {
@@ -159,6 +164,27 @@ unsigned short get_size_list(List* list)
     {
         cont++;
         list->current = list->current->next;
+    }
+    return cont;
+}
+
+int isListEmpty(List* lista)
+{
+    if (lista->head == NULL)    return 1;
+    else     return 0;    
+}
+
+int get_size(List* lista)
+{
+    if (lista->head == NULL)
+        return 0;
+    
+    lista->current = lista->head;
+    int cont = 0;
+    while (lista->current != NULL)
+    {
+         cont++;
+        lista->current = lista->current->next;
     }
     return cont;
 }

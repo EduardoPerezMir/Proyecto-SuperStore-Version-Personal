@@ -43,6 +43,8 @@ void replace(List * list, void * data);
 
 unsigned short get_size_list(List* list);
 
+int isListEmpty(List* lista);
+
+int get_size(List* lista);
+
 #endif /* List_h */
-
-

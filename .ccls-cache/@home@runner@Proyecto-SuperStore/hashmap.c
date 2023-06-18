@@ -32,13 +32,6 @@ long hash( char * key, long capacity) {
     return hash % capacity;
 }
 
-int is_equal(void* key1, void* key2){
-    if(key1 == NULL || key2 == NULL) return 0;
-    if(strcmp((char*)key1,(char*)key2) == 0) return 1;
-    return 0;
-}
-
-
 void insertMap(HashMap * map, char * key, void * value) {
     if (map->size >= 0.70 * map->capacity)
         enlarge(map);
@@ -47,33 +40,40 @@ void insertMap(HashMap * map, char * key, void * value) {
 
     while (map->buckets[indice]!=NULL && map->buckets[indice]->key!=NULL)
     {
-        if (is_equal(key,  map->buckets[indice]->key) == 0)return;
+        if (strcmp(key,  map->buckets[indice]->key) == 0)return;
         indice=(indice+1) % map->capacity;
     }
 
     map->buckets[indice] = createPair(key,value);
     map->current = indice;
     map->size++;
-    return;
 }
 
 void enlarge(HashMap * map) {
-    enlarge_called = 1; // no borrar (testing purposes)
     Pair** aux = map->buckets;
     long sizeAux = map->capacity;
     map->capacity *= 2;
-    map->buckets = (Pair **) calloc(map->capacity,sizeof(Pair *));
+    map->buckets = (Pair **) calloc(map->capacity, sizeof(Pair *));
     
-    if (map->buckets == NULL) exit(EXIT_FAILURE);
+    if (map->buckets == NULL) return;
     map->size = 0;
     
     for (long k = 0 ; k < sizeAux ; k++)
     {
-        if (aux[k] !=NULL && aux[k]->key != NULL)
-            insertMap(map,aux[k]->key,aux[k]->value); 
+        if (aux[k] !=NULL && aux[k]->key != NULL) {
+            long indice = hash(aux[k]->key, map->capacity);
+            
+            while (map->buckets[indice] != NULL && map->buckets[indice]->key != NULL) {
+                indice = (indice + 1) % map->capacity;
+            }
+            
+            map->buckets[indice] = createPair(aux[k]->key, aux[k]->value);
+            map->size++;
+        }
     }
-    free(aux); 
+    free(aux);
 }
+
 
 
 HashMap * createMap(long capacity) {
@@ -106,7 +106,7 @@ Pair * searchMap(HashMap * map,  char * key) {
     
     while (map->buckets[indice] != NULL) // Mapea por la clave
     {
-        if (is_equal(key,map->buckets[indice]->key) == 1)
+        if (strcmp(key,map->buckets[indice]->key) == 0)
         {
             map->current=indice;
             return map->buckets[indice];
