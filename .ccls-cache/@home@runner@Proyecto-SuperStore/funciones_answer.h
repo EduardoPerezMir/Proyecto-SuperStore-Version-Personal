@@ -48,6 +48,11 @@ typedef struct{
     char password[MAXLEN + 1];
 }tipoAdministrador;
 
+typedef struct{
+    char nombre[MAXLEN + 1];
+    char supermercado[M]
+}tipoCanasta;
+
 void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMap* mapaCategorias, BTree* arbolProductos);
 
 void armarCanasta(List* canasta, HashMap* mapaProductos, HashMap* mapaSupermercado);
@@ -57,6 +62,8 @@ void mostrarTodosProductos(HashMap* productos);
 void printListS(List* Super); // Muestra lista de supermercados
 
 void printAllP(HashMap* mapaProductos); // Mostrar todos los productos OPCION 2
+
+void printListP(List* Super); // Mostrar toda la lista de productos (OPCION CANASTA)
 
 int loginAdmin(HashMap* mapaAdministradores); // Iniciar sesion como administrador OPCION 7, Si se inicia sesion correctamente retorna distinto a 0
 
@@ -68,6 +75,10 @@ void menuAdmin(HashMap* mapaProductos,HashMap* mapaSupermercados,HashMap* mapaCa
 
 void agregarProducto(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* mapaSupermercados);
 
+void agregarSupermercado (HashMap* mapaSupermercados);
+
+void agregarCategoria (HashMap* mapaCategorias);
+
 void busquedaProductosDirecta(HashMap* mapa);
 
 void busquedaPorPrecio(BTree* arbolP);
@@ -76,10 +87,10 @@ tipoProducto* busquedaProductosAdyacentes(HashMap* mapa);
 
 void mostrarProducto(tipoProducto* producto);
 
-int isInList(List* list, void* element); //test
+void subMenuCanasta();
 
 void mostrarMenu();
 
-void mostrarOpciones();
+void mostrarOpciones(); //
 
 #endif /* Funciones_answer_h */

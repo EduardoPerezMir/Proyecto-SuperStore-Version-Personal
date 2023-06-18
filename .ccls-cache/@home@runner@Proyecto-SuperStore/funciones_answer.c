@@ -60,7 +60,7 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMa
     fclose(file);
 }
 
-/*void importarCredencialesAdmin (HashMap* mapaAdmin)
+void importarCredencialesAdmin (HashMap* mapaAdmin)
 {
     FILE* file = fopen("credenciales_admin.csv", "r");
     if (file == NULL) {
@@ -84,39 +84,75 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMa
       insertMap(mapaAdmin,nuevoAdmin->rut, nuevoAdmin);
    }
 }
-*/
 
-void armarCanasta(List* canasta, HashMap* mapaProductos, HashMap* mapaSupermercados) {
-    char nomProducto[MAXLEN + 1];
-    do{
-        printf("INGRESE NOMBRE DEL PRODUCTO AGREGAR A LA CANASTA\n");
-        scanf("%s",nomProducto);
-        getchar();
-    }while(strlen(nomProducto) > MAXLEN);
-
-    Pair* current;
-    if( (current = searchMap(mapaProductos,nomProducto)) == NULL) {
-        printf("EL PRODUCTO A BUSCAR NO SE ENCUENTRA EN LA BASE DE DATOS\n");
-        return;
-    }
-    printf("Lista de supermercados que contienen el producto: %s\n",nomProducto);
-    printListS(((tipoProducto *)current->value)->supermercados);
-    
-    char nomSupermercado[MAXLEN + 1];
-    do{
-        printf("INGRESE NOMBRE DEL PRODUCTO AGREGAR A LA CANASTA\n");
-        scanf("%s",nomSupermercado);
-        getchar();
-    }while(strlen(nomSupermercado) > MAXLEN);
-
-
-    if(searchMap(mapaSupermercados,nomSupermercado) == NULL) {
-        printf("EL SUPERMERCADO A BUSCAR NO SE ENCUENTRA EN LA BASE DE DATOS\n");
-        return;
-    }
-    
-    pushBack(canasta,current);
+void subMenuCanasta() {
+    printf("********************************************************\n");
+    printf("1. INGRESE 1 SI DESEA VER TODOS PRODUCTOS DE LA CANASTA\n");
+    printf("2. INGRESE 2 SI DESEA AGREGAR PRODUCTOS A LA CANASTA\n");
+    printf("********************************************************\n");
 }
+
+
+void armarCanasta(List* canasta, HashMap* mapaProductos, HashMap* mapaSupermercados)
+{
+    
+    subMenuCanasta();
+    int opcion;
+    do {
+        scanf("%i",&opcion);
+    }while(opcion!=1 && opcion!=2);
+
+
+    if (opcion == 1) 
+    {
+        if (isListEmpty(canasta))
+            printf("NO EXISTEN PRODUCTOS EN LA CANASTA\n");
+        else printListP(canasta);
+    } 
+    else
+    {
+        char nomProducto[MAXLEN + 1];
+        do{
+            printf("INGRESE NOMBRE DEL PRODUCTO AGREGAR A LA CANASTA\n");
+            scanf("%s",nomProducto);
+            getchar();
+        }while(strlen(nomProducto) > MAXLEN);
+    
+        Pair* current;
+        if( (current = searchMap(mapaProductos,nomProducto)) == NULL) {
+            printf("EL PRODUCTO A BUSCAR NO SE ENCUENTRA EN LA BASE DE DATOS\n");
+            return;
+        }
+        printf("Lista de supermercados que contienen el producto: %s\n",nomProducto);
+        printListS(((tipoProducto *)current->value)->supermercados);
+        
+        char nomSupermercado[MAXLEN + 1];
+        do{
+            printf("INGRESE NOMBRE DEL SUPERMERCADO QUE POSEE EL PRODUCTO AGREGAR A LA CANASTA\n");
+            scanf("%s",nomSupermercado);
+            getchar();
+        }while(strlen(nomSupermercado) > MAXLEN);
+    
+    
+        if(searchMap(mapaSupermercados,nomSupermercado) == NULL) {
+            printf("EL SUPERMERCADO A BUSCAR NO SE ENCUENTRA EN LA BASE DE DATOS\n");
+            return;
+        }
+        pushBack(canasta,current->value);
+        printf("EL PRODUCTO %s DEL SUPERMERCADO %s HA SIDO AGREGADO A LA CANASTA\n",nomProducto,nomSupermercado);
+    }
+}
+
+void printListP(List* Super) {
+    tipoProducto* current = firstList(Super);
+    int cont = 1;
+    while(current != NULL) {
+        printf("%d. %s\n",cont,current->nombre);
+        cont++;
+        current = nextList(Super);
+    }
+}
+
 
 void printListS(List* Super) {
     tipoSupermercado* current = firstList(Super);
@@ -130,7 +166,7 @@ void printListS(List* Super) {
 
 void mostrarProducto(tipoProducto* productoAMostrar)
 {
-    puts(barra4);
+    //puts(barra4);
     printf("Nombre Producto: %s\nPrecio: %s\nCategoria: %s\n", productoAMostrar->nombre, productoAMostrar->precio, productoAMostrar->categoria);
     tipoSupermercado* supermercadoPtr = firstList(productoAMostrar->supermercados);
     printf("Supermercado 1: %s\n", supermercadoPtr->nombre);
@@ -139,25 +175,24 @@ void mostrarProducto(tipoProducto* productoAMostrar)
         supermercadoPtr = nextList(productoAMostrar->supermercados);
         printf("Supermercado %d: %s\n", i + 1, supermercadoPtr->nombre);
     }
-    puts(barra4);
+    //puts(barra4);
 }
 
 
 void printAllP(HashMap* productos) {
     Pair* current = firstMap(productos);
     if(current == NULL) {
-        printf("NO HAY PRODUCTOS EN LA BASE DE DATOS\n");
+        printf("No hay productos existentes\n");
         return;
     }
     
-    printf("\nLISTA DE PRODUCTOS A NIVEL NACIONAL:\n\n");
+    printf("\nLista de productos existentes:\n\n");
     
     int cont = 1;
      while(current != NULL) {
         tipoProducto* producto = (tipoProducto*) current->value;
         printf("            PRODUCTO %d", cont);
         mostrarProducto(producto);
-         //printf("%d. Nombre Producto: %s. Categoria: %s. Precio: %s\n",cont,producto->nombre,producto->categoria,producto->precio);
         cont++;
         current = nextMap(productos);
      }
@@ -180,35 +215,21 @@ int loginAdmin(HashMap * mapaAdmin) {
       getchar();
     } while (strlen(password) > MAXLEN);
 
-        Pair* adminItem = searchMap(mapaAdmin, rut);
-        if (adminItem != NULL) {
-            tipoAdministrador* admin = (tipoAdministrador*)adminItem->value;
-            if (strcmp(admin->rut, rut) == 0 && strcmp(admin->password, password) == 0) {
-                printf("SE HA INICIADO SESIÓN EXITOSAMENTE\n");
-                return 1;
-            }
+    Pair* adminItem = searchMap(mapaAdmin, rut);
+    if (adminItem != NULL) {
+        tipoAdministrador* admin = (tipoAdministrador*)adminItem->value;
+        if (strcmp(admin->rut, rut) == 0 && strcmp(admin->password, password) == 0) {
+            printf("SE HA INICIADO SESIÓN EXITOSAMENTE\n");
+            return 1;
         }
+    
         printf("RUT o contraseña incorrectos. Inténtelo nuevamente.\n");
-      return 0;
-    }
-}
-
-/* cuando estaba intentando utilizar esta funcion para validar las credenciales se me quedaba atrapada en un loop asi que hice todo en la misma funcion.
-int successLogin(Pair* adminItem, char* rut, char* password) {
-    if (adminItem == NULL || adminItem->value == NULL) {
         return 0;
     }
-
-    tipoAdministrador* admin = (tipoAdministrador *) adminItem->value;
-    if(strcmp(admin->rut,rut) != 0 || strcmp(admin->password,password) != 0)
-        return 0;
-
-    return 1;
 }
-*/
+}
 
-void busquedaProductosDirecta(HashMap* mapa)
-{
+void busquedaProductosDirecta(HashMap* mapa) {
     printf("BUSQUEDA DE PRODUCTOS POR NOMBRE\n");
     char nombreProductoBuscado[MAXLEN + 1];
     puts(barra2);
@@ -269,7 +290,7 @@ void busquedaPorPrecio(BTree* arbolP)
     }
 }
 
-/*
+
 void mostrarMenuAdmin()
 {
     puts(barra3);
@@ -289,15 +310,15 @@ void menuAdmin(HashMap* mapaProductos,HashMap* mapaSupermercados,HashMap* mapaCa
     switch (opcion) {
     case 1:
         printf("OPCION 1 INGRESADA\n\n");
-        //agregarProducto(mapaProductos, mapaCategorias, mapaSupermercados);
+        agregarProducto(mapaProductos, mapaCategorias, mapaSupermercados);
         break;
     case 2:
         printf("OPCION 2 INGRESADA\n\n");
-        
+      agregarSupermercado(mapaSupermercados);
         break;
     case 3:
         printf("OPCION 3 INGRESADA\n\n");
-        
+        agregarCategoria(mapaCategorias);
         break;
     case 4:
         printf("OPCION 4 INGRESADA\n\n");
@@ -311,7 +332,45 @@ void menuAdmin(HashMap* mapaProductos,HashMap* mapaSupermercados,HashMap* mapaCa
     }
 }
 
-/*void agregarProducto(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* mapaSupermercados) {
+void agregarSupermercado (HashMap* mapaSupermercados) {
+  char nombreSupermercado [MAXLEN +1];
+  printf("Ingrese el nombre del supermercado: ");
+  scanf("%s", nombreSupermercado);
+  getchar();
+
+  tipoSupermercado* supermercado = (tipoSupermercado*) searchMap(mapaSupermercados, nombreSupermercado);
+  if (supermercado != NULL) {
+      printf("El supermercado ya existe en el mapa de supermercados.\n");
+      return;
+  }
+    supermercado = (tipoSupermercado*)malloc(sizeof(tipoSupermercado));
+    strncpy(supermercado->nombre, nombreSupermercado, sizeof(supermercado->nombre));
+    supermercado->productos = createList();
+
+  insertMap(mapaSupermercados, nombreSupermercado, supermercado);
+  printf("Supermercado agregado exitosamente.\n");
+}
+
+void agregarCategoria (HashMap* mapaCategoria) {
+  char nombreCategoria [MAXLEN +1];
+  printf("Ingrese el nombre de la categoria: ");
+  scanf("%s", nombreCategoria);
+  getchar();
+
+  tipoCategoria* categoria = (tipoCategoria*) searchMap(mapaCategoria, nombreCategoria); 
+  if (categoria != NULL) {
+      printf("La categoria ya existe en el mapa de categorias.\n");
+      return;
+  }
+    categoria = (tipoCategoria*)malloc(sizeof(tipoCategoria));
+    strncpy(categoria->nombre, nombreCategoria, sizeof(categoria->nombre));
+    categoria->productos = createList();
+
+  insertMap(mapaCategoria, nombreCategoria, categoria);
+  printf("Categoria agregado exitosamente.\n");
+}
+
+void agregarProducto(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* mapaSupermercados) {
     char nombre[MAXLEN + 1];
     char precio[PRICELEN + 1];
     char categoria[MAXLEN + 1];
@@ -324,6 +383,9 @@ void menuAdmin(HashMap* mapaProductos,HashMap* mapaSupermercados,HashMap* mapaCa
     printf("Ingrese el precio del producto: ");
     scanf("%s", precio);
     getchar();
+    
+    // Convertir el precio de cadena de caracteres a entero
+    int price = atoi(precio);
 
     printf("Ingrese la categoría del producto: ");
     scanf("%s", categoria);
@@ -337,6 +399,7 @@ void menuAdmin(HashMap* mapaProductos,HashMap* mapaSupermercados,HashMap* mapaCa
     tipoProducto* nuevoProducto = (tipoProducto*)malloc(sizeof(tipoProducto));
     strncpy(nuevoProducto->nombre, nombre, sizeof(nuevoProducto->nombre));
     strncpy(nuevoProducto->precio, precio, sizeof(nuevoProducto->precio));
+    nuevoProducto->price = price;
     strncpy(nuevoProducto->categoria, categoria, sizeof(nuevoProducto->categoria));
     nuevoProducto->cantSupermercados = cantSupermercados;
     nuevoProducto->supermercados = createList();
@@ -374,41 +437,15 @@ void menuAdmin(HashMap* mapaProductos,HashMap* mapaSupermercados,HashMap* mapaCa
             insertMap(mapaSupermercados, nombreSupermercado, supermercado);
         }
 
-        // Verificar si el supermercado ya está asociado al producto
-        Node* currentNode = nuevoProducto->supermercados->head;
-        while (currentNode != NULL) {
-            tipoSupermercado* existingSupermercado = (tipoSupermercado*)currentNode->data;
-            if (strcmp(existingSupermercado->nombre, nombreSupermercado) == 0) {
-                printf("El supermercado ya está asociado al producto.\n");
-                break;
-            }
-            currentNode = currentNode->next;
-        }
-
-        // Si el supermercado no está asociado, agregarlo al producto y a la lista de productos del supermercado
-        if (currentNode == NULL) {
-            pushBack(supermercado->productos, nuevoProducto);
-            pushBack(nuevoProducto->supermercados, supermercado);
-        }
+        // Agregar el producto a la lista de productos del supermercado
+        pushBack(supermercado->productos, nuevoProducto);
+        pushBack(nuevoProducto->supermercados, supermercado);
     }
 
-    
- // Imprimir el producto agregado
-    printf("Producto agregado exitosamente:\n");
-    printf("Nombre: %s\n", nuevoProducto->nombre);
-    printf("Precio: %s\n", nuevoProducto->precio);
-    printf("Categoría: %s\n", nuevoProducto->categoria);
-    printf("Cantidad de supermercados: %d\n", nuevoProducto->cantSupermercados);
-
-    printf("Supermercados asociados:\n");
-    Node* currentNode = nuevoProducto->supermercados->head;
-    while (currentNode != NULL) {
-        tipoSupermercado* supermercado = (tipoSupermercado*)currentNode->data;
-        printf("- %s\n", supermercado->nombre);
-        currentNode = currentNode->next;
-    }
+    printf("Producto agregado exitosamente.\n");
 }
-*/
+
+
 
 void mostrarOpciones()
 {
@@ -426,16 +463,16 @@ void mostrarOpciones()
 
 void mostrarMenu()
 {
-    HashMap* mapaProductos=createMap(MAPINITIALCAPAC);
-    HashMap* mapaSupermercados=createMap(MAPINITIALCAPAC);
-    HashMap* mapaCategorias=createMap(MAPINITIALCAPAC);
+    HashMap* mapaProductos = createMap(MAPINITIALCAPAC);
+    HashMap* mapaSupermercados = createMap(MAPINITIALCAPAC);
+    HashMap* mapaCategorias = createMap(MAPINITIALCAPAC);
     BTree* arbolProductos = createBTree(1 + MAPINITIALCAPAC / 6); // Debe ser impar
     
     HashMap* mapaAdmin = createMap(MAPADMINITIALCAPAC);
     
     importarDatosCSV(mapaProductos, mapaSupermercados, mapaCategorias, arbolProductos);
     traverseBTree(getRoot(arbolProductos));
-    //(importarCredencialesAdmin(mapaAdmin);
+    importarCredencialesAdmin(mapaAdmin);
     
     List* canasta = createList();
     int opcion;
@@ -447,7 +484,7 @@ void mostrarMenu()
         switch (opcion) {
         case 1:
             printf("OPCION 1 INGRESADA\n\n");
-            //armarCanasta(canasta,mapaProductos,mapaSupermercados);
+            armarCanasta(canasta,mapaProductos,mapaSupermercados);
             break;
         case 2:
             puts(barra2);
@@ -475,8 +512,8 @@ void mostrarMenu()
             break;
         case 7:
             printf("OPCION 7 INGRESADA\n\n");
-            //if(loginAdmin(mapaAdmin) != 0)
-            //    menuAdmin(mapaProductos,mapaSupermercados,mapaCategorias);
+            if(loginAdmin(mapaAdmin) != 0)
+               menuAdmin(mapaProductos,mapaSupermercados,mapaCategorias);
             break;
         default:       
             printf("CERRANDO EL PROGRAMA...\n");
