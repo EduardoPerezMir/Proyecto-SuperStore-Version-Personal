@@ -27,7 +27,6 @@ typedef struct BTree {
 
 BTree* createBTree(int order);
 BTreeNode* newBTreeNode(BTree* tree, int leaf);
-void traverseBTree(BTreeNode *root);
 BTreeNode* searchBTree(BTreeNode* root, int value);
 int insertBTree(BTree *tree, int key, void* value);
 int splitChildBTree(BTree* tree, BTreeNode *x, int i);

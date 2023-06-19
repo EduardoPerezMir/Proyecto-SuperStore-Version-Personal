@@ -21,6 +21,7 @@
 #define barra2 "\n-----------------------------------------------------------------\n"
 #define barra3 "\n*****************************************************************\n"
 #define barra4 "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+#define barra5 "||                                                             ||\n"
 
 typedef struct{
     char nombre[MAXLEN + 1];
@@ -50,7 +51,8 @@ typedef struct{
 
 typedef struct{
     char nombre[MAXLEN + 1];
-    char supermercado[MA]
+    char supermercado[MAXLEN + 1];
+    char precio[PRICELEN + 1];
 }tipoCanasta;
 
 void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMap* mapaCategorias, BTree* arbolProductos);
@@ -58,6 +60,8 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMa
 void armarCanasta(List* canasta, HashMap* mapaProductos, HashMap* mapaSupermercado);
 
 void mostrarTodosProductos(HashMap* productos);
+
+void printListPC(List* Super);//muestra canasta
 
 void printListS(List* Super); // Muestra lista de supermercados
 
