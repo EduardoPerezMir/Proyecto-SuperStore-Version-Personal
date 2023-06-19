@@ -187,19 +187,19 @@ void printListS(List* Super) {
 void mostrarProducto(tipoProducto* productoAMostrar)
 {
     //puts(barra4);
-    printf("┌───────────────────────────────┐\n");
-    printf("│ Nombre Producto: %s\n", productoAMostrar->nombre);
-    printf("│ Precio: $%s\n", productoAMostrar->precio);
-    printf("│ Categoria: %s\n", productoAMostrar->categoria);
+    printf("┌──────────────────────────────────────────┐\n");
+    printf("  Nombre Producto: %s\n", productoAMostrar->nombre);
+    printf("  Precio: $%s\n", productoAMostrar->precio);
+    printf("  Categoria: %s\n", productoAMostrar->categoria);
     
     tipoSupermercado* supermercadoPtr = firstList(productoAMostrar->supermercados);
-    printf("│ Supermercado 1: %s\n", supermercadoPtr->nombre);
+    printf("  Supermercado 1: %s\n", supermercadoPtr->nombre);
     for (int i = 1; i < productoAMostrar->cantSupermercados; i++)
     {
         supermercadoPtr = nextList(productoAMostrar->supermercados);
-        printf("│ Supermercado %d: %s\n", i + 1, supermercadoPtr->nombre);
+        printf("  Supermercado %d: %s\n", i + 1, supermercadoPtr->nombre);
     }
-    printf("└───────────────────────────────┘\n");
+    printf("└──────────────────────────────────────────┘\n");
     //puts(barra4);
 }
 
@@ -218,9 +218,9 @@ void printAllP(HashMap* productos) {
      while(current != NULL) {
         tipoProducto* producto = (tipoProducto*) current->value;
         //printf(barra1);
-        printf("\n%31s %d\n","PRODUCTO",cont);
+        printf("\n%24s %d\n","PRODUCTO",cont);
         mostrarProducto(producto);
-        printf(barra1);
+        //printf(barra1);
         cont++;
         current = nextMap(productos);
      }
