@@ -23,7 +23,6 @@ typedef struct{
     char nombre[MAXLEN + 1];
     char precio[PRICELEN + 1];
     int price;
-
     char categoria[MAXLEN + 1];
     int cantSupermercados;
     List *supermercados;
@@ -63,6 +62,8 @@ void printListS(List* Super); // Muestra lista de supermercados
 
 void printListP(List* Super); // Mostrar lista de productos 
 
+void printMapP(HashMap* mapaProducto); //Mostrar todos los productos para el usuario saber al agregar producto a la canasta
+
 
 // Armar Canasta OPCION 1
 
@@ -90,6 +91,7 @@ void busquedaProductosDirecta(HashMap* mapa);
 void busquedaPorPrecio(BTree* arbolP);
 
 // Mostrar por supermercado OPCION 5
+
 
 
 

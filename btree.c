@@ -267,13 +267,9 @@ void searchByRangeBTree(BTreeNode* node, int key1, int key2, List* listaP) {
         return;
     }
     else{
-        int j = 0;
-        while (j < node->numKeys && node->keys[j] < key1) {
-            j++;
-        }
-        while (j <= node->numKeys && (j == node->numKeys || node->keys[j] <= key2)) {
+        for (int j = 0; j <= node->numKeys; j++)
+        {
             searchByRangeBTree(node->children[j], key1, key2, listaP);
-            j++;
         }
     }
 }
