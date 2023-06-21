@@ -23,7 +23,7 @@ Pair * createPair( char * key,  void * value) {
 }
 
 // Funcion hash para obtener el indice
-long hash( char * key, long capacity) {
+long hash(char * key, long capacity) {
     unsigned long hash = 0;
      char * ptr;
     for (ptr = key; *ptr != '\0'; ptr++) {
@@ -40,7 +40,7 @@ void insertMap(HashMap * map, char * key, void * value) {
 
     while (map->buckets[indice]!=NULL && map->buckets[indice]->key!=NULL)
     {
-        if (strcmp(key,  map->buckets[indice]->key) == 0)return;
+        if (strcmp(key,  map->buckets[indice]->key) == 0)    return;
         indice=(indice+1) % map->capacity;
     }
 
@@ -113,6 +113,7 @@ Pair * searchMap(HashMap * map,  char * key) {
         }
         indice=(indice+1) % map->capacity;    
     }
+    
     return NULL;
 }
 
@@ -154,4 +155,14 @@ bool areProductsPresents(HashMap * map)
 long sizeMap(HashMap * map)
 {
     return map->size;
+}
+
+
+void mostrarTodo(HashMap* mapa)
+{
+    for (int i = 0; i < mapa->capacity; i++)
+        {
+            if (mapa->buckets[i] != NULL && mapa->buckets[i]->key != NULL)
+                puts(mapa->buckets[i]->key);
+        }
 }

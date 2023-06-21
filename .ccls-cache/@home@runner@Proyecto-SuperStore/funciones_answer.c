@@ -26,28 +26,57 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMa
         
         token = strtok(NULL, ",");
 
-        tipoCategoria* nuevaCategoria = (tipoCategoria*) malloc(sizeof(tipoCategoria));
         strncpy(nuevoProducto->categoria, token, sizeof(nuevoProducto->categoria));
-        strncpy(nuevaCategoria->nombre, token, sizeof(nuevaCategoria->nombre));
-        nuevaCategoria->productos = createList();
-        pushBack(nuevaCategoria->productos, nuevoProducto);
-        insertMap(mapaCategorias, nuevaCategoria->nombre, nuevaCategoria);
+        Pair* parAux = searchMap(mapaCategorias, token);
+        
+        if (parAux == NULL)
+        {
+            tipoCategoria* nuevaCategoria = (tipoCategoria*) malloc(sizeof(tipoCategoria));
+            strncpy(nuevaCategoria->nombre, token, sizeof(nuevaCategoria->nombre));
+            nuevaCategoria->productos = createList();
+            pushBack(nuevaCategoria->productos, nuevoProducto);
+            insertMap(mapaCategorias, nuevaCategoria->nombre, nuevaCategoria);
+        }
+        else
+        {
+            tipoCategoria* categoriaExistente = parAux->value;
+            pushBack(categoriaExistente->productos, nuevoProducto);
+        }
+
         
         token = strtok(NULL, ",");
         nuevoProducto->cantSupermercados = atoi(token);
         
         nuevoProducto->supermercados = createList();
         
+        Pair* parAux2 = (Pair*) malloc(sizeof(Pair)); 
+        
         for (unsigned short i = 0; i < nuevoProducto->cantSupermercados; i++) {
-            token = strtok(NULL, ",");
-            tipoSupermercado *nuevoSupermercado = (tipoSupermercado*) malloc(sizeof(tipoSupermercado));
-            strncpy(nuevoSupermercado->nombre, token, sizeof(nuevoSupermercado->nombre));
-            pushBack(nuevoProducto->supermercados, nuevoSupermercado);      
-            nuevoSupermercado->productos = createList();
-            pushBack(nuevoSupermercado->productos, nuevoProducto);
-            insertMap(mapaSupermercados, nuevoSupermercado->nombre, nuevoSupermercado);
+            if (i == nuevoProducto->cantSupermercados - 1)
+            {
+                token = strtok(NULL, ".");
+            }
+            else
+            {
+                token = strtok(NULL, ",");
+            }
+            parAux2 = searchMap(mapaSupermercados, token);
+            if (parAux2 == NULL)
+            {
+                tipoSupermercado *nuevoSupermercado = (tipoSupermercado*) malloc(sizeof(tipoSupermercado));
+                strncpy(nuevoSupermercado->nombre, token, sizeof(nuevoSupermercado->nombre));
+                pushBack(nuevoProducto->supermercados, nuevoSupermercado);      
+                nuevoSupermercado->productos = createList();
+                pushBack(nuevoSupermercado->productos, nuevoProducto);
+                insertMap(mapaSupermercados, nuevoSupermercado->nombre, nuevoSupermercado);
+            }
+            else
+            {
+                tipoSupermercado *supermercadoExistente = parAux2->value;
+                pushBack(nuevoProducto->supermercados, supermercadoExistente);
+                pushBack(supermercadoExistente->productos, nuevoProducto);
+            }
         }
-
         
         tipoSupermercado *superAux = firstList(nuevoProducto->supermercados);
         for (int i = 1; i < nuevoProducto->cantSupermercados; i++)
@@ -193,9 +222,9 @@ void printMapP(HashMap* mapaProductos)
     printf("\nLista de productos existentes:\n");
     printf("┌──────────────────────────────────┐\n");
     int cont = 1;
-     while(current != NULL) {
+    while(current != NULL) {
         tipoProducto* producto = (tipoProducto*) current->value;
-         printf(" %i. %s\n",cont,producto->nombre);
+        printf(" %i. %s\n", cont, producto->nombre);
         cont++;
         current = nextMap(mapaProductos);
      }
@@ -264,15 +293,22 @@ void printAllP(HashMap* productos) {
 
 /*La función busquedaProductosDirecta consiste en una busqueda por el nombre del producto en el mapa de productos.*/
 void busquedaProductosDirecta(HashMap* mapa) {
-    printf("Busqueda de productos por nombre");
-    char nombreProductoBuscado[MAXLEN + 1]; //Variable que almacenará la cadena ingresada por el usuario para este caso.
     printMapP(mapa);
+    puts(MSJBUSQUEDA1);
+    char nombreProductoBuscado[MAXLEN + 1]; //Variable que almacenará la cadena ingresada por el usuario para este caso.
     printf("Ingrese el nombre del producto a buscar: ");
-    scanf("%s", nombreProductoBuscado); //Se pide al usuario ingresar el nombre exacto del producto (incluyendo la mayúscula inicial).
-    
+    scanf("%30[^\n]s", nombreProductoBuscado); //Se pide al usuario ingresar el nombre exacto del producto (incluyendo la mayúscula inicial).
+    while (getchar() != '\n');
     Pair* parBuscado = searchMap(mapa, nombreProductoBuscado); //Se busca en el mapa de productos con clave el nombre del producto.
-    tipoProducto* productoBuscado = parBuscado->value; //Se crea una variable auxiliar tipoProducto para almacenar la data del producto buscado por su nombre.
+    if (parBuscado != NULL)
+    {
+            tipoProducto* productoBuscado = parBuscado->value; //Se crea una variable auxiliar tipoProducto para almacenar la data del producto buscado por su nombre.
     mostrarProducto(productoBuscado); //Se muestra el producto.
+    }
+    else
+    {
+        puts(MSJBUSQUEDASC);
+    }
 }
 
 
@@ -283,7 +319,7 @@ void busquedaPorPrecio(BTree* arbolP)
     int precio1 = 1, precio2 = 0;
     List* listaP = createList();
     
-    printf("BUSQUEDA DE PRODUCTOS POR PRECIO\n");
+    puts(MSJBUSQUEDA2);
     
     if (listaP == NULL) //Esta línea fue escrita por seguridad en fugas de memoria.
     {
@@ -304,7 +340,7 @@ void busquedaPorPrecio(BTree* arbolP)
     
     if (isListEmpty(listaP)) // Si la lista está vacía es porque no hay productos en ese rango de precios.
     {
-        printf("NO SE HALLARON PRODUCTOS EN EL RANGO DE PRECIOS SELECCIONADO.");
+        puts(MSJBUSQUEDASC);
         return;
     }
     
@@ -326,24 +362,62 @@ void busquedaPorPrecio(BTree* arbolP)
     }
 }
 
-// Mostrar por supermercado Opcion 5
-
-
-
-// Mostrar por categoria Opcion 6
-
 // Busqueda Productos en Listas Adyacentes:
 
-/*
-tipoProducto* busquedaProductosAdyacentes(HashMap* mapa)
+void busquedaProductosAdyacentes(HashMap* mapa, int indicador)
 {
+    if (indicador == 1)
+    {
+        puts(MSJBUSQUEDA3);
+        puts(MSJBUSQUEDA31);
+    }
+    else
+    {
+        puts(MSJBUSQUEDA4);
+        puts(MSJBUSQUEDA41);
+    }
+    
+    char nombreElementoBuscado[MAXLEN + 1];
+    
+    printf("\n");
+    scanf("%30[^\n]s", nombreElementoBuscado);
+    while (getchar() != '\n');
+    
+    Pair* parBuscado = searchMap(mapa, nombreElementoBuscado);
 
-
-
-
-
-}*/
-
+    if (parBuscado == NULL)
+    {
+        puts(MSJBUSQUEDASC);
+        return;
+    }
+    else
+    {
+        if (indicador == 1)
+        {
+            tipoSupermercado* supermercadoEncontrado = parBuscado->value;
+            int cantProductoAsociados = get_size_list(supermercadoEncontrado->productos);
+            tipoProducto* productoAsociado = firstList(supermercadoEncontrado->productos);
+            mostrarProducto(productoAsociado);
+            for (int i = 1; i < cantProductoAsociados; i++)
+            {
+                productoAsociado = nextList(supermercadoEncontrado->productos);
+                mostrarProducto(productoAsociado);
+            }
+        }
+        else
+        {
+            tipoCategoria* categoriaEncontrada = parBuscado->value;
+            int cantProductoAsociados = get_size_list(categoriaEncontrada->productos);
+            tipoProducto* productoAsociado = firstList(categoriaEncontrada->productos);
+            mostrarProducto(productoAsociado);
+            for (int i = 1; i < cantProductoAsociados; i++)
+            {
+                productoAsociado = nextList(categoriaEncontrada->productos);
+                mostrarProducto(productoAsociado);
+            }
+        }
+    }
+}
 
 // Iniciar sesion sesion como administrador Opcion 7
 
@@ -591,13 +665,14 @@ void mostrarMenu()
     
     importarDatosCSV(mapaProductos, mapaSupermercados, mapaCategorias, arbolProductos);
     importarCredencialesAdmin(mapaAdmin);
-    
+    mostrarTodo(mapaSupermercados);
     List* canasta = createList();
     int opcion;
     do {
         mostrarOpciones();
         printf("Opción: ");
         scanf("%d", &opcion);
+        while (getchar() != '\n');
         switch (opcion) {
         case 1:
             printf("\nOpción 1 ingresada\n");
@@ -617,9 +692,11 @@ void mostrarMenu()
             break;
         case 5:
             printf("\nOpción 5 ingresada\n");
+            busquedaProductosAdyacentes(mapaSupermercados, 1);
             break;
         case 6:
             printf("\nOpción 6 ingresada\n");
+            busquedaProductosAdyacentes(mapaCategorias, 2);
             break;
         case 7:
             printf("\nOpción 7 ingresada\n");

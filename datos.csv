@@ -1,33 +1,33 @@
 nombre,precio,categoria,cantidad de supermercados,supermercado
-Cereal de maíz,2500,Alimento,1,Lider
-Martillo,1200,Herramienta,2,Jumbo,Tottus
-Jabón de manos,500,Higiene,3,Santa Isabel,Lider,Jumbo
-Limones,800,Fruta,2,Lider,Jumbo
-Pan blanco,1500,Alimento,1,Santa Isabel
-Licor,5000,Bebida,2,Tottus,Santa Isabel
-Calcetines,1000,Vestuario,3,Jumbo,Lider,Santa Isabel
-Cuchara,300,Utensilio,1,Jumbo
-Pizza,4500,Alimento,2,Santa Isabel,Jumbo
-Pintura acrílica,2000,Arte,1,Tottus
-Detergente,2500,Limpieza,3,Lider,Jumbo,Santa Isabel
-Melón,2000,Fruta,1,Jumbo
-Aceite de oliva,3500,Condimento,2,Lider,Santa Isabel
-Toallas de papel,800,Limpieza,1,Santa Isabel
-Pantalones,35000,Vestuario,3,Lider,Jumbo,Santa Isabel
-Cepillo de uñas,200,Higiene,2,Lider,Santa Isabel
-Jabón en barra,1000,Higiene,1,Jumbo
-Mantequilla,1800,Alimento,3,Santa Isabel,Jumbo,Lider
-Esponja,500,Lavado,1,Santa Isabel
-Tostadas,1200,Snack,2,Lider,Jumbo
-Máquina de coser,90000,Electrodomestico,1,Lider
-Pimiento,1000,Verdura,3,Santa Isabel,Jumbo,Lider
-Esmalte de uñas,1500,Belleza,1,Santa Isabel
-Cable HDMI,500,Electrónica,2,Lider,Jumbo
-Tomates,800,Fruta,1,Jumbo
-Manteles,2000,Hogar,3,Lider,Jumbo,Santa Isabel
-Queso crema,1800,Alimento,2,Lider,Jumbo
-Vasos desechables,500,Utensilio,1,Jumbo
-Auriculares inalámbricos,3000,Electrónica,3,Jumbo,Santa Isabel,Lider
-Pepino,500,Verdura,1,Santa Isabel
-Velas perfumadas,1000,Hogar,2,Jumbo,Lider
-Papel aluminio,800,Utensilio,3,Lider,Jumbo,Santa Isabel
+Cereal de maíz,2500,Alimento,1,Lider.
+Martillo,1200,Herramienta,2,Jumbo,Tottus.
+Jabón de manos,500,Higiene,3,Santa Isabel,Lider,Jumbo.
+Limones,800,Fruta,2,Lider,Jumbo.
+Pan blanco,1500,Alimento,1,Santa Isabel.
+Licor,5000,Bebida,2,Tottus,Santa Isabel.
+Calcetines,1000,Vestuario,3,Jumbo,Lider,Santa Isabel.
+Cuchara,300,Utensilio,1,Jumbo.
+Pizza,4500,Alimento,2,Santa Isabel,Jumbo.
+Pintura acrílica,2000,Arte,1,Tottus.
+Detergente,2500,Limpieza,3,Lider,Jumbo,Santa Isabel.
+Melón,2000,Fruta,1,Jumbo.
+Aceite de oliva,3500,Condimento,2,Lider,Santa Isabel.
+Toallas de papel,800,Limpieza,1,Santa Isabel.
+Pantalones,35000,Vestuario,3,Lider,Jumbo,Santa Isabel.
+Cepillo de uñas,200,Higiene,2,Lider,Santa Isabel.
+Jabón en barra,1000,Higiene,1,Jumbo.
+Mantequilla,1800,Alimento,3,Santa Isabel,Jumbo,Lider.
+Esponja,500,Lavado,1,Santa Isabel.
+Tostadas,1200,Snack,2,Lider,Jumbo.
+Máquina de coser,90000,Electrodomestico,1,Lider.
+Pimiento,1000,Verdura,3,Santa Isabel,Jumbo,Lider.
+Esmalte de uñas,1500,Belleza,1,Santa Isabel.
+Cable HDMI,500,Electrónica,2,Lider,Jumbo.
+Tomates,800,Fruta,1,Jumbo.
+Manteles,2000,Hogar,3,Lider,Jumbo,Santa Isabel.
+Queso crema,1800,Alimento,2,Lider,Jumbo.
+Vasos desechables,500,Utensilio,1,Jumbo.
+Auriculares inalámbricos,3000,Electrónica,3,Jumbo,Santa Isabel,Lider.
+Pepino,500,Verdura,1,Santa Isabel.
+Velas perfumadas,1000,Hogar,2,Jumbo,Lider.
+Papel aluminio,800,Utensilio,3,Lider,Jumbo,Santa Isabel.

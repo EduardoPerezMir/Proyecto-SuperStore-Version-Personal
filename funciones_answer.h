@@ -15,9 +15,16 @@
 
 #define MAXLEN 30
 #define PRICELEN 9
-#define MAPINITIALCAPAC 36
+#define MAPINITIALCAPAC 41
 #define MAPADMINITIALCAPAC 4
-
+#define MSJBUSQUEDA1 "BUSQUEDA DE PRODUCTOS POR NOMBRE."
+#define MSJBUSQUEDA2 "BUSQUEDA DE PRODUCTOS POR PRECIO."
+#define MSJBUSQUEDA3 "BUSQUEDA DE PRODUCTOS POR SUPERMERCADO."
+#define MSJBUSQUEDA31 "INGRESE EL NOMBRE DEL SUPERMERCADO A BUSCAR."
+#define MSJBUSQUEDA4 "BUSQUEDA DE PRODUCTOS POR CATEGORÍA"
+#define MSJBUSQUEDA41 "INGRESE EL NOMBRE DE LA CATEGORÍA A BUSCAR."
+#define MSJBUSQUEDASC "NO HAY COINCIDENCIAS EN LA BÚSQUEDA."
+// MSJBUSQUEDASC: Mensaje de busqueda para los casos en que no haya coincidencias.
 
 typedef struct{
     char nombre[MAXLEN + 1];
@@ -64,7 +71,6 @@ void printListP(List* Super); // Mostrar lista de productos
 
 void printMapP(HashMap* mapaProducto); //Mostrar todos los productos para el usuario saber al agregar producto a la canasta
 
-
 // Armar Canasta OPCION 1
 
 void subMenuCanasta(); // Muestra submenu de armar canasta
@@ -97,7 +103,7 @@ void busquedaPorPrecio(BTree* arbolP);
 
 //Mostrar por categoria OPCION 6 
 
-tipoProducto* busquedaProductosAdyacentes(HashMap* mapa); // (NO ESTOY SEGURO)
+void busquedaProductosAdyacentes(HashMap* mapa, int indicador);
 
 
 // Iniciar sesion como administrador OPCION 7
