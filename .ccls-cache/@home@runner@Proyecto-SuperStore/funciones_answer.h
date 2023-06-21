@@ -127,6 +127,8 @@ void agregarCategoria (HashMap* mapaCategorias);
 
 void quitarProductos(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* mapaSupermercados);
 
+void eliminarProductoLista(List* productos,char* nomProducto);
+
 // Menu principal
 
 void mostrarMenu();

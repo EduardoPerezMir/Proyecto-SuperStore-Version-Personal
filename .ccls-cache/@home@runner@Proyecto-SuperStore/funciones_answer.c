@@ -541,9 +541,9 @@ void menuAdmin(HashMap* mapaProductos,HashMap* mapaSupermercados,HashMap* mapaCa
         break;
     case 5:
         printf("\nOpción 5 ingresada\n");
-        
+        //falta la funcion para exportar cambios
         printf("GURDANDO CAMBIOS ...");
-        return;
+        mostrarMenu();
         break;
     }
 }
@@ -707,19 +707,6 @@ void agregarCategoria(HashMap* mapaCategorias) {
   }
 }
 
-void menuQuitarProducto()
-{
-    printf("\n╔════════════════════════════════════════════════════════════════════════╗\n");
-    printf("║                                                                        ║\n");
-    printf("║ 1. INGRESE 1 SI DESEA QUITAR EL PRODUCTO DE TODOS LOS SUPERMERCADOS    ║\n");
-    printf("║ 2. INGRESE 2 SI DESEA QUITAR EL PRODUCTO DE UN SUPERMERCADO ESPECIFICO ║\n");
-    printf("║                                                                        ║\n");
-    printf("╚════════════════════════════════════════════════════════════════════════╝\n\n");
-    printf("Opción: ");
-    
-    
-}
-
 void eliminarProductoLista(List* productos,char* nomProducto)
 {
     for (tipoProducto* currentList=firstList(productos);currentList!=NULL;currentList=nextList(productos))
@@ -746,74 +733,43 @@ void quitarProductos(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* m
         printf("\n");
     }while(strlen(nomProducto) > MAXLEN);
     
-    Pair* current=searchMap(mapaProductos,nomProducto);
+    Pair* current = searchMap(mapaProductos,nomProducto);
     if (current == NULL)
     {
         printf("El producto %s no existe en la base de datos",nomProducto);
         menuAdmin(mapaProductos,mapaSupermercados,mapaCategorias);
     }
+
+    tipoProducto* producto = current->value;
+
+    //eliminacion del producto de la lista del mapa de supermercados
+    tipoSupermercado* currentListSuper = firstList(producto->supermercados);
+    while(currentListSuper != NULL)
+    {
+        Pair* parSuper=searchMap(mapaSupermercados,currentListSuper->nombre);
+        tipoSupermercado* elemenMapSuper=parSuper->value;
+        eliminarProductoLista(elemenMapSuper->productos,nomProducto);
+        //se le manda la lista de cada elemento del mapa de supermercado ademas el nombre del producto a eliminar
+        currentListSuper=nextList(producto->supermercados);
+    }
+
+    //eliminacion del producto en la lista del mapa de categoria
+    Pair* parCategoria = searchMap(mapaCategorias,producto->categoria);
+    tipoCategoria* categoria = parCategoria->value;
     
-    menuQuitarProducto();
-    unsigned short opcion = 0;
-    do{
-        scanf("%hu",&opcion);
-        
-    }while(opcion!=1 && opcion!=2);
-    getchar();
-    if (opcion==1)
+    tipoProducto* currentListP = firstList(categoria->productos);
+    while(currentListP != NULL)
     {
-        tipoProducto* producto=current->value;
-
-
-        
-        //eliminacion del producto de la lista del mapa de supermercados
-        
-        for (tipoSupermercado* currentListSuper=firstList(producto->supermercados);currentListSuper!=NULL;currentListSuper=nextList(producto->supermercados))
+        if (strcmp(currentListP->nombre,nomProducto) == 0)
         {
-            Pair* parSuper=searchMap(mapaSupermercados,currentListSuper->nombre);
-            tipoSupermercado* elemenMapSuper=parSuper->value;
-            eliminarProductoLista(elemenMapSuper->productos,nomProducto);//se le manda la lista de cada elemento del mapa de supermercado ademas el nombre del producto a eliminar
+            popCurrent(categoria->productos);
+            break;
         }
-
-        //eliminacion del producto en la lista del mapa de categoria
-        Pair* parCategoria = searchMap(mapaCategorias,producto->categoria);
-        tipoCategoria* categoria=parCategoria->value;
-        for (tipoProducto* currentCategoria = firstList(categoria->productos) ; current!=NULL ; currentCategoria = nextList(categoria->productos))
-        {
-            if (strcmp(currentCategoria->nombre,nomProducto)==0)
-            {
-                popCurrent(categoria->productos);
-                break;
-            }
-        }
-        
-        eraseMap(mapaProductos,nomProducto);
-        printf("El producto %s ha sido eliminado de la base de datos",nomProducto);
-        menuAdmin(mapaProductos,mapaSupermercados,mapaCategorias);
+        currentListP = nextList(categoria->productos);
     }
-    else
-    {
-        printMapP(mapaSupermercados);
-        char nomSupermercado[MAXLEN + 1];
-        do{
-            printf("Ingrese el nombre del supermercado: ");
-            scanf("%[^\n]s",nomSupermercado);
-            getchar();
-            printf("\n");
-        }while(strlen(nomSupermercado) > MAXLEN);
         
-        Pair* currentSuper=searchMap(mapaSupermercados,nomSupermercado);
-        if (currentSuper == NULL)
-        {
-            printf("El supermercado %s no existe en la base de datos",nomSupermercado);
-            menuAdmin(mapaProductos,mapaSupermercados,mapaCategorias);
-        }
-        
-    }
-
-
-
-
+    eraseMap(mapaProductos,nomProducto);
+    printf("El producto %s ha sido eliminado de la base de datos",nomProducto);
     menuAdmin(mapaProductos,mapaSupermercados,mapaCategorias);
 }
 
