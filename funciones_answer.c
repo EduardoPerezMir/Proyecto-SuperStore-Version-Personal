@@ -150,6 +150,29 @@ void subMenuCanasta() {
     printf("╚═════════════════════════════════════════════════════════════╝\n\n");
 }
 
+void subMenuCanastaCantidad()
+{
+    printf("\n╔═════════════════════════════════════════════════════════════╗\n");
+    printf("║                                                             ║\n");
+    printf("║ 1. INGRESE 1 SI DESEA AUMENTAR LA CANTIDAD EN LA CANASTA    ║\n");
+    printf("║ 2. INGRESE 2 SI DESEA SALIR                                 ║\n");
+    printf("║                                                             ║\n");
+    printf("╚═════════════════════════════════════════════════════════════╝\n\n");
+    printf("Opción: ");
+}
+
+tipoCanasta* searchListCanasta(List* canasta,char* key)
+{
+    for (tipoCanasta* current=firstList(canasta);current!=NULL;current=nextList(canasta))
+    {
+        if (strcmp(key,current->nombre)==0)
+        {
+            return current;
+        }
+    }
+    return NULL;
+}
+
 void armarCanasta(List* canasta, HashMap* mapaProductos, HashMap* mapaSupermercados)
 {
     
@@ -195,19 +218,104 @@ void armarCanasta(List* canasta, HashMap* mapaProductos, HashMap* mapaSupermerca
             printf("\n");
         }while(strlen(nomSupermercado) > MAXLEN);
     
-    
         if(searchMap(mapaSupermercados,nomSupermercado) == NULL) {
             printf("El supermercado a buscar no se encuentra en la base de datos\n");
             return;
         }
-
-        tipoCanasta* elemCanasta = (tipoCanasta *) malloc(sizeof(tipoCanasta));
-        strcpy(elemCanasta->nombre,nomProducto);
-        strcpy(elemCanasta->supermercado,nomSupermercado);
-        strcpy(elemCanasta->precio,((tipoProducto *)current->value)->precio);
+        size_t cantidad=0;
+        tipoCanasta* productoBuscado=searchListCanasta(canasta,nomProducto);
         
-        pushBack(canasta,elemCanasta);
-        printf("El producto %s del supermercado %s ha sido agregado a la canasta.\n\n",nomProducto,nomSupermercado);
+        if (productoBuscado==NULL)
+        {
+            printf("Ingrese la cantidad de %s que desea agregar a la canasta :",nomProducto);
+            do{
+                scanf("%zd",&cantidad);
+            }while(cantidad<=0);
+    
+            tipoCanasta* elemCanasta = (tipoCanasta *) malloc(sizeof(tipoCanasta));
+            strcpy(elemCanasta->nombre,nomProducto);
+            strcpy(elemCanasta->supermercado,nomSupermercado);
+            strcpy(elemCanasta->precio,((tipoProducto *)current->value)->precio);
+            elemCanasta->cantidad=cantidad;
+            
+            pushBack(canasta,elemCanasta);
+            printf("El producto %s del supermercado %s ha sido agregado a la canasta.\n\n",nomProducto,nomSupermercado);
+            
+        }
+        else
+        {
+            if (strcmp(productoBuscado->supermercado,nomSupermercado)==0)
+            {
+                printf("El producto %s se encuentra en la canasta con una cantidad de %zd\n",nomProducto,productoBuscado->cantidad);
+                subMenuCanastaCantidad();
+                unsigned short opcion=0;
+                do{
+                    scanf("%hu",&opcion);
+                }while(opcion!=1 && opcion!=2);
+                if (opcion == 2)return;
+                printf("Ingrese la cantidad ha agregar: ");
+                do{
+                    scanf("%zd",&cantidad);
+                }while(cantidad<=0);
+                productoBuscado->cantidad+=cantidad;
+                printf("La cantidad actual de %s en la canasta es %zd\n",nomProducto,productoBuscado->cantidad);
+            }
+            else
+            {
+                printf("Ingrese la cantidad de %s que desea agregar a la canasta :",nomProducto);
+                do{
+                    scanf("%zd",&cantidad);
+                }while(cantidad<=0);
+        
+                tipoCanasta* elemCanasta = (tipoCanasta *) malloc(sizeof(tipoCanasta));
+                strcpy(elemCanasta->nombre,nomProducto);
+                strcpy(elemCanasta->supermercado,nomSupermercado);
+                strcpy(elemCanasta->precio,((tipoProducto *)current->value)->precio);
+                elemCanasta->cantidad=cantidad;
+                
+                pushBack(canasta,elemCanasta);
+                printf("El producto %s del supermercado %s ha sido agregado a la canasta.\n\n",nomProducto,nomSupermercado);
+            }
+        }
+        
+
+        /*
+        if (productoBuscado != NULL)
+        {
+            if (strcmp(productoBuscado->supermercado,nomSupermercado)==0)
+            {
+                printf("El producto %s se encuentra en la canasta con una cantidad de %zd\n",nomProducto,productoBuscado->cantidad);
+                subMenuCanastaCantidad();
+                unsigned short opcion=0;
+                do{
+                    scanf("%hu",&opcion);
+                }while(opcion!=1 && opcion!=2);
+                if (opcion == 2)return;
+                printf("Ingrese la cantidad ha agregar: ");
+                do{
+                    scanf("%zd",&cantidad);
+                }while(cantidad<=0);
+                productoBuscado->cantidad+=cantidad;
+                printf("La cantidad actual de %s en la canasta es %zd\n",nomProducto,productoBuscado->cantidad);
+            }
+            
+        }
+        if (cantidad==0)//si es 0 quiere decir que no esta repetida
+        {
+            printf("Ingrese la cantidad de %s que desea agregar a la canasta :",nomProducto);
+            do{
+                scanf("%zd",&cantidad);
+            }while(cantidad<=0);
+    
+            tipoCanasta* elemCanasta = (tipoCanasta *) malloc(sizeof(tipoCanasta));
+            strcpy(elemCanasta->nombre,nomProducto);
+            strcpy(elemCanasta->supermercado,nomSupermercado);
+            strcpy(elemCanasta->precio,((tipoProducto *)current->value)->precio);
+            elemCanasta->cantidad=cantidad;
+            
+            pushBack(canasta,elemCanasta);
+            printf("El producto %s del supermercado %s ha sido agregado a la canasta.\n\n",nomProducto,nomSupermercado);
+        }  */  
     }
 }
 
@@ -236,16 +344,18 @@ void printListPC(List* Super) {
     tipoCanasta* current = firstList(Super);
     int cont = 1;
     size_t pagar = 0;
+    size_t precioTotalProduc;
 
-    printf("┌──────────────────────────────────┐\n");
+    printf("┌────────────────────────────────────────────────┐\n");
     while(current != NULL) {
-        printf(" %d. Producto: %s\n Supermercado: %s\n Precio: $%s\n\n",cont,current->nombre,current->supermercado,current->precio);
+        precioTotalProduc = atol(current->precio)*current->cantidad;
+        printf(" %d. Producto: %s\n Supermercado: %s\n Cantidad: %zd\n Precio unitario: $%s Precio total: $%zd\n\n",cont,current->nombre,current->supermercado,current->cantidad,current->precio,precioTotalProduc);
         cont++;
-        pagar = pagar + atol(current->precio);
+        pagar = pagar + precioTotalProduc;
         current = nextList(Super);
     }
     printf(" Total a pagar: $%zd\n",pagar);
-    printf("└──────────────────────────────────┘\n\n");
+    printf("└────────────────────────────────────────────────┘\n\n");
 }
 
 // Mostrar toda la oferta de productos Opcion 2

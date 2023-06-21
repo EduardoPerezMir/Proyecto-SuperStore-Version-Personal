@@ -54,6 +54,7 @@ typedef struct{
     char nombre[MAXLEN + 1];
     char supermercado[MAXLEN + 1];
     char precio[PRICELEN + 1];
+    size_t cantidad;
 }tipoCanasta;
 
 // Importacion base de datos
