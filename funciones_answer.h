@@ -80,6 +80,9 @@ void armarCanasta(List* canasta, HashMap* mapaProductos, HashMap* mapaSupermerca
 
 void printListPC(List* Super); // Muestra los productos de la canasta
 
+void subMenuCanastaCantidad();
+
+tipoCanasta* searchListCanasta(List* canasta,char* producto,char* supermercado);
 
 // Mostrar toda la oferta de productos OPCION 2
 
@@ -122,6 +125,7 @@ void agregarSupermercado (HashMap* mapaSupermercados);
 
 void agregarCategoria (HashMap* mapaCategorias);
 
+void quitarProductos(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* mapaSupermercados);
 
 // Menu principal
 

@@ -161,14 +161,13 @@ void subMenuCanastaCantidad()
     printf("Opción: ");
 }
 
-tipoCanasta* searchListCanasta(List* canasta,char* key)
+tipoCanasta* searchListCanasta(List* canasta,char* producto,char* supermercado)
 {
     for (tipoCanasta* current=firstList(canasta);current!=NULL;current=nextList(canasta))
     {
-        if (strcmp(key,current->nombre)==0)
-        {
-            return current;
-        }
+        if (strcmp(producto,current->nombre)==0)
+            if (strcmp(current->supermercado,supermercado)==0)
+                return current;
     }
     return NULL;
 }
@@ -222,10 +221,11 @@ void armarCanasta(List* canasta, HashMap* mapaProductos, HashMap* mapaSupermerca
             printf("El supermercado a buscar no se encuentra en la base de datos\n");
             return;
         }
-        size_t cantidad=0;
-        tipoCanasta* productoBuscado=searchListCanasta(canasta,nomProducto);
         
-        if (productoBuscado==NULL)
+        size_t cantidad=0;
+        tipoCanasta* productoBuscado=searchListCanasta(canasta,nomProducto,nomSupermercado);
+        
+        if (productoBuscado==NULL)//si es null quiere decir que no esta
         {
             printf("Ingrese la cantidad de %s que desea agregar a la canasta :",nomProducto);
             do{
@@ -239,83 +239,26 @@ void armarCanasta(List* canasta, HashMap* mapaProductos, HashMap* mapaSupermerca
             elemCanasta->cantidad=cantidad;
             
             pushBack(canasta,elemCanasta);
-            printf("El producto %s del supermercado %s ha sido agregado a la canasta.\n\n",nomProducto,nomSupermercado);
+            printf("\nEl producto %s del supermercado %s ha sido agregado a la canasta.\n\n",nomProducto,nomSupermercado);
             
         }
         else
         {
-            if (strcmp(productoBuscado->supermercado,nomSupermercado)==0)
-            {
-                printf("El producto %s se encuentra en la canasta con una cantidad de %zd\n",nomProducto,productoBuscado->cantidad);
-                subMenuCanastaCantidad();
-                unsigned short opcion=0;
-                do{
-                    scanf("%hu",&opcion);
-                }while(opcion!=1 && opcion!=2);
-                if (opcion == 2)return;
-                printf("Ingrese la cantidad ha agregar: ");
-                do{
-                    scanf("%zd",&cantidad);
-                }while(cantidad<=0);
-                productoBuscado->cantidad+=cantidad;
-                printf("La cantidad actual de %s en la canasta es %zd\n",nomProducto,productoBuscado->cantidad);
-            }
-            else
-            {
-                printf("Ingrese la cantidad de %s que desea agregar a la canasta :",nomProducto);
-                do{
-                    scanf("%zd",&cantidad);
-                }while(cantidad<=0);
-        
-                tipoCanasta* elemCanasta = (tipoCanasta *) malloc(sizeof(tipoCanasta));
-                strcpy(elemCanasta->nombre,nomProducto);
-                strcpy(elemCanasta->supermercado,nomSupermercado);
-                strcpy(elemCanasta->precio,((tipoProducto *)current->value)->precio);
-                elemCanasta->cantidad=cantidad;
-                
-                pushBack(canasta,elemCanasta);
-                printf("El producto %s del supermercado %s ha sido agregado a la canasta.\n\n",nomProducto,nomSupermercado);
-            }
-        }
-        
-
-        /*
-        if (productoBuscado != NULL)
-        {
-            if (strcmp(productoBuscado->supermercado,nomSupermercado)==0)
-            {
-                printf("El producto %s se encuentra en la canasta con una cantidad de %zd\n",nomProducto,productoBuscado->cantidad);
-                subMenuCanastaCantidad();
-                unsigned short opcion=0;
-                do{
-                    scanf("%hu",&opcion);
-                }while(opcion!=1 && opcion!=2);
-                if (opcion == 2)return;
-                printf("Ingrese la cantidad ha agregar: ");
-                do{
-                    scanf("%zd",&cantidad);
-                }while(cantidad<=0);
-                productoBuscado->cantidad+=cantidad;
-                printf("La cantidad actual de %s en la canasta es %zd\n",nomProducto,productoBuscado->cantidad);
-            }
-            
-        }
-        if (cantidad==0)//si es 0 quiere decir que no esta repetida
-        {
-            printf("Ingrese la cantidad de %s que desea agregar a la canasta :",nomProducto);
+            printf("El producto %s se encuentra en la canasta con una cantidad de %zd\n",nomProducto,productoBuscado->cantidad);
+            subMenuCanastaCantidad();
+            unsigned short opcion=0;
+            do{
+                scanf("%hu",&opcion);
+            }while(opcion!=1 && opcion!=2);
+            if (opcion == 2)return;
+            printf("Ingrese la cantidad ha agregar: ");
             do{
                 scanf("%zd",&cantidad);
             }while(cantidad<=0);
-    
-            tipoCanasta* elemCanasta = (tipoCanasta *) malloc(sizeof(tipoCanasta));
-            strcpy(elemCanasta->nombre,nomProducto);
-            strcpy(elemCanasta->supermercado,nomSupermercado);
-            strcpy(elemCanasta->precio,((tipoProducto *)current->value)->precio);
-            elemCanasta->cantidad=cantidad;
-            
-            pushBack(canasta,elemCanasta);
-            printf("El producto %s del supermercado %s ha sido agregado a la canasta.\n\n",nomProducto,nomSupermercado);
-        }  */  
+            productoBuscado->cantidad+=cantidad;
+            printf("La cantidad actual de %s en la canasta es %zd\n",nomProducto,productoBuscado->cantidad);
+
+        }  
     }
 }
 
@@ -594,11 +537,13 @@ void menuAdmin(HashMap* mapaProductos,HashMap* mapaSupermercados,HashMap* mapaCa
         break;
     case 4:
         printf("\nOpción 4 ingresada\n");
+        quitarProductos(mapaProductos, mapaCategorias, mapaSupermercados);
         break;
     case 5:
         printf("\nOpción 5 ingresada\n");
         
         printf("GURDANDO CAMBIOS ...");
+        return;
         break;
     }
 }
@@ -760,6 +705,33 @@ void agregarCategoria(HashMap* mapaCategorias) {
   } else {
     printf("No se encontró la categoría en el mapa de categorías.\n");
   }
+}
+
+/* en vez de poner return llamo a la funcion menuAdmin porque si se ocupa return se vuelve al menu principal y no se guardan los cambios
+si el usuario quiere guardar los cambios lo va devolver al menu del admin y entra a la opcion salir*/
+void quitarProductos(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* mapaSupermercados)
+{
+
+    printMapP(mapaProductos);
+    char nomProducto[MAXLEN + 1];
+    do{
+        printf("Ingrese el nombre del producto ha eliminar de la base de datos: ");
+        scanf("%s",nomProducto);
+        getchar();
+        printf("\n");
+    }while(strlen(nomProducto) > MAXLEN);
+    if (searchMap(mapaProductos,nomProducto) == NULL)
+    {
+        printf("El producto %s no existe en la base de datos",nomProducto);
+        menuAdmin(mapaProductos,mapaSupermercados,mapaCategorias);
+    }
+
+
+
+
+
+
+    menuAdmin(mapaProductos,mapaSupermercados,mapaCategorias);
 }
 
 // Menu principal
