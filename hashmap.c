@@ -104,9 +104,9 @@ void eraseMap(HashMap * map,  char * key) {
 Pair * searchMap(HashMap * map,  char * key) {  
     long indice = hash(key,map->capacity); 
     
-    while (map->buckets[indice] != NULL) // Mapea por la clave
+    while (map->buckets[indice] != NULL && map->buckets[indice]->key != NULL) // Mapea por la clave
     {
-        if (strcmp(key,map->buckets[indice]->key) == 0)
+        if (strcmp(key,map->buckets[indice]->key) == 0 )
         {
             map->current=indice;
             return map->buckets[indice];

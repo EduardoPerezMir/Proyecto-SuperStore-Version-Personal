@@ -196,7 +196,7 @@ void armarCanasta(List* canasta, HashMap* mapaProductos, HashMap* mapaSupermerca
         char nomProducto[MAXLEN + 1];
         do{
             printf("Ingrese el nombre del producto agregar a la canasta: ");
-            scanf("%s",nomProducto);
+            scanf("%[^\n]s",nomProducto);
             getchar();
             printf("\n");
         }while(strlen(nomProducto) > MAXLEN);
@@ -212,7 +212,7 @@ void armarCanasta(List* canasta, HashMap* mapaProductos, HashMap* mapaSupermerca
         char nomSupermercado[MAXLEN + 1];
         do{
             printf("Ingrese el nombre del supermercado que posee el producto agregar a la canasta: ");
-            scanf("%s",nomSupermercado);
+            scanf("%[^\n]s",nomSupermercado);
             getchar();
             printf("\n");
         }while(strlen(nomSupermercado) > MAXLEN);
@@ -707,8 +707,32 @@ void agregarCategoria(HashMap* mapaCategorias) {
   }
 }
 
-/* en vez de poner return llamo a la funcion menuAdmin porque si se ocupa return se vuelve al menu principal y no se guardan los cambios
-si el usuario quiere guardar los cambios lo va devolver al menu del admin y entra a la opcion salir*/
+void menuQuitarProducto()
+{
+    printf("\n╔════════════════════════════════════════════════════════════════════════╗\n");
+    printf("║                                                                        ║\n");
+    printf("║ 1. INGRESE 1 SI DESEA QUITAR EL PRODUCTO DE TODOS LOS SUPERMERCADOS    ║\n");
+    printf("║ 2. INGRESE 2 SI DESEA QUITAR EL PRODUCTO DE UN SUPERMERCADO ESPECIFICO ║\n");
+    printf("║                                                                        ║\n");
+    printf("╚════════════════════════════════════════════════════════════════════════╝\n\n");
+    printf("Opción: ");
+    
+    
+}
+
+void eliminarProductoLista(List* productos,char* nomProducto)
+{
+    for (tipoProducto* currentList=firstList(productos);currentList!=NULL;currentList=nextList(productos))
+    {
+        if (strcmp(currentList->nombre,nomProducto)==0)
+        {
+            popCurrent(productos);
+            return;
+            
+        }
+    }
+}
+
 void quitarProductos(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* mapaSupermercados)
 {
 
@@ -716,17 +740,76 @@ void quitarProductos(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* m
     char nomProducto[MAXLEN + 1];
     do{
         printf("Ingrese el nombre del producto ha eliminar de la base de datos: ");
-        scanf("%s",nomProducto);
+        getchar();
+        scanf("%[^\n]s",nomProducto);
         getchar();
         printf("\n");
     }while(strlen(nomProducto) > MAXLEN);
-    if (searchMap(mapaProductos,nomProducto) == NULL)
+    
+    Pair* current=searchMap(mapaProductos,nomProducto);
+    if (current == NULL)
     {
         printf("El producto %s no existe en la base de datos",nomProducto);
         menuAdmin(mapaProductos,mapaSupermercados,mapaCategorias);
     }
+    
+    menuQuitarProducto();
+    unsigned short opcion = 0;
+    do{
+        scanf("%hu",&opcion);
+        
+    }while(opcion!=1 && opcion!=2);
+    getchar();
+    if (opcion==1)
+    {
+        tipoProducto* producto=current->value;
 
 
+        
+        //eliminacion del producto de la lista del mapa de supermercados
+        
+        for (tipoSupermercado* currentListSuper=firstList(producto->supermercados);currentListSuper!=NULL;currentListSuper=nextList(producto->supermercados))
+        {
+            Pair* parSuper=searchMap(mapaSupermercados,currentListSuper->nombre);
+            tipoSupermercado* elemenMapSuper=parSuper->value;
+            eliminarProductoLista(elemenMapSuper->productos,nomProducto);//se le manda la lista de cada elemento del mapa de supermercado ademas el nombre del producto a eliminar
+        }
+
+        //eliminacion del producto en la lista del mapa de categoria
+        Pair* parCategoria = searchMap(mapaCategorias,producto->categoria);
+        tipoCategoria* categoria=parCategoria->value;
+        for (tipoProducto* currentCategoria = firstList(categoria->productos) ; current!=NULL ; currentCategoria = nextList(categoria->productos))
+        {
+            if (strcmp(currentCategoria->nombre,nomProducto)==0)
+            {
+                popCurrent(categoria->productos);
+                break;
+            }
+        }
+        
+        eraseMap(mapaProductos,nomProducto);
+        printf("El producto %s ha sido eliminado de la base de datos",nomProducto);
+        menuAdmin(mapaProductos,mapaSupermercados,mapaCategorias);
+    }
+    else
+    {
+        printMapP(mapaSupermercados);
+        char nomSupermercado[MAXLEN + 1];
+        do{
+            printf("Ingrese el nombre del supermercado: ");
+            scanf("%[^\n]s",nomSupermercado);
+            getchar();
+            printf("\n");
+        }while(strlen(nomSupermercado) > MAXLEN);
+        
+        Pair* currentSuper=searchMap(mapaSupermercados,nomSupermercado);
+        if (currentSuper == NULL)
+        {
+            printf("El supermercado %s no existe en la base de datos",nomSupermercado);
+            menuAdmin(mapaProductos,mapaSupermercados,mapaCategorias);
+        }
+        
+    }
 
 
 
