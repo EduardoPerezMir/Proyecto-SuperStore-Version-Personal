@@ -218,7 +218,7 @@ void eliminarProduCanasta(List* canasta)
         printf("\n");
     }while(strlen(nomProductoE) > MAXLEN);
         
-    int entro=0;
+    int entro  = 0;
     tipoCanasta* currentCanasta = firstList(canasta);
     while (currentCanasta != NULL)
     {
@@ -545,7 +545,7 @@ int loginAdmin(HashMap * mapaAdmin) {
     
         printf("RUT o contraseña incorrectos. Inténtelo nuevamente.\n");
         return 0;
-    }
+        }
     }
 }
 
@@ -605,6 +605,11 @@ void agregarProducto(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* m
     scanf("%s", nombre);
     getchar(); 
 
+  if(searchMap(mapaProductos, nombre) != NULL){
+    printf("El prodcuto ya existe en el mapa de productos.\n");
+    return;
+  }
+
     printf("Ingrese el precio del producto: ");
     scanf("%s", precio);
     getchar();
@@ -621,9 +626,6 @@ void agregarProducto(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* m
     getchar();
 
     // Crear una estructura para el nuevo producto
-
-    //SI EL PRODUCTO NO EXISTE BREAK; TODO.
-  
     tipoProducto* nuevoProducto = (tipoProducto*)malloc(sizeof(tipoProducto));
     strncpy(nuevoProducto->nombre, nombre, sizeof(nuevoProducto->nombre));
     strncpy(nuevoProducto->precio, precio, sizeof(nuevoProducto->precio));
