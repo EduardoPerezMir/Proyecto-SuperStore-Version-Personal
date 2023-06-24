@@ -133,6 +133,8 @@ void quitarProductos(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* m
 
 void eliminarProductoLista(List* productos,char* nomProducto);
 
+void guardarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMap* mapaCategorias);
+
 // Menu principal
 
 void mostrarMenu();

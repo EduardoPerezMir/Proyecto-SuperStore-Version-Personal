@@ -587,6 +587,7 @@ void menuAdmin(HashMap* mapaProductos,HashMap* mapaSupermercados,HashMap* mapaCa
     case 5:
         printf("\nOpción 5 ingresada\n");
         //falta la funcion para exportar cambios
+guardarDatosCSV(mapaProductos, mapaSupermercados,  mapaCategorias);
         printf("GURDANDO CAMBIOS ...");
         mostrarMenu();
         break;
@@ -820,6 +821,41 @@ void quitarProductos(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* m
     menuAdmin(mapaProductos,mapaSupermercados,mapaCategorias);
 }
 
+void guardarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMap* mapaCategorias) {
+    FILE* archivo = fopen("datos.csv", "w");
+
+    if (archivo == NULL) {
+        printf("No se pudo abrir el archivo para guardar los datos.\n");
+        return;
+    }
+
+    fprintf(archivo, "Nombre,Precio,Categoría,Supermercados\n");
+
+    // Recorrer los productos y escribirlos en el archivo
+    Pair* currentProducto = firstMap(mapaProductos);
+    while (currentProducto != NULL) {
+        tipoProducto* producto = (tipoProducto*)currentProducto->value;
+        fprintf(archivo, "%s,%s,%s,", producto->nombre, producto->precio, producto->categoria);
+
+        // Recorrer los supermercados del producto
+        Node* nodoSupermercado = producto->supermercados->head;
+        while (nodoSupermercado != NULL) {
+            char* supermercado = (char*)nodoSupermercado->data;
+            fprintf(archivo, "%s,", supermercado);
+            nodoSupermercado = nodoSupermercado->next;
+        }
+        fprintf(archivo, "\n");
+
+        currentProducto = nextMap(mapaProductos);
+    }
+
+    // Resto del código para recorrer y escribir los mapas de supermercados y categorías
+
+    fclose(archivo);
+
+    printf("Datos guardados exitosamente en el archivo datos.csv.\n");
+}
+
 // Menu principal
 
 void mostrarMenu()
@@ -893,5 +929,7 @@ void mostrarOpciones()
     printf("║                                                             ║\n");
     printf("╚═════════════════════════════════════════════════════════════╝\n\n");
 
+
+  
 
 }
