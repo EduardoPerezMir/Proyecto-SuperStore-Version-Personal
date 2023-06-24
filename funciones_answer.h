@@ -76,7 +76,11 @@ void printMapP(HashMap* mapaProducto); //Mostrar todos los productos para el usu
 
 void subMenuCanasta(); // Muestra submenu de armar canasta
 
-void armarCanasta(List* canasta, HashMap* mapaProductos, HashMap* mapaSupermercado); 
+void armarCanasta(List* canasta, HashMap* mapaProductos, HashMap* mapaSupermercado);
+
+void eliminarProduCanasta(List* canasta);
+
+void agregarProduCanasta(HashMap* mapaProductos,HashMap* mapaSupermercados,List* canasta);
 
 void printListPC(List* Super); // Muestra los productos de la canasta
 

@@ -93,6 +93,15 @@ void * popCurrent(List * list) {
   
   void *dato = NULL;
   dato = list->current->data;
+
+    if (list->current == list->tail && list->current == list->head)
+    {
+        list->head=NULL;
+        list->tail=NULL;
+        list->current = NULL;
+        free(list->current);
+        return dato;
+    }
   
   if (list->current == list->tail)
   {
