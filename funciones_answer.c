@@ -571,14 +571,17 @@ void menuAdmin(HashMap* mapaProductos,HashMap* mapaSupermercados,HashMap* mapaCa
     case 1:
         printf("\nOpción 1 ingresada\n");
         agregarProducto(mapaProductos, mapaCategorias, mapaSupermercados);
+      menuAdmin(mapaProductos,mapaSupermercados,mapaCategorias);
         break;
     case 2:
         printf("\nOpción 2 ingresada\n");
         agregarSupermercado(mapaSupermercados);
+      menuAdmin(mapaProductos,mapaSupermercados,mapaCategorias);
         break;
     case 3:
         printf("\nOpción 3 ingresada\n");
         agregarCategoria(mapaCategorias);
+      menuAdmin(mapaProductos,mapaSupermercados,mapaCategorias);
         break;
     case 4:
         printf("\nOpción 4 ingresada\n");
@@ -608,7 +611,7 @@ void agregarProducto(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* m
 
   if(searchMap(mapaProductos, nombre) != NULL){
     printf("El prodcuto ya existe en el mapa de productos.\n");
-    return;
+    mostrarMenuAdmin();
   }
 
     printf("Ingrese el precio del producto: ");
@@ -829,27 +832,43 @@ void guardarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMap
         return;
     }
 
-    fprintf(archivo, "Nombre,Precio,Categoría,Supermercados\n");
+    fprintf(archivo, "Nombre,Precio,Categoría,Cantidad de Supermercados,Supermercados\n");
 
     // Recorrer los productos y escribirlos en el archivo
     Pair* currentProducto = firstMap(mapaProductos);
+
     while (currentProducto != NULL) {
         tipoProducto* producto = (tipoProducto*)currentProducto->value;
-        fprintf(archivo, "%s,%s,%s,", producto->nombre, producto->precio, producto->categoria);
 
-        // Recorrer los supermercados del producto
-        Node* nodoSupermercado = producto->supermercados->head;
-        while (nodoSupermercado != NULL) {
-            char* supermercado = (char*)nodoSupermercado->data;
-            fprintf(archivo, "%s,", supermercado);
-            nodoSupermercado = nodoSupermercado->next;
+        // Verificar si el nombre del producto no es nulo
+        if (producto->nombre[0] != '\0') {
+            fprintf(archivo, "%s,%s,%s,", producto->nombre, producto->precio, producto->categoria);
+
+            // Verificar si la lista de supermercados no es nula
+            if (producto->supermercados != NULL) {
+                int cantidadSupermercados = get_size_list(producto->supermercados);
+                fprintf(archivo, "%d,", cantidadSupermercados);
+
+                Node* nodoSupermercado = producto->supermercados->head;
+                while (nodoSupermercado != NULL) {
+                    char* supermercado = (char*)nodoSupermercado->data;
+                    fprintf(archivo, "%s", supermercado);
+                    
+                    nodoSupermercado = nodoSupermercado->next;
+                    
+                    if (nodoSupermercado != NULL) {
+                        fprintf(archivo, ",");
+                    }
+                }
+            } else {
+                fprintf(archivo, "0");
+            }
+
+            fprintf(archivo, ".\n"); // Agregar el punto al final de la línea
         }
-        fprintf(archivo, "\n");
 
         currentProducto = nextMap(mapaProductos);
     }
-
-    // Resto del código para recorrer y escribir los mapas de supermercados y categorías
 
     fclose(archivo);
 

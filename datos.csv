@@ -1,33 +1,33 @@
-Nombre,Precio,Categoría,Supermercados
-Cable HDMI,500,Electrónica,
-Pepino,500,Verdura,
-Detergente,2500,Limpieza,
-Toallas de papel,800,Limpieza,
-Queso crema,1800,Alimento,
-Aceite de oliva,3500,Condimento,
-Pimiento,1000,Verdura,
-Cuchara,300,Utensilio,
-Auriculares inalámbricos,3000,Electrónica,
-Pantalones,35000,Vestuario,
-Tostadas,1200,Snack,
-Papel aluminio,800,Utensilio,
-Esponja,500,Lavado,
-Calcetines,1000,Vestuario,
-Jabón de manos,500,Higiene,
-Tomates,800,Fruta,
-Jabón en barra,1000,Higiene,
-Martillo,1200,Herramienta,
-Melón,2000,Fruta,
-Licor,5000,Bebida,
-Cepillo de uñas,200,Higiene,
-Velas perfumadas,1000,Hogar,
-Máquina de coser,90000,Electrodomestico,
-Cereal de maíz,2500,Alimento,
-Mantequilla,1800,Alimento,
-Limones,800,Fruta,
-Esmalte de uñas,1500,Belleza,
-Pan blanco,1500,Alimento,
-Pintura acrílica,2000,Arte,
-Pizza,4500,Alimento,
-Vasos desechables,500,Utensilio,
-Manteles,2000,Hogar,
+Nombre,Precio,Categoría,Cantidad de Supermercados,Supermercados
+Cable HDMI,500,Electrónica,2,Lider,Jumbo.
+Pepino,500,Verdura,1,Santa Isabel.
+Detergente,2500,Limpieza,3,Lider,Jumbo,Santa Isabel.
+Toallas de papel,800,Limpieza,1,Santa Isabel.
+Queso crema,1800,Alimento,2,Lider,Jumbo.
+Aceite de oliva,3500,Condimento,2,Lider,Santa Isabel.
+Pimiento,1000,Verdura,3,Santa Isabel,Jumbo,Lider.
+Cuchara,300,Utensilio,1,Jumbo.
+Auriculares inalámbricos,3000,Electrónica,3,Jumbo,Santa Isabel,Lider.
+Pantalones,35000,Vestuario,3,Lider,Jumbo,Santa Isabel.
+Tostadas,1200,Snack,2,Lider,Jumbo.
+Papel aluminio,800,Utensilio,3,Lider,Jumbo,Santa Isabel.
+Esponja,500,Lavado,1,Santa Isabel.
+Calcetines,1000,Vestuario,3,Jumbo,Lider,Santa Isabel.
+Jabón de manos,500,Higiene,3,Santa Isabel,Lider,Jumbo.
+Tomates,800,Fruta,1,Jumbo.
+Jabón en barra,1000,Higiene,1,Jumbo.
+Martillo,1200,Herramienta,2,Jumbo,Tottus.
+Melón,2000,Fruta,1,Jumbo.
+Licor,5000,Bebida,2,Tottus,Santa Isabel.
+Cepillo de uñas,200,Higiene,2,Lider,Santa Isabel.
+Velas perfumadas,1000,Hogar,2,Jumbo,Lider.
+Máquina de coser,90000,Electrodomestico,1,Lider.
+Cereal de maíz,2500,Alimento,1,Lider.
+Mantequilla,1800,Alimento,3,Santa Isabel,Jumbo,Lider.
+Limones,800,Fruta,2,Lider,Jumbo.
+Esmalte de uñas,1500,Belleza,1,Santa Isabel.
+Pan blanco,1500,Alimento,1,Santa Isabel.
+Pintura acrílica,2000,Arte,1,Tottus.
+Pizza,4500,Alimento,2,Santa Isabel,Jumbo.
+Vasos desechables,500,Utensilio,1,Jumbo.
+Manteles,2000,Hogar,3,Lider,Jumbo,Santa Isabel.
