@@ -156,13 +156,3 @@ long sizeMap(HashMap * map)
 {
     return map->size;
 }
-
-
-void mostrarTodo(HashMap* mapa)
-{
-    for (int i = 0; i < mapa->capacity; i++)
-        {
-            if (mapa->buckets[i] != NULL && mapa->buckets[i]->key != NULL)
-                puts(mapa->buckets[i]->key);
-        }
-}

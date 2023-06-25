@@ -28,6 +28,4 @@ bool areProductsPresents(HashMap *map);
 
 long sizeMap(HashMap *map);
 
-void mostrarTodo(HashMap* mapa);
-
 #endif /* HashMap_h */

@@ -1,0 +1,344 @@
+Nombre,Precio,Categoría,Cantidad de Supermercados,Supermercados
+Televisor LED,200000,Electronica,2,Lider,Jumbo.
+Lechuga,400,Verdura,1,Santa Isabel.
+Papel higienico,600,Limpieza,1,Santa Isabel.
+Yogur natural,800,Alimento,2,Lider,Jumbo.
+Vinagre de manzana,1200,Condimento,2,Lider,Santa Isabel.
+Zanahoria,500,Verdura,3,Santa Isabel,Jumbo,Lider.
+Tenedor,200,Utensilio,1,Jumbo.
+Altavoces Bluetooth,5000,Electronica,3,Jumbo,Santa Isabel,Lider.
+Camiseta,25000,Vestuario,3,Lider,Jumbo,Santa Isabel.
+Papas fritas,1000,Snack,2,Lider,Jumbo.
+Bolsas de basura,600,Utensilio,3,Lider,Jumbo,Santa Isabel.
+Calcetines deportivos,800,Vestuario,3,Jumbo,Lider,Santa Isabel.
+Champu,500,Higiene,3,Santa Isabel,Lider,Jumbo.
+Manzanas,600,Fruta,1,Jumbo.
+Pasta de dientes,800,Higiene,1,Jumbo.
+Destornillador,1000,Herramienta,2,Jumbo,Tottus.
+Sandia,1500,Fruta,1,Jumbo.
+Vino tinto,3000,Bebida,2,Tottus,Santa Isabel.
+Lima de uñas,100,Higiene,2,Lider,Santa Isabel.
+Velas aromaticas,800,Hogar,2,Jumbo,Lider.
+Licuadora,60000,Electrodomestico,1,Lider.
+Cereal de chocolate,2000,Alimento,1,Lider.
+Margarina,1500,Alimento,3,Santa Isabel,Jumbo,Lider.
+Naranjas,700,Fruta,2,Lider,Jumbo.
+Esmalte de uñas rojo,1200,Belleza,1,Santa Isabel.
+Pan integral,1200,Alimento,1,Santa Isabel.
+Pinceles de pintura,2000,Arte,1,Tottus.
+Hamburguesas,4000,Alimento,2,Santa Isabel,Jumbo.
+Platos desechables,400,Utensilio,1,Jumbo.
+Equipo de sonido,80000,Electronica,3,Jumbo,Santa Isabel,Lider.
+Coliflor,500,Verdura,1,Lider.
+Lapiz labial,1500,Belleza,1,Santa Isabel.
+Pan frances,1000,Alimento,1,Santa Isabel.
+Pinceles acuarela,2500,Arte,1,Tottus.
+Cerveza,3500,Bebida,2,Lider,Jumbo.
+Servilletas,300,Utensilio,1,Jumbo.
+Auriculares con cable,1000,Electronica,2,Tottus,Lider.
+Atun en lata,800,Alimento,3,Santa Isabel,Jumbo,Lider.
+Platanos,500,Fruta,2,Lider,Jumbo.
+Rimel,1000,Belleza,1,Santa Isabel.
+Pan de molde,800,Alimento,1,Santa Isabel.
+Pintura al oleo,3000,Arte,1,Tottus.
+Galletas,1500,Snack,2,Jumbo,Lider.
+Vasos de vidrio,500,Utensilio,1,Jumbo.
+Auriculares deportivos,2000,Electronica,3,Jumbo,Santa Isabel,Lider.
+Arroz,2500,Alimento,1,Lider.
+Mermelada,1200,Alimento,3,Santa Isabel,Jumbo,Lider.
+Duraznos,800,Fruta,2,Lider,Jumbo.
+Pan de ajo,1500,Alimento,1,Santa Isabel.
+Pinceles para acrilico,2000,Arte,1,Tottus.
+Papel de regalo,500,Hogar,2,Jumbo,Lider.
+Aspiradora,90000,Electrodomestico,1,Lider.
+Leche de almendras,2500,Alimento,1,Lider.
+Ron,4500,Bebida,2,Santa Isabel,Jumbo.
+Cepillo de dientes,200,Higiene,2,Lider,Santa Isabel.
+Lavadora,90000,Electrodomestico,1,Lider.
+Harina de trigo,2500,Alimento,1,Lider.
+Queso rallado,1800,Alimento,3,Santa Isabel,Jumbo,Lider.
+Mangos,800,Fruta,2,Lider,Jumbo.
+Esmalte de uñas transparente,1200,Belleza,1,Santa Isabel.
+Pintura en acuarela,2000,Arte,1,Tottus.
+Tequila,5000,Bebida,2,Tottus,Santa Isabel.
+Crema facial,2000,Belleza,1,Santa Isabel.
+Manteles de tela,1500,Hogar,2,Jumbo,Lider.
+Secadora de ropa,80000,Electrodomestico,1,Lider.
+Azucar,1500,Alimento,1,Lider.
+Yogur de frutas,1200,Alimento,3,Santa Isabel,Jumbo,Lider.
+Uvas,700,Fruta,2,Lider,Jumbo.
+Lapiz de ojos,1500,Belleza,1,Santa Isabel.
+Pan sin gluten,1500,Alimento,1,Santa Isabel.
+Lienzo para pintar,2000,Arte,1,Tottus.
+Vodka,4000,Bebida,2,Santa Isabel,Jumbo.
+Desodorante,500,Higiene,3,Lider,Santa Isabel,Jumbo.
+Pañuelos desechables,300,Utensilio,1,Jumbo.
+Sarten,1200,Articulo de cocina,2,Jumbo,Tottus.
+Durazno enlatado,1500,Alimento,3,Santa Isabel,Jumbo,Lider.
+Nueces,2000,Fruta seca,2,Lider,Jumbo.
+Rimel resistente al agua,1000,Belleza,1,Santa Isabel.
+Pan integral sin sal,1500,Alimento,1,Santa Isabel.
+Pinceles para oleo,2500,Arte,1,Tottus.
+Cerveza artesanal,3500,Bebida,2,Lider,Jumbo.
+Jabon intimo,200,Higiene,2,Lider,Santa Isabel.
+Cortinas,1000,Hogar,2,Jumbo,Lider.
+Lavavajillas,80000,Electrodomestico,1,Lider.
+Sal,500,Alimento,1,Lider.
+Mantequilla de mani,1800,Alimento,3,Santa Isabel,Jumbo,Lider.
+Cerezas,800,Fruta,2,Lider,Jumbo.
+Esmalte de uñas rosa,1200,Belleza,2,Santa Isabel,Cugat.
+Palillos de dientes,100,Higiene,3,Lider,Santa Isabel,Unimarc.
+Margarina light,1800,Alimento,2,Santa Isabel,Jumbo.
+Lapiz de cejas,1500,Belleza,2,Santa Isabel,Unimarc.
+Pintura en aerosol,2000,Arte,3,Tottus,Lider,Unimarc.
+Cepillo de dientes,200,Higiene,2,Lider,Santa Isabel.
+Almohadas,1000,Hogar,3,Jumbo,Lider,Unimarc.
+Balsamo labial,800,Belleza,3,Unimarc,Cugat,Lider.
+Pan de avena,1100,Alimento,2,Jumbo,Unimarc.
+Set de acuarelas,3500,Arte,2,Cugat,Tottus.
+Sidra,3800,Bebida,3,Lider,Jumbo,Unimarc.
+Tazas de ceramica,500,Utensilio,2,Jumbo,Cugat.
+Ratón inalámbrico,1500,Electronica,3,Unimarc,Lider,Tottus.
+Sardinas en lata,700,Alimento,4,Unimarc,Cugat,Jumbo,Santa Isabel.
+Platanos,500,Fruta,3,Lider,Jumbo,Santa Isabel.
+Gel de baño,1200,Higiene,3,Santa Isabel,Lider,Jumbo.
+Pan de pasas,900,Alimento,2,Santa Isabel,Unimarc.
+Set de pintura acrílica,4000,Arte,3,Tottus,Unimarc,Lider.
+Barras de granola,1600,Snack,2,Jumbo,Lider.
+Botellas de vidrio,600,Utensilio,3,Jumbo,Lider,Unimarc.
+Auriculares de estudio,5000,Electronica,2,Lider,Tottus.
+Lentejas,2200,Alimento,2,Lider,Unimarc.
+Miel,1500,Alimento,3,Unimarc,Cugat,Jumbo.
+Kiwis,900,Fruta,3,Lider,Jumbo,Unimarc.
+Crema hidratante,1800,Belleza,3,Cugat,Unimarc,Santa Isabel.
+Pan de nueces,1300,Alimento,3,Unimarc,Cugat,Lider.
+Set de pinceles de acuarela,3000,Arte,3,Tottus,Cugat,Unimarc.
+Cognac,7000,Bebida,3,Tottus,Santa Isabel,Unimarc.
+Hilo dental,200,Higiene,2,Lider,Santa Isabel.
+Lámparas de escritorio,1800,Hogar,3,Jumbo,Lider,Unimarc.
+Horno eléctrico,70000,Electrodomestico,2,Lider,Cugat.
+Leche de soja,2700,Alimento,3,Lider,Unimarc,Santa Isabel.
+Mantequilla sin sal,1900,Alimento,4,Santa Isabel,Jumbo,Lider,Unimarc.
+Melocotones,900,Fruta,3,Lider,Jumbo,Unimarc.
+Sombra de ojos,2000,Belleza,2,Santa Isabel,Cugat.
+Pan multicereales,1500,Alimento,3,Santa Isabel,Lider,Unimarc.
+Lienzos en blanco,2500,Arte,3,Tottus,Unimarc,Lider.
+Cava de vinos,90000,Electrodomestico,2,Lider,Jumbo.
+Crema de afeitar,500,Higiene,2,Santa Isabel,Lider.
+Refrigerador,120000,Electrodomestico,2,Jumbo,Lider.
+Harina de avena,2600,Alimento,1,Lider.
+Queso parmesano,2000,Alimento,3,Santa Isabel,Jumbo,Lider.
+Mora,900,Fruta,2,Lider,Jumbo.
+Corrector de maquillaje,1500,Belleza,2,Santa Isabel,Lider.
+Pan pita,1400,Alimento,1,Santa Isabel.
+Acuarelas profesionales,3500,Arte,1,Tottus.
+Sake,6000,Bebida,1,Tottus.
+Enjuague bucal,700,Higiene,3,Lider,Santa Isabel,Jumbo.
+Ollas de cerámica,1500,Hogar,3,Jumbo,Lider,Unimarc.
+Microondas,50000,Electrodomestico,2,Lider,Jumbo.
+Peras,700,Fruta,3,Lider,Jumbo,Unimarc.
+Base de maquillaje,2500,Belleza,2,Santa Isabel,Lider.
+Pan de arroz,1500,Alimento,2,Santa Isabel,Lider.
+Caballete para pintar,4000,Arte,1,Tottus.
+Pisco,4500,Bebida,2,Lider,Unimarc.
+Acondicionador,800,Higiene,3,Lider,Santa Isabel,Jumbo.
+Escoba,700,Hogar,2,Jumbo,Unimarc.
+Batidora,40000,Electrodomestico,3,Lider,Jumbo,Unimarc.
+Cilantro,300,Verdura,3,Lider,Jumbo,Unimarc.
+Acelga,500,Verdura,3,Lider,Jumbo,Santa Isabel.
+Ciruelas,900,Fruta,3,Lider,Jumbo,Unimarc.
+Delineador de ojos,1800,Belleza,2,Santa Isabel,Lider.
+Pan sin lactosa,1600,Alimento,2,Santa Isabel,Lider.
+Set de pinturas al óleo,5000,Arte,1,Tottus.
+Vodka premium,6500,Bebida,2,Lider,Tottus.
+Shampoo para cabello seco,900,Higiene,3,Lider,Santa Isabel,Jumbo.
+Reproductor DVD,7000,Electronica,2,Lider,Unimarc.
+Tomate,500,Verdura,3,Lider,Jumbo,Santa Isabel.
+Vainilla en vainas,2500,Condimento,2,Lider,Jumbo.
+Pomelos,800,Fruta,2,Lider,Jumbo.
+Esmalte de uñas azul,1200,Belleza,1,Santa Isabel.
+Pan con semillas,1800,Alimento,1,Santa Isabel.
+Set de pinturas acrílicas,4500,Arte,1,Tottus.
+Ron añejo,5000,Bebida,2,Tottus,Santa Isabel.
+Crema dental para dientes sensibles,1000,Higiene,3,Lider,Santa Isabel,Jumbo.
+Laptop,500000,Electronica,3,Jumbo,Unimarc,Cugat.
+Apio,300,Verdura,3,Lider,Jumbo,Unimarc.
+Menta fresca,500,Condimento,2,Lider,Jumbo.
+Limones,800,Fruta,3,Lider,Jumbo,Unimarc.
+Pintalabios rojo,1800,Belleza,2,Santa Isabel,Lider.
+Pan de maíz,1600,Alimento,2,Santa Isabel,Lider.
+Set de pintura gouache,4000,Arte,2,Tottus,Cugat.
+Tequila premium,6500,Bebida,2,Tottus,Santa Isabel.
+Shampoo para cabello graso,900,Higiene,3,Lider,Santa Isabel,Jumbo.
+Cámara digital,200000,Electronica,2,Lider,Jumbo.
+Cebolla,500,Verdura,3,Lider,Jumbo,Santa Isabel.
+Pimienta negra en grano,1500,Condimento,3,Lider,Jumbo,Unimarc.
+Uvas pasas,1500,Fruta seca,3,Lider,Jumbo,Santa Isabel.
+Pintalabios nude,1800,Belleza,2,Santa Isabel,Lider.
+Pan de espelta,2000,Alimento,1,Santa Isabel.
+Set de pinturas acuarelas,5000,Arte,1,Tottus.
+Whisky escocés,8000,Bebida,3,Tottus,Santa Isabel,Lider.
+Enjuague bucal mentolado,700,Higiene,3,Lider,Santa Isabel,Jumbo.
+Tablet,200000,Electronica,3,Jumbo,Unimarc,Cugat.
+Zucchini,700,Verdura,3,Lider,Jumbo,Unimarc.
+Hierbabuena fresca,500,Condimento,2,Lider,Jumbo.
+Pasas,800,Fruta seca,3,Lider,Jumbo,Unimarc.
+Pintalabios rosa,1800,Belleza,2,Santa Isabel,Lider.
+Pan de quinoa,1800,Alimento,2,Santa Isabel,Lider.
+Set de pasteles al óleo,4500,Arte,1,Tottus.
+Gin premium,6500,Bebida,2,Tottus,Santa Isabel.
+Cámara de video,250000,Electronica,2,Lider,Jumbo.
+Pepino,500,Verdura,3,Lider,Jumbo,Santa Isabel.
+Sal de mar,1200,Condimento,3,Lider,Jumbo,Unimarc.
+Pasas de uva,1500,Fruta seca,3,Lider,Jumbo,Santa Isabel.
+Pintalabios mate,2000,Belleza,2,Santa Isabel,Lider.
+Set de crayones,1000,Arte,1,Tottus.
+Vodka premium,5500,Bebida,2,Tottus,Santa Isabel.
+Acondicionador para cabello seco,1000,Higiene,3,Lider,Santa Isabel,Jumbo.
+Teclado para computadora,20000,Electronica,2,Lider,Jumbo.
+Espárragos,800,Verdura,3,Lider,Jumbo,Unimarc.
+Hojas de laurel,500,Condimento,2,Lider,Jumbo.
+Almendras,2000,Fruta seca,3,Lider,Jumbo,Unimarc.
+Pintalabios hidratante,2100,Belleza,2,Santa Isabel,Lider.
+Pan con semillas,1800,Alimento,2,Santa Isabel,Lider.
+Set de marcadores,1500,Arte,1,Tottus.
+Ron blanco,4500,Bebida,3,Tottus,Santa Isabel,Lider.
+Pasta dental blanqueadora,1200,Higiene,3,Lider,Santa Isabel,Jumbo.
+Mouse para computadora,15000,Electronica,2,Lider,Jumbo.
+Berenjenas,700,Verdura,3,Lider,Jumbo,Unimarc.
+Romero fresco,500,Condimento,2,Lider,Jumbo.
+Avellanas,2500,Fruta seca,3,Lider,Jumbo,Unimarc.
+Pintalabios con vitamina E,2200,Belleza,2,Santa Isabel,Lider.
+Pan integral con semillas,2000,Alimento,2,Santa Isabel,Lider.
+Set de pinturas de tiza,2500,Arte,1,Tottus.
+Licor de naranja,5500,Bebida,2,Tottus,Santa Isabel.
+Shampoo anticaspa,1200,Higiene,3,Lider,Santa Isabel,Jumbo.
+Monitor para computadora,150000,Electronica,2,Lider,Jumbo.
+Rúcula,600,Verdura,3,Lider,Jumbo,Unimarc.
+Albahaca fresca,500,Condimento,2,Lider,Jumbo.
+Pistachos,3000,Fruta seca,3,Lider,Jumbo,Unimarc.
+Pintalabios larga duración,2400,Belleza,2,Santa Isabel,Lider.
+Pan con avena,2000,Alimento,2,Santa Isabel,Lider.
+Set de pinturas para cerámica,3000,Arte,1,Tottus.
+Vodka de frutas,4500,Bebida,3,Tottus,Santa Isabel,Lider.
+Acondicionador para cabello teñido,1200,Higiene,3,Lider,Santa Isabel,Jumbo.
+Cámara de seguridad,150000,Electronica,2,Lider,Jumbo.
+Espinacas,600,Verdura,3,Lider,Jumbo,Unimarc.
+Orégano fresco,500,Condimento,2,Lider,Jumbo.
+Pasas de ciruela,1500,Fruta seca,3,Lider,Jumbo,Unimarc.
+Bronceador,3500,Belleza,2,Santa Isabel,Lider.
+Pan multicereal,2200,Alimento,2,Santa Isabel,Lider.
+Set de pinturas para vidrio,3000,Arte,1,Tottus.
+Te de manzanilla,800,Bebida,3,Tottus,Santa Isabel,Lider.
+Gel antibacterial,500,Higiene,3,Lider,Santa Isabel,Jumbo.
+Impresora inalámbrica,80000,Electronica,2,Lider,Jumbo.
+Acelgas,500,Verdura,3,Lider,Jumbo,Unimarc.
+Tomillo fresco,600,Condimento,2,Lider,Jumbo.
+Pasas de uva,1500,Fruta seca,3,Lider,Jumbo,Unimarc.
+Base de maquillaje,3500,Belleza,2,Santa Isabel,Lider.
+Set de lápices de colores,3000,Arte,1,Tottus.
+Whisky de malta,9000,Bebida,3,Tottus,Santa Isabel,Lider.
+Crema hidratante para manos,800,Higiene,3,Lider,Santa Isabel,Jumbo.
+Router Wi-Fi,50000,Electronica,2,Lider,Jumbo.
+Apio,600,Verdura,3,Lider,Jumbo,Unimarc.
+Cilantro fresco,400,Condimento,2,Lider,Jumbo.
+Dátiles,2000,Fruta seca,3,Lider,Jumbo,Unimarc.
+Delineador de ojos,2500,Belleza,2,Santa Isabel,Lider.
+Pan de pasas,2500,Alimento,2,Santa Isabel,Lider.
+Set de rotuladores,3500,Arte,1,Tottus.
+Jugo de naranja,1500,Bebida,3,Tottus,Santa Isabel,Lider.
+Crema corporal,1000,Higiene,3,Lider,Santa Isabel,Jumbo.
+Micrófono de estudio,40000,Electronica,2,Lider,Jumbo.
+Calabacín,500,Verdura,3,Lider,Jumbo,Unimarc.
+Hierbabuena fresca,500,Condimento,2,Lider,Jumbo.
+Higos secos,2000,Fruta seca,3,Lider,Jumbo,Unimarc.
+Sombras para ojos,3000,Belleza,2,Santa Isabel,Lider.
+Set de plumones,3500,Arte,1,Tottus.
+Limonada casera,2000,Bebida,3,Tottus,Cugat,Lider.
+Loción humectante,1500,Higiene,2,Cugat,Santa Isabel.
+Teclado inalámbrico,15000,Electronica,2,Lider,Cugat.
+Berenjenas,700,Verdura,3,Cugat,Jumbo,Unimarc.
+Romero fresco,600,Condimento,2,Lider,Cugat.
+Frutos secos surtidos,2500,Fruta seca,3,Cugat,Jumbo,Unimarc.
+Polvo compacto,3000,Belleza,2,Santa Isabel,Cugat.
+Pan de linaza,2600,Alimento,2,Cugat,Santa Isabel.
+Set de acuarelas,4000,Arte,1,Tottus.
+Agua de coco,1800,Bebida,3,Tottus,Cugat,Lider.
+Talco para pies,1000,Higiene,2,Cugat,Santa Isabel.
+Mouse inalámbrico,12000,Electronica,2,Lider,Cugat.
+Ajo fresco,1000,Verdura,3,Cugat,Jumbo,Unimarc.
+Orégano fresco,700,Condimento,2,Lider,Cugat.
+Castañas de cajú,3000,Fruta seca,3,Cugat,Jumbo,Unimarc.
+Rímel alargador,3500,Belleza,2,Santa Isabel,Cugat.
+Pan de maíz,2400,Alimento,2,Cugat,Santa Isabel.
+Set de crayones,2500,Arte,1,Tottus.
+Jugo de piña,1700,Bebida,3,Tottus,Cugat,Lider.
+Gel de baño,1800,Higiene,2,Cugat,Santa Isabel.
+Cámara de seguridad,20000,Electronica,2,Lider,Cugat.
+Zanahorias baby,800,Verdura,3,Cugat,Jumbo,Unimarc.
+Salsa de soja,1800,Condimento,2,Lider,Cugat.
+Semillas de girasol,2000,Fruta seca,3,Cugat,Jumbo,Unimarc.
+Labial mate,3000,Belleza,2,Santa Isabel,Cugat.
+Pan de kamut,2800,Alimento,2,Cugat,Santa Isabel.
+Set de acuarelas para niños,2800,Arte,1,Tottus.
+Refresco de manzana,2000,Bebida,3,Tottus,Cugat,Lider.
+Espuma de baño,2000,Higiene,2,Cugat,Santa Isabel.
+Reloj inteligente,50000,Electronica,2,Lider,Cugat.
+Cebollas moradas,700,Verdura,3,Cugat,Jumbo,Unimarc.
+Salsa de ajo,1500,Condimento,2,Lider,Cugat.
+Semillas de chía,2000,Fruta seca,3,Cugat,Jumbo,Unimarc.
+Delineador líquido,2800,Belleza,2,Santa Isabel,Cugat.
+Pan de centeno con semillas,3000,Alimento,2,Cugat,Santa Isabel.
+Set de pintura para niños,2800,Arte,1,Tottus.
+Jugo de mango,2000,Bebida,3,Tottus,Cugat,Lider.
+Cera para el cabello,2500,Higiene,2,Cugat,Santa Isabel.
+Tablet infantil,40000,Electronica,2,Lider,Cugat.
+Espárragos frescos,1500,Verdura,3,Cugat,Jumbo,Unimarc.
+Salsa de ostión,1800,Condimento,2,Lider,Cugat.
+Mix de frutos secos,2500,Fruta seca,3,Cugat,Jumbo,Unimarc.
+Corrector de ojeras,2800,Belleza,2,Santa Isabel,Cugat.
+Pan sin semillas,2800,Alimento,2,Cugat,Santa Isabel.
+Set de oleos para niños,2800,Arte,1,Tottus.
+Jugo de guayaba,2200,Bebida,3,Tottus,Cugat,Lider.
+Pasta dental blanqueadora,2500,Higiene,2,Cugat,Santa Isabel.
+Laptop para niños,50000,Electronica,2,Lider,Cugat.
+Brotes de soja,800,Verdura,3,Cugat,Jumbo,Unimarc.
+Salsa de mostaza,1500,Condimento,2,Lider,Cugat.
+Almendras tostadas,3000,Fruta seca,3,Cugat,Jumbo,Unimarc.
+Base de maquillaje,3200,Belleza,2,Santa Isabel,Cugat.
+Pan con avena,2800,Alimento,2,Cugat,Santa Isabel.
+Set de pinceles para niños,2800,Arte,1,Tottus.
+Jugo de maracuyá,2200,Bebida,3,Tottus,Cugat,Lider.
+Enjuague bucal,2500,Higiene,2,Cugat,Santa Isabel.
+Drone para niños,45000,Electronica,2,Lider,Cugat.
+Remolachas,700,Verdura,3,Cugat,Jumbo,Unimarc.
+Vinagre balsámico,1800,Condimento,2,Lider,Cugat.
+Nueces tostadas,3200,Fruta seca,3,Cugat,Jumbo,Unimarc.
+Máscara facial,2000,Belleza,2,Cugat,Santa Isabel.
+Marcadores para niños,1500,Arte,2,Cugat,Unimarc.
+Jugo de frambuesa,1800,Bebida,3,Cugat,Jumbo,Unimarc.
+Locion corporal,2800,Higiene,2,Lider,Cugat.
+Juego de mesa,15000,Juguetes,2,Cugat,Unimarc.
+Berenjenas,800,Verdura,3,Lider,Cugat,Unimarc.
+Pistachos tostados,3500,Fruta seca,2,Lider,Cugat.
+Iluminador,2200,Belleza,2,Santa Isabel,Cugat.
+Pan con linaza,1800,Alimento,3,Lider,Cugat,Unimarc.
+Lápices de colores,1300,Arte,2,Unimarc,Cugat.
+Jugo de piña,1500,Bebida,3,Santa Isabel,Cugat,Jumbo.
+Loción para después del sol,2000,Higiene,3,Lider,Jumbo,Cugat.
+Bicicleta para niños,60000,Juguetes,2,Unimarc,Cugat.
+Espinacas,600,Verdura,3,Jumbo,Lider,Cugat.
+Salsa de tomate,1000,Condimento,3,Santa Isabel,Lider,Cugat.
+Castañas de cajú,3000,Fruta seca,2,Cugat,Unimarc.
+Polvo para cejas,1800,Belleza,2,Santa Isabel,Cugat.
+Pan sin lactosa,2000,Alimento,3,Lider,Unimarc,Cugat.
+Acuarelas para niños,1800,Arte,2,Cugat,Unimarc.
+Jugo de papaya,1500,Bebida,3,Santa Isabel,Cugat,Jumbo.
+Crema para pies,2000,Higiene,2,Cugat,Jumbo.
+Muñeca Barbie,25000,Juguetes,2,Unimarc,Cugat.
+Pimientos rojos,700,Verdura,3,Lider,Cugat,Unimarc.
+Aderezo para ensaladas,1300,Condimento,2,Santa Isabel,Cugat.
+Avellanas tostadas,2800,Fruta seca,2,Cugat,Unimarc.
+Pintalabios,1800,Belleza,3,Lider,Cugat,Santa Isabel.
+Pan de quinoa,2000,Alimento,2,Cugat,Unimarc.
+Crayones para niños,1200,Arte,2,Cugat,Unimarc.
