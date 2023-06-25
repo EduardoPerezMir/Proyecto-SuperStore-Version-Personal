@@ -25,7 +25,8 @@ Pair * createPair( char * key,  void * value) {
 // Funcion hash para obtener el indice
 long hash(char * key, long capacity) {
     unsigned long hash = 0;
-     char * ptr;
+    char * ptr;
+    
     for (ptr = key; *ptr != '\0'; ptr++) {
         hash += hash*32 + tolower(*ptr);
     }
@@ -102,8 +103,7 @@ void eraseMap(HashMap * map,  char * key) {
 
 // Busca en el mapa segun la clave
 Pair * searchMap(HashMap * map,  char * key) {  
-    long indice = hash(key,map->capacity); 
-    
+    long indice = hash(key,map->capacity);
     while (map->buckets[indice] != NULL && map->buckets[indice]->key != NULL) // Mapea por la clave
     {
         if (strcmp(key,map->buckets[indice]->key) == 0 )

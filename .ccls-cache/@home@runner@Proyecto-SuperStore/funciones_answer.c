@@ -1,9 +1,19 @@
 #include "funciones_answer.h"
 
+//Logo
+void printLogo(){
+FILE *fptr = fopen("Base de datos/image.txt","r");
+char read_string[MAXLEN];
+ 
+    while(fgets(read_string,sizeof(read_string),fptr) != NULL)
+        printf("%s",read_string);
+        
+fclose(fptr);
+}
 // Importacion de base de datos
 
 void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMap* mapaCategorias, BTree* arbolP) {
-    FILE* file = fopen("db_productos.csv", "r");
+    FILE* file = fopen("Base de datos/db_productos.csv", "r");
     if (file == NULL) {
         printf("No se pudo abrir el archivo.\n");
         return;
@@ -90,9 +100,9 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMa
     fclose(file);
 }
 
-void importarCredencialesAdmin (HashMap* mapaAdmin)
+void importarCredencialesAdmin(HashMap* mapaAdmin)
 {
-    FILE* file = fopen("credenciales_admin.csv", "r");
+    FILE* file = fopen("Base de datos/credenciales_admin.csv", "r");
     if (file == NULL) {
         printf("No se pudo abrir el archivo.\n");
         return;
@@ -233,7 +243,11 @@ void eliminarProduCanasta(List* canasta)
         getchar();
         printf("\n");
     }while(strlen(nomProductoE) > MAXLEN);
-        
+
+    nomProductoE[0] = toupper(nomProductoE[0]);
+    for (char i = 1; nomProductoE[i] != '\0'; i++)
+        nomProductoE[i] = tolower(nomProductoE[i]);
+    
     int entro  = 0;
     tipoCanasta* currentCanasta = firstList(canasta);
     while (currentCanasta != NULL)
@@ -263,6 +277,10 @@ void agregarProduCanasta(HashMap* mapaProductos,HashMap* mapaSupermercados,List*
         getchar();
         printf("\n");
     }while(strlen(nomProducto) > MAXLEN);
+
+    nomProducto[0] = toupper(nomProducto[0]);
+    for (char i = 1; nomProducto[i] != '\0'; i++)
+        nomProducto[i] = tolower(nomProducto[i]);
     
     Pair* current;
     if( (current = searchMap(mapaProductos, nomProducto)) == NULL) {
@@ -279,6 +297,14 @@ void agregarProduCanasta(HashMap* mapaProductos,HashMap* mapaSupermercados,List*
         getchar();
         printf("\n");
     }while(strlen(nomSupermercado) > MAXLEN);
+
+    nomSupermercado[0] = toupper(nomSupermercado[0]);
+    for (char i = 1; nomSupermercado[i] != '\0'; i++)
+    {
+        nomSupermercado[i] = tolower(nomSupermercado[i]);
+        if (isspace(nomSupermercado[i - 1]))
+            nomSupermercado[i] = toupper(nomSupermercado[i]);
+    }
     
     if(searchMap(mapaSupermercados, nomSupermercado) == NULL) {
         printf("El supermercado a buscar no se encuentra en la base de datos\n");
@@ -337,6 +363,7 @@ void printMapP(HashMap* mapaProductos)
     while(current != NULL) {
         tipoProducto* producto = (tipoProducto*) current->value;
         printf(" %i. %s\n", cont, producto->nombre);
+        cont++;
         current = nextMap(mapaProductos);
      }
     printf("└──────────────────────────────────┘\n\n");
@@ -409,9 +436,14 @@ void busquedaProductosDirecta(HashMap* mapa) {
     puts(MSJBUSQUEDA1);
     
     char nombreProductoBuscado[MAXLEN + 1]; //Variable que almacenará la cadena ingresada por el usuario para este caso.
-    printf("Ingrese el nombre del producto a buscar: ");
+    printf("INGRESE EL NOMBRE DEL PRODUCTO A BUSCAR: ");
     scanf("%30[^\n]s", nombreProductoBuscado); //Se pide al usuario ingresar el nombre exacto del producto (incluyendo la mayúscula inicial).
     while (getchar() != '\n');
+    
+    nombreProductoBuscado[0] = toupper(nombreProductoBuscado[0]);
+    for (char i = 1; nombreProductoBuscado[i] != '\0'; i++)
+        nombreProductoBuscado[i] = tolower(nombreProductoBuscado[i]);
+    
     Pair* parBuscado = searchMap(mapa, nombreProductoBuscado); //Se busca en el mapa de productos con clave el nombre del producto.
     if (parBuscado != NULL)
     {
@@ -492,6 +524,15 @@ void busquedaProductosAdyacentes(HashMap* mapa, int indicador)
     
     printf("\n");
     scanf("%30[^\n]s", nombreElementoBuscado);
+
+    nombreElementoBuscado[0] = toupper(nombreElementoBuscado[0]);
+    for (char i = 1; nombreElementoBuscado[i] != '\0'; i++)
+    {
+        nombreElementoBuscado[i] = tolower(nombreElementoBuscado[i]);
+        if (indicador == 1 && isspace(nombreElementoBuscado[i - 1]))
+            nombreElementoBuscado[i] = toupper(nombreElementoBuscado[i]);
+    }
+    
     while (getchar() != '\n');
     
     Pair* parBuscado = searchMap(mapa, nombreElementoBuscado);
@@ -622,10 +663,14 @@ void agregarProducto(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* m
     scanf("%s", nombre);
     getchar(); 
 
-  if(searchMap(mapaProductos, nombre) != NULL){
+    nombre[0] = toupper(nombre[0]);
+    for (char i = 1; nombre[i] != '\0'; i++)
+        nombre[i] = tolower(nombre[i]);
+    
+    if(searchMap(mapaProductos, nombre) != NULL){
     printf("El prodcuto ya existe en el mapa de productos.\n");
     mostrarMenuAdmin();
-  }
+    }
 
     printf("Ingrese el precio del producto: ");
     scanf("%s", precio);
@@ -825,7 +870,7 @@ void quitarProductos(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* m
 }
 
 void guardarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMap* mapaCategorias) {
-    FILE* archivo = fopen("db_productos.csv", "w");
+    FILE* archivo = fopen("Base de datos/db_productos.csv", "w");
 
     if (archivo == NULL) {
         printf("No se pudo abrir el archivo para guardar los datos.\n");
@@ -904,17 +949,31 @@ void mostrarMenu()
                 printAllP(mapaProductos);
                 break;
             case 3:
+            {
                 busquedaProductosDirecta(mapaProductos);
                 break;
+            }
             case 4:
+            {
                 busquedaPorPrecio(arbolProductos);
+                break;
+            }   
             case 5:
+            {
                 busquedaProductosAdyacentes(mapaSupermercados, 1);
+                break;
+            }       
             case 6:
+            {
                 busquedaProductosAdyacentes(mapaCategorias, 2);
+                break;
+            }
             case 7:
+            {
                 if(loginAdmin(mapaAdmin) != 0)
                    menuAdmin(mapaProductos,mapaSupermercados,mapaCategorias);
+                break;
+            }        
             case 0:
             {
                 printf("CERRANDO EL PROGRAMA...\n");

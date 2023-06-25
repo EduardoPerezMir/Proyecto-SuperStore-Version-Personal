@@ -160,7 +160,7 @@ Esmalte de uñas azul,1200,Belleza,1,Santa Isabel.
 Pan con semillas,1800,Alimento,1,Santa Isabel.
 Set de pinturas acrílicas,4500,Arte,1,Tottus.
 Ron añejo,5000,Bebida,2,Tottus,Santa Isabel.
-Crema dental para dientes sensibles,1000,Higiene,3,Lider,Santa Isabel,Jumbo.
+Crema dental,1000,Higiene,3,Lider,Santa Isabel,Jumbo.
 Laptop,500000,Electronica,3,Jumbo,Unimarc,Cugat.
 Apio,300,Verdura,3,Lider,Jumbo,Unimarc.
 Menta fresca,500,Condimento,2,Lider,Jumbo.
@@ -184,7 +184,6 @@ Zucchini,700,Verdura,3,Lider,Jumbo,Unimarc.
 Hierbabuena fresca,500,Condimento,2,Lider,Jumbo.
 Pasas,800,Fruta seca,3,Lider,Jumbo,Unimarc.
 Pintalabios rosa,1800,Belleza,2,Santa Isabel,Lider.
-Pan de quinoa,1800,Alimento,2,Santa Isabel,Lider.
 Set de pasteles al óleo,4500,Arte,1,Tottus.
 Gin premium,6500,Bebida,2,Tottus,Santa Isabel.
 Cámara de video,250000,Electronica,2,Lider,Jumbo.
@@ -194,7 +193,6 @@ Pasas de uva,1500,Fruta seca,3,Lider,Jumbo,Santa Isabel.
 Pintalabios mate,2000,Belleza,2,Santa Isabel,Lider.
 Set de crayones,1000,Arte,1,Tottus.
 Vodka premium,5500,Bebida,2,Tottus,Santa Isabel.
-Acondicionador para cabello seco,1000,Higiene,3,Lider,Santa Isabel,Jumbo.
 Teclado para computadora,20000,Electronica,2,Lider,Jumbo.
 Espárragos,800,Verdura,3,Lider,Jumbo,Unimarc.
 Hojas de laurel,500,Condimento,2,Lider,Jumbo.
@@ -205,9 +203,6 @@ Set de marcadores,1500,Arte,1,Tottus.
 Ron blanco,4500,Bebida,3,Tottus,Santa Isabel,Lider.
 Pasta dental blanqueadora,1200,Higiene,3,Lider,Santa Isabel,Jumbo.
 Mouse para computadora,15000,Electronica,2,Lider,Jumbo.
-Berenjenas,700,Verdura,3,Lider,Jumbo,Unimarc.
-Romero fresco,500,Condimento,2,Lider,Jumbo.
-Avellanas,2500,Fruta seca,3,Lider,Jumbo,Unimarc.
 Pintalabios con vitamina E,2200,Belleza,2,Santa Isabel,Lider.
 Pan integral con semillas,2000,Alimento,2,Santa Isabel,Lider.
 Set de pinturas de tiza,2500,Arte,1,Tottus.
@@ -218,10 +213,8 @@ Rúcula,600,Verdura,3,Lider,Jumbo,Unimarc.
 Albahaca fresca,500,Condimento,2,Lider,Jumbo.
 Pistachos,3000,Fruta seca,3,Lider,Jumbo,Unimarc.
 Pintalabios larga duración,2400,Belleza,2,Santa Isabel,Lider.
-Pan con avena,2000,Alimento,2,Santa Isabel,Lider.
 Set de pinturas para cerámica,3000,Arte,1,Tottus.
 Vodka de frutas,4500,Bebida,3,Tottus,Santa Isabel,Lider.
-Acondicionador para cabello teñido,1200,Higiene,3,Lider,Santa Isabel,Jumbo.
 Cámara de seguridad,150000,Electronica,2,Lider,Jumbo.
 Espinacas,600,Verdura,3,Lider,Jumbo,Unimarc.
 Orégano fresco,500,Condimento,2,Lider,Jumbo.
@@ -262,7 +255,6 @@ Romero fresco,600,Condimento,2,Lider,Cugat.
 Frutos secos surtidos,2500,Fruta seca,3,Cugat,Jumbo,Unimarc.
 Polvo compacto,3000,Belleza,2,Santa Isabel,Cugat.
 Pan de linaza,2600,Alimento,2,Cugat,Santa Isabel.
-Set de acuarelas,4000,Arte,1,Tottus.
 Agua de coco,1800,Bebida,3,Tottus,Cugat,Lider.
 Talco para pies,1000,Higiene,2,Cugat,Santa Isabel.
 Mouse inalámbrico,12000,Electronica,2,Lider,Cugat.
@@ -280,7 +272,6 @@ Salsa de soja,1800,Condimento,2,Lider,Cugat.
 Semillas de girasol,2000,Fruta seca,3,Cugat,Jumbo,Unimarc.
 Labial mate,3000,Belleza,2,Santa Isabel,Cugat.
 Pan de kamut,2800,Alimento,2,Cugat,Santa Isabel.
-Set de acuarelas para niños,2800,Arte,1,Tottus.
 Refresco de manzana,2000,Bebida,3,Tottus,Cugat,Lider.
 Espuma de baño,2000,Higiene,2,Cugat,Santa Isabel.
 Reloj inteligente,50000,Electronica,2,Lider,Cugat.
@@ -319,15 +310,11 @@ Marcadores para niños,1500,Arte,2,Cugat,Unimarc.
 Jugo de frambuesa,1800,Bebida,3,Cugat,Jumbo,Unimarc.
 Locion corporal,2800,Higiene,2,Lider,Cugat.
 Juego de mesa,15000,Juguetes,2,Cugat,Unimarc.
-Berenjenas,800,Verdura,3,Lider,Cugat,Unimarc.
-Pistachos tostados,3500,Fruta seca,2,Lider,Cugat.
 Iluminador,2200,Belleza,2,Santa Isabel,Cugat.
 Pan con linaza,1800,Alimento,3,Lider,Cugat,Unimarc.
-Lápices de colores,1300,Arte,2,Unimarc,Cugat.
 Jugo de piña,1500,Bebida,3,Santa Isabel,Cugat,Jumbo.
 Loción para después del sol,2000,Higiene,3,Lider,Jumbo,Cugat.
 Bicicleta para niños,60000,Juguetes,2,Unimarc,Cugat.
-Espinacas,600,Verdura,3,Jumbo,Lider,Cugat.
 Salsa de tomate,1000,Condimento,3,Santa Isabel,Lider,Cugat.
 Castañas de cajú,3000,Fruta seca,2,Cugat,Unimarc.
 Polvo para cejas,1800,Belleza,2,Santa Isabel,Cugat.

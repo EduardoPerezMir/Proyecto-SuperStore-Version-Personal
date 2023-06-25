@@ -7,11 +7,9 @@
 #include <ctype.h>
 #include <stdbool.h>
 
-#include "hashmap.h"
-#include "list.h"
-#include "btree.h"
-#include "list.h"
-#include "hashmap.h"
+#include "TDAs/hashmap.h"
+#include "TDAs/list.h"
+#include "TDAs/btree.h"
 
 #define MAXLEN 30
 #define PRICELEN 9
@@ -107,12 +105,7 @@ void busquedaProductosDirecta(HashMap* mapa);
 
 void busquedaPorPrecio(BTree* arbolP);
 
-// Mostrar por supermercado OPCION 5
-
-
-
-
-//Mostrar por categoria OPCION 6 
+// Mostrar por supermercado o categoria OPCION 5 y 6
 
 void busquedaProductosAdyacentes(HashMap* mapa, int indicador);
 
@@ -141,6 +134,8 @@ void guardarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMap
 // Menu principal
 
 void mostrarMenu();
+
+void printLogo();
 
 void mostrarOpciones(); // Mostrar opciones de menu principal
 
