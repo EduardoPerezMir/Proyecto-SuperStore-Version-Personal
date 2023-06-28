@@ -1,15 +1,4 @@
-#include "funciones_answer.h"
-
-//Logo
-void printLogo(){
-FILE *fptr = fopen("Base de datos/image.txt","r");
-char read_string[MAXLEN];
- 
-    while(fgets(read_string,sizeof(read_string),fptr) != NULL)
-        printf("%s",read_string);
-        
-fclose(fptr);
-}
+/* #include "funciones_answer.h"
 // Importacion de base de datos
 
 void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMap* mapaCategorias, BTree* arbolP) {
@@ -147,6 +136,26 @@ void printListP(List* Super) {
         cont++;
         current = nextList(Super);
     }
+}
+
+void printMapP(HashMap* mapaProductos)
+{
+    Pair* current = firstMap(mapaProductos);
+    if(current == NULL) {
+        printf("No hay productos existentes\n");
+        return;
+    }
+    
+    printf("\nLista de productos existentes:\n");
+    printf("┌──────────────────────────────────┐\n");
+    int cont = 1;
+    while(current != NULL) {
+        tipoProducto* producto = (tipoProducto*) current->value;
+        printf(" %i. %s\n", cont, producto->nombre);
+        cont++;
+        current = nextMap(mapaProductos);
+     }
+    printf("└──────────────────────────────────┘\n\n");
 }
 
 // Armar canasta Opcion 1
@@ -349,27 +358,6 @@ void agregarProduCanasta(HashMap* mapaProductos,HashMap* mapaSupermercados,List*
     }  
 }
 
-void printMapP(HashMap* mapaProductos)
-{
-    Pair* current = firstMap(mapaProductos);
-    if(current == NULL) {
-        printf("No hay productos existentes\n");
-        return;
-    }
-    
-    printf("\nLista de productos existentes:\n");
-    printf("┌──────────────────────────────────┐\n");
-    int cont = 1;
-    while(current != NULL) {
-        tipoProducto* producto = (tipoProducto*) current->value;
-        printf(" %i. %s\n", cont, producto->nombre);
-        cont++;
-        current = nextMap(mapaProductos);
-     }
-    printf("└──────────────────────────────────┘\n\n");
-    
-}
-
 void printListPC(List* Super) {
     tipoCanasta* current = firstList(Super);
     int cont = 1;
@@ -430,13 +418,13 @@ void printAllP(HashMap* productos) {
 
 // Mostrar producto por nombre Opcion 3
 
-/*La función busquedaProductosDirecta consiste en una busqueda por el nombre del producto en el mapa de productos.*/
+// La función busquedaProductosDirecta consiste en una busqueda por el nombre del producto en el mapa de productos.
 void busquedaProductosDirecta(HashMap* mapa) {
     printMapP(mapa);
     puts(MSJBUSQUEDA1);
     
     char nombreProductoBuscado[MAXLEN + 1]; //Variable que almacenará la cadena ingresada por el usuario para este caso.
-    printf("INGRESE EL NOMBRE DEL PRODUCTO A BUSCAR: ");
+    printf("Ingrese el nombre del producto a buscar: ");
     scanf("%30[^\n]s", nombreProductoBuscado); //Se pide al usuario ingresar el nombre exacto del producto (incluyendo la mayúscula inicial).
     while (getchar() != '\n');
     
@@ -1003,3 +991,16 @@ void mostrarOpciones()
     printf("║                                                             ║\n");
     printf("╚═════════════════════════════════════════════════════════════╝\n\n");
 }
+
+
+
+//Logo
+void printLogo(){
+    FILE *fptr = fopen("Base de datos/image.txt","r");
+    char read_string[MAXLEN];
+     
+        while(fgets(read_string,sizeof(read_string),fptr) != NULL)
+            printf("%s",read_string);
+            
+    fclose(fptr);
+}*/

@@ -141,18 +141,6 @@ void cleanList(List * list) {
     list->current = NULL;
 }
 
-/*void display(List* list) {
-
-    Node* current = list->head;
-
-    while(current != NULL) {
-        printf("");
-        current = current->next;
-    }
-
-} */
-
-
 void replace(List * list, void * data){
     Node *nuevoNodo = createNode(data);
     list->current->prev->next = nuevoNodo;

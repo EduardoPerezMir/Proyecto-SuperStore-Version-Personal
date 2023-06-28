@@ -1,4 +1,4 @@
-#ifndef Funciones_answer_h
+/* #ifndef Funciones_answer_h
 #define Funciones_answer_h
 
 #include <stdio.h>
@@ -87,13 +87,13 @@ void printListPC(List* Super); // Muestra los productos de la canasta
 
 void subMenuCanastaCantidad();
 
-tipoCanasta* searchListCanasta(List* canasta,char* producto,char* supermercado);
+tipoCanasta* searchListCanasta(List* canasta, char* producto, char* supermercado);
 
 // Mostrar toda la oferta de productos OPCION 2
 
-void mostrarTodosProductos(HashMap* productos); // Opcion 2 "Mostrar todos los productos"
-
 void mostrarProducto(tipoProducto* producto);
+
+void mostrarTodosProductos(HashMap* productos); // Opcion 2 "Mostrar todos los productos"
 
 void printAllP(HashMap* mapaProductos); // Mostrar todos los productos 
 
@@ -105,10 +105,9 @@ void busquedaProductosDirecta(HashMap* mapa);
 
 void busquedaPorPrecio(BTree* arbolP);
 
-// Mostrar por supermercado o categoria OPCION 5 y 6
+// Mostrar por supermercado y categoria OPCION 5 y 6
 
 void busquedaProductosAdyacentes(HashMap* mapa, int indicador);
-
 
 // Iniciar sesion como administrador OPCION 7
 int loginAdmin(HashMap* mapaAdministradores); // Iniciar sesion como administrador, si se inicia sesion correctamente retorna distinto a 0
@@ -135,8 +134,9 @@ void guardarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMap
 
 void mostrarMenu();
 
-void printLogo();
-
 void mostrarOpciones(); // Mostrar opciones de menu principal
 
-#endif /* Funciones_answer_h */
+void printLogo();
+
+#endif // Funciones_answer_h
+*/
