@@ -20,6 +20,7 @@ int main(void) {
     importarCredencialesAdmin(mapaAdmin);
     List* canasta = createList();
     int opcion;
+    
     printLogo();
     do {
         mostrarOpciones();
@@ -72,17 +73,17 @@ int main(void) {
     } while (opcion != 0);
 
     destroyAllAdjacentListsProductos(mapaProductos);
-    //destroyAllAdjacentListsSupermercados(mapaSupermercados);
-    //destroyAllAdjacentListsCategorias(mapaCategorias);
-    //destroyAllAdjacentListsBTree(arbolProductos);
+    destroyAllAdjacentListsSupermercados(mapaSupermercados);
+    destroyAllAdjacentListsCategorias(mapaCategorias);
+    destroyAllAdjacentListsBTree(getRoot(arbolProductos));
     
-    //destroyHashMap(mapaProductos);
-    //destroyHashMap(mapaSupermercados);
-    //destroyHashMap(mapaCategorias);
-    //destroyHashMap(mapaAdmin);
+    destroyHashMap(mapaProductos);
+    destroyHashMap(mapaSupermercados);
+    destroyHashMap(mapaCategorias);
+    destroyHashMap(mapaAdmin);
 
-    //destroyBTree(getRoot(arbolProductos));
-    //free(arbolProductos);
+    destroyBTree(getRoot(arbolProductos));
+    free(arbolProductos);
 
     
     return 0;

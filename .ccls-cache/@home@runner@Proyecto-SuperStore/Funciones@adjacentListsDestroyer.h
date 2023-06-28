@@ -13,6 +13,6 @@ void destroyAllAdjacentListsSupermercados(HashMap* map);
 
 void destroyAllAdjacentListsCategorias(HashMap* map);
 
-//void destroyAllAdjacentListsBTree(BTree* arbolB);
+void destroyAllAdjacentListsBTree(BTreeNode* node);
 
 #endif

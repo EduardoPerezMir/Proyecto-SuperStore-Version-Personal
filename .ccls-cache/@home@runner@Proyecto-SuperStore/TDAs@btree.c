@@ -57,30 +57,10 @@ BTreeNode* newBTreeNode(BTree* tree, int leaf) {
     return newNode;
 }
 
-void freeBTreeNode(BTreeNode* node) {
-    if (node == NULL) {
-        return;
-    }
-    
-    if (node->leaf == 0) {
-        int i;
-        for (i = 0; i <= node->numKeys; i++) {
-            freeBTreeNode(node->children[i]);
-        }
-        free(node->children);
-    }
-
-    for(int i = 0; i < node->numKeys; i++) {
-        free(node->values[i]);
-    }
-    free(node->keys);
-    free(node->values);
-    free(node);
-}
-
-void freeBTree(BTree* tree) {
-    freeBTreeNode(tree->root);
-    free(tree);
+int isLeaf(BTreeNode* node)
+{
+    if (node->leaf)    return 1;
+    else    return 0;
 }
 
 int splitChildBTree(BTree* tree, BTreeNode* x, int i) {
@@ -292,22 +272,36 @@ BTreeNode* searchBTree(BTreeNode* root, int key) {
 }
 
 
-void destroyBTree(BTreeNode *node)
+void destroyBTreeNodes(BTreeNode *node)
 {
     if (node == NULL)
         return;
 
     // Si el nodo no es una hoja, llamar a BTreeDestroy en cada hijo
-    if (!node->leaf) {
-        for (int i = 0; i <= MAX; i++) {
-            destroyBTree(node->children[i]);
+    if (!isLeaf(node)) {
+        for (int i = 0; node->children[i] != NULL; i++) {
+            if (node->children[i] != NULL)
+                destroyBTreeNodes(node->children[i]);
         }
     }
 
     // Liberar los recursos para las claves y los hijos
-    free(node->keys);
-    free(node->children);
+    if (node->keys != NULL) {
+        free(node->keys);
+        node->keys = NULL;
+    }
+    if (node->children != NULL) {
+        free(node->children);
+        node->children = NULL;
+    }
 
     // Finalmente, liberar el nodo mismo
     free(node);
 }
+
+void destroyBTree(BTree* BTree)
+{
+    free(BTree->root);
+    free(BTree);
+}
+
