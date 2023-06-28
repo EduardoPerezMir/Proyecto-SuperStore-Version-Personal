@@ -23,6 +23,7 @@ void armarCanasta(List* canasta, HashMap* mapaProductos, HashMap* mapaSupermerca
         scanf("%i",&opcion);
         getchar();
         printf("\n");
+        // Opciones dependiendo de lo ingresado
         switch(opcion)
         {
             case 1:
@@ -58,12 +59,14 @@ void armarCanasta(List* canasta, HashMap* mapaProductos, HashMap* mapaSupermerca
 
 void eliminarProduCanasta(List* canasta)
 {
+    // Si la lista esta vacia finaliza la ejecucion
     if (isListEmpty(canasta))
     {
         printf("No existen productos en la canasta\n");
         return;
     }
     printf("Lista de productos en la canasta\n");
+    // Se muestran todos los elementos de la lista
     printListS(canasta);
     char nomProductoE[MAXLEN + 1];
     do{
@@ -73,13 +76,14 @@ void eliminarProduCanasta(List* canasta)
         printf("\n");
     }while(strlen(nomProductoE) > MAXLEN);
 
+    // Se transforma la cadena ingresada a la primera letra mayuscula y demas minusculas para ser buscado luego
     nomProductoE[0] = toupper(nomProductoE[0]);
     for (char i = 1; nomProductoE[i] != '\0'; i++)
         nomProductoE[i] = tolower(nomProductoE[i]);
     
-    int entro  = 0;
+    int entro = 0;
     tipoCanasta* currentCanasta = firstList(canasta);
-    while (currentCanasta != NULL)
+    while (currentCanasta != NULL)//ciclo que recorre canasta
     {
         if (strcmp(currentCanasta->nombre, nomProductoE) == 0)
         {
@@ -178,6 +182,7 @@ void agregarProduCanasta(HashMap* mapaProductos,HashMap* mapaSupermercados,List*
     }  
 }
 
+/* Impresion de canasta con informacion de productos y total a pagar*/
 void printListPC(List* Super) {
     tipoCanasta* current = firstList(Super);
     int cont = 1;

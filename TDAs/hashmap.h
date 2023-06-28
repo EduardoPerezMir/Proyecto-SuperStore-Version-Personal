@@ -28,4 +28,8 @@ bool areProductsPresents(HashMap *map);
 
 long sizeMap(HashMap *map);
 
+void destroyNode(Pair* node);
+
+void destroyHashMap(HashMap* map);
+
 #endif /* HashMap_h */

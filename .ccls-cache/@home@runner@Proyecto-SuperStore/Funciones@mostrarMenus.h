@@ -6,12 +6,12 @@
 
 void mostrarOpciones(); // Mostrar opciones de menu principal
 
-void mostrarMenuAdmin(); 
+void mostrarMenuAdmin();  // Mostrar opciones del menu administrador
 
 void subMenuCanasta(); // Muestra submenu de armar canasta
 
-void subMenuCanastaCantidad();
+void subMenuCanastaCantidad(); // Muestra submenu del submenu armar canasta
 
-void printLogo();
+void printLogo(); // Muestra el logo
 
 #endif

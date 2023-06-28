@@ -23,5 +23,6 @@ void eliminarProductoLista(List* productos,char* nomProducto);
 
 void guardarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMap* mapaCategorias);
 
+void guardarDatosCSV2 (HashMap* mapaSupermercados, HashMap* mapaCategoria);
 
 #endif

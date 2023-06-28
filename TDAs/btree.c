@@ -290,3 +290,24 @@ BTreeNode* searchBTree(BTreeNode* root, int key) {
 
     return searchBTree(root->children[i], key);
 }
+
+
+void destroyBTree(BTreeNode *node)
+{
+    if (node == NULL)
+        return;
+
+    // Si el nodo no es una hoja, llamar a BTreeDestroy en cada hijo
+    if (!node->leaf) {
+        for (int i = 0; i <= MAX; i++) {
+            destroyBTree(node->children[i]);
+        }
+    }
+
+    // Liberar los recursos para las claves y los hijos
+    free(node->keys);
+    free(node->children);
+
+    // Finalmente, liberar el nodo mismo
+    free(node);
+}

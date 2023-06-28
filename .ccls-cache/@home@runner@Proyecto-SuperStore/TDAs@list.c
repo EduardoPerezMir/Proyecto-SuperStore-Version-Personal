@@ -185,3 +185,30 @@ int get_size(List* lista)
     }
     return cont;
 }
+
+
+void destroyList(List* list)
+{
+    if (list == NULL) {
+        return;
+    }
+    
+    Node* current = list->head;
+    
+    if (list->head == NULL)
+    {
+        free(list);
+        return;
+    }
+    
+    Node* next = (Node*) malloc(sizeof(Node));
+    
+    while (current != NULL) {
+        next = current->next;
+        free(current);
+        current = next;
+    }
+
+    list->head = NULL; // Para evitar el acceso a una dirección de memoria ya liberada
+    free(list);
+}

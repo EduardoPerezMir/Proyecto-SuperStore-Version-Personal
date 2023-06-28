@@ -156,3 +156,19 @@ long sizeMap(HashMap * map)
 {
     return map->size;
 }
+
+void destroyNode(Pair* node) {
+    if (node == NULL)
+        return;
+    
+    free(node);
+}
+
+
+void destroyHashMap(HashMap* map)
+{
+    for (int i = 0; i < map->size; i++)
+        destroyNode(map->buckets[i]);
+    free(map->buckets);
+    free(map);
+}

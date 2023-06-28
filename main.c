@@ -6,6 +6,7 @@
 #include "Funciones/opcionesAdmin.h"
 #include "Funciones/opcionesCanasta.h"
 #include "Funciones/busquedas.h"
+#include "Funciones/adjacentListsDestroyer.h"
 
 int main(void) {
     HashMap* mapaProductos = createMap(MAPINITIALCAPAC);
@@ -61,7 +62,7 @@ int main(void) {
             case 0:
             {
                 printf("CERRANDO EL PROGRAMA...\n");
-                return 0;
+                break;
             }
             default:
             {
@@ -69,6 +70,20 @@ int main(void) {
             }    
         }
     } while (opcion != 0);
+
+    destroyAllAdjacentListsProductos(mapaProductos);
+    //destroyAllAdjacentListsSupermercados(mapaSupermercados);
+    //destroyAllAdjacentListsCategorias(mapaCategorias);
+    //destroyAllAdjacentListsBTree(arbolProductos);
+    
+    //destroyHashMap(mapaProductos);
+    //destroyHashMap(mapaSupermercados);
+    //destroyHashMap(mapaCategorias);
+    //destroyHashMap(mapaAdmin);
+
+    //destroyBTree(getRoot(arbolProductos));
+    //free(arbolProductos);
+
     
     return 0;
 }

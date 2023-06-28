@@ -1,6 +1,6 @@
 #include "mostrarMenus.h"
 
-
+// Muestra Menu principal
 void mostrarOpciones()
 {
     printf("\n╔═════════════════════════════════════════════════════════════╗\n");
@@ -17,7 +17,7 @@ void mostrarOpciones()
     printf("╚═════════════════════════════════════════════════════════════╝\n\n");
 }
 
-
+// Muestra menu administrador
 void mostrarMenuAdmin()
 {
    printf("\n╔═════════════════════════════════════════════════════════════╗\n");
@@ -29,10 +29,11 @@ void mostrarMenuAdmin()
     printf("║ 5. INGRESE 5 SI DESEA SALIR AL MENU PRINICIPAL              ║\n");
     printf("║                                                             ║\n");
     printf("╚═════════════════════════════════════════════════════════════╝\n\n");
+    printf("Opción: ");
 }
 
 
-
+// Muestra submenu armar canasta al ingresar opción "1"
 void subMenuCanasta() {
     printf("\n╔═════════════════════════════════════════════════════════════╗\n");
     printf("║                                                             ║\n");
@@ -40,9 +41,12 @@ void subMenuCanasta() {
     printf("║ 2. INGRESE 2 SI DESEA AGREGAR PRODUCTOS A LA CANASTA.       ║\n");
     printf("║ 3. INGRESE 3 SI DESEA ELIMINAR PRODUCTOS DE LA CANASTA.     ║\n");
     printf("║ 4. INGRESE 0 SI DESEA SALIR AL MENÚ PRINCIPAL.              ║\n");
+    printf("║                                                             ║\n");
     printf("╚═════════════════════════════════════════════════════════════╝\n\n");
+    printf("Opción: ");
 }
 
+// Muestra submenu en el submenu de armar canasta al momento de ingresar un producto este ya se encuentra
 void subMenuCanastaCantidad()
 {
     printf("\n╔═════════════════════════════════════════════════════════════╗\n");
@@ -55,7 +59,7 @@ void subMenuCanastaCantidad()
 }
 
 
-//Logo
+// Logo
 void printLogo(){
     FILE *fptr = fopen("Base de datos/image.txt","r");
     char read_string[MAXLEN];

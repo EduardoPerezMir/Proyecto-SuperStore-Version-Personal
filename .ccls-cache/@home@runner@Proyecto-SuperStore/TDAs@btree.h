@@ -32,5 +32,6 @@ int insertNonFullBTree(BTree *tree, BTreeNode *x, int key, void *value);
 void searchByRangeBTree(BTreeNode *root, int key1, int key2, List *listaP);
 BTreeNode *getRoot(BTree *tree);
 void freeBTreeNode(BTreeNode *node);
+void destroyBTree(BTreeNode *node);
 
 #endif

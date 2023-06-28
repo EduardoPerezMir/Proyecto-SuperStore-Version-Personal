@@ -41,6 +41,7 @@ void menuAdmin(HashMap* mapaProductos,HashMap* mapaSupermercados,HashMap* mapaCa
     mostrarMenuAdmin();
     int opcion;
     scanf("%d", &opcion);
+    // Segun la opcion ingresadaos
     switch (opcion) {
     case 1:
         printf("\nOpción 1 ingresada\n");
@@ -64,6 +65,7 @@ void menuAdmin(HashMap* mapaProductos,HashMap* mapaSupermercados,HashMap* mapaCa
     case 5:
         printf("\nOpción 5 ingresada\n");
         guardarDatosCSV(mapaProductos, mapaSupermercados,  mapaCategorias);
+        guardarDatosCSV2(mapaSupermercados, mapaCategorias);
         printf("GURDANDO CAMBIOS ...");
         return;
     }
@@ -165,19 +167,17 @@ void agregarProducto(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* m
 }
 
 void agregarSupermercado(HashMap* mapaSupermercados) {
-    char nombreSupermercado[MAXLEN + 1];
+    char *nombreSupermercado = (char*) malloc(sizeof(MAXLEN + 1));
     printf("Ingrese el nombre del supermercado: ");
     scanf("%s", nombreSupermercado);
     while (getchar() != '\n');
     
     if (searchMap(mapaSupermercados, nombreSupermercado) != NULL) {
-    printf("El supermercado ya existe en el mapa de supermercados.\n");
-    return;
+        printf("El supermercado ya existe en el mapa de supermercados.\n");
+        return;
     }
-    
-    tipoSupermercado* supermercado = (tipoSupermercado*)malloc(sizeof(tipoSupermercado));
+    tipoSupermercado* supermercado = (tipoSupermercado*) malloc(sizeof(tipoSupermercado));
     strncpy(supermercado->nombre, nombreSupermercado, MAXLEN);
-    supermercado->nombre[MAXLEN] = '\0';
     supermercado->productos = createList();
     
     insertMap(mapaSupermercados, nombreSupermercado, supermercado);
@@ -187,22 +187,22 @@ void agregarSupermercado(HashMap* mapaSupermercados) {
     // Comprobación de que el supermercado se agregó al mapa
     Pair* test = searchMap(mapaSupermercados, nombreSupermercado);
     if (test != NULL) {
-    printf("Supermercado encontrado en el mapa de supermercados: %s\n", ((tipoSupermercado *)test->value)->nombre);
+    printf("Supermercado encontrado en el mapa de supermercados: %s\n", test->key);
     } else {
     printf("No se encontró el supermercado en el mapa de supermercados.\n");
     }
 }
 
 void agregarCategoria(HashMap* mapaCategorias) {
-    char nombreCategoria[MAXLEN + 1];
+    char *nombreCategoria = (char*) malloc(sizeof(MAXLEN + 1));
     printf("Ingrese el nombre de la categoría: ");
     scanf("%s", nombreCategoria);
     while (getchar() != '\n');
     
     tipoCategoria* categoria = (tipoCategoria*)searchMap(mapaCategorias, nombreCategoria);
     if (categoria != NULL) {
-    printf("La categoría ya existe en el mapa de categorías.\n");
-    return;
+        printf("La categoría ya existe en el mapa de categorías.\n");
+        return;
     }
     
     categoria = (tipoCategoria*)malloc(sizeof(tipoCategoria));
@@ -225,9 +225,9 @@ void agregarCategoria(HashMap* mapaCategorias) {
 void eliminarProductoLista(List* productos,char* nomProducto)
 {
     tipoProducto* currentList=firstList(productos);
-    while(currentList != NULL)
+    while(currentList != NULL)//ciclo que recorre la lista recibida
     {
-        if (strcmp(currentList->nombre,nomProducto)==0)
+        if (strcmp(currentList->nombre, nomProducto) == 0)
         {
             popCurrent(productos);
             return;
@@ -257,23 +257,25 @@ void quitarProductos(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* m
     
     tipoProducto* producto = current->value;
     
-    //eliminacion del producto de la lista del mapa de supermercados
+    //eliminacion del producto de la lista de productos del mapa de supermercados
     tipoSupermercado* currentListSuper = firstList(producto->supermercados);
-    while(currentListSuper != NULL)
+    while(currentListSuper != NULL)//ciclo para recorrer todos los supermercados de la lista del producto a eliminar
     {
         Pair* parSuper = searchMap(mapaSupermercados,currentListSuper->nombre);
         tipoSupermercado* elemenMapSuper = parSuper->value;
+
+        //(eliminarProductoLista)ciclo para recorrer lista del mapa de supermercado para eliminar producto
         eliminarProductoLista(elemenMapSuper->productos, nomProducto);
-        //se le manda la lista de cada elemento del mapa de supermercado ademas el nombre del producto a eliminar
+        
         currentListSuper = nextList(producto->supermercados);
     }
     
-    //eliminacion del producto en la lista del mapa de categoria
+    //eliminacion del producto en la lista del producto del mapa de categoria
     Pair* parCategoria = searchMap(mapaCategorias,producto->categoria);
-    tipoCategoria* categoria = parCategoria->value;
+    tipoCategoria* categoria = parCategoria->value;//categoria donde se encuentra el producto a eliminar
     
     tipoProducto* currentListP = firstList(categoria->productos);
-    while(currentListP != NULL)
+    while(currentListP != NULL)//ciclo que recorre lista de productos del mapa categoria
     {
         if (strcmp(currentListP->nombre,nomProducto) == 0)
         {
@@ -282,6 +284,7 @@ void quitarProductos(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* m
         }
         currentListP = nextList(categoria->productos);
     }
+    
     eraseMap(mapaProductos, nomProducto);
     printf("El producto %s ha sido eliminado de la base de datos\n", nomProducto);
     menuAdmin(mapaProductos, mapaSupermercados, mapaCategorias);
@@ -311,7 +314,7 @@ void guardarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMap
             if (producto->supermercados != NULL) {
                 int cantidadSupermercados = get_size_list(producto->supermercados);
                 fprintf(archivo, "%d,", cantidadSupermercados);
-
+//ARREGLAR
                 Node* nodoSupermercado = producto->supermercados->head;
                 while (nodoSupermercado != NULL) {
                     char* supermercado = (char*)nodoSupermercado->data;
@@ -326,8 +329,6 @@ void guardarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMap
             } else {
                 fprintf(archivo, "0");
             }
-
-            fprintf(archivo, ".\n"); // Agregar el punto al final de la línea
         }
 
         currentProducto = nextMap(mapaProductos);
@@ -336,4 +337,45 @@ void guardarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMap
     fclose(archivo);
 
     printf("Datos guardados exitosamente en la base de dato.\n");
+}
+
+void guardarDatosCSV2 (HashMap* mapaSupermercados, HashMap* mapaCategorias){
+    FILE *file_super = fopen("Base de datos/db_supermercados.csv", "w");
+    FILE *file_categoria = fopen("Base de datos/db_categorias.csv", "w");
+    if (file_super == NULL) {
+        printf("No se pudo abrir el archivo para guardar los datos.\n");
+        return;
+    }
+    
+    fprintf(file_super, "Supermercados\n");
+    
+    Pair* currentSupermercado = firstMap(mapaSupermercados);
+    tipoSupermercado* supermercadoAux = currentSupermercado->value;
+    while(currentSupermercado != NULL) {
+        if (supermercadoAux->nombre[0] != '\0') {
+            printf("test: %s\n", supermercadoAux->nombre);
+        fprintf(file_super, "%s\n", supermercadoAux->nombre);
+        }
+        currentSupermercado = nextMap(mapaSupermercados);
+        supermercadoAux = currentSupermercado->value;
+    }
+    
+    fclose(file_super);
+//categoria
+fprintf(file_categoria, "Categorias\n");
+Pair* currentCategoria = firstMap(mapaCategorias);
+    tipoSupermercado* categoriaAux = currentCategoria->value;
+    while(currentCategoria != NULL) {
+        if (categoriaAux->nombre[0] != '\0') {
+            printf("test: %s\n", categoriaAux->nombre);
+        fprintf(file_categoria, "%s\n", categoriaAux->nombre);
+        }
+        currentCategoria = nextMap(mapaCategorias);
+        categoriaAux = currentCategoria->value;
+    }
+    
+    fclose(file_categoria);
+
+    
+    printf("Datos de los supermercados guardados.\n");
 }
