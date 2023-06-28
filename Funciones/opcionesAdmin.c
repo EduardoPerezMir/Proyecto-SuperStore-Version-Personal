@@ -238,7 +238,7 @@ void eliminarProductoLista(List* productos,char* nomProducto)
 
 void quitarProductos(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* mapaSupermercados)
 {
-    printMap(mapaProductos);
+    printMap(mapaProductos, 0);
     char nomProducto[MAXLEN + 1];
     do{
         printf("Ingrese el nombre del producto ha eliminar de la base de datos: ");

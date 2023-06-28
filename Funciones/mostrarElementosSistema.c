@@ -22,25 +22,38 @@ void printListP(List* Super) {
     }
 }
 
-void printMap(HashMap* mapa)
+void printMap(HashMap* mapa, int indicadorMSJ)
 {
     Pair* current = firstMap(mapa);
     if(current == NULL) {
-        printf("No hay productos existentes\n");
+        printf("No hay elementos existentes.\n");
         return;
     }
+
+    if (indicadorMSJ == 0)    printf("\nLista de productos existentes:\n");
+    else if (indicadorMSJ == 1) printf("\nLista de supermercados existentes:\n");
+    else printf("\nLista de categorías existentes:\n");
     
-    printf("\nLista de productos existentes:\n");
-    printf("┌──────────────────────────────────┐\n");
-    int cont = 1;
-    while(current != NULL) {
-        char elemento[MAXLEN + 1];
-        strcpy(elemento, current->key);
-        printf(" %i. %s\n", cont, elemento);
+    printf("┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐\n");
+    int cont = 0;
+    char caracterAux = ' ';
+    while (current != NULL || (current == NULL && cont % 3 != 0)) {
+        if (current != NULL) 
+        {
+            char elemento[MAXLEN + 1];
+            strcpy(elemento, current->key);
+            printf("|%-4i|%-31s| ", cont + 1, elemento);
+            if ((cont + 1) % 3 == 0)    printf("\n");
+            current = nextMap(mapa);
+        }
+        else 
+        {
+            printf("|%-4c|%-31c| ", caracterAux, caracterAux);
+            if ((cont + 1) % 3 == 0)    printf("\n");
+        }
         cont++;
-        current = nextMap(mapa);
-     }
-    printf("└──────────────────────────────────┘\n\n");
+    }
+    printf("└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘\n\n");
 }
 
 void mostrarProducto(tipoProducto* productoAMostrar)

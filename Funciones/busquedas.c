@@ -4,7 +4,7 @@
 
 /*La función busquedaProductosDirecta consiste en una busqueda por el nombre del producto en el mapa de productos.*/
 void busquedaProductosDirecta(HashMap* mapa) {
-    printMap(mapa);    // Muestra todos los productos disponibles.
+    printMap(mapa, 0);    // Muestra todos los productos disponibles.
     puts(MSJBUSQUEDA1); //Mensaje de búsqueda de productos por nombre.
     
     char nombreProductoBuscado[MAXLEN + 1]; //Variable que almacenará la cadena ingresada por el usuario para este caso.
@@ -83,14 +83,15 @@ void busquedaProductosAdyacentes(HashMap* mapa, int indicador)
 {
     // Si el indicador es 1, se estaría accediendo al mapa de supemercados.
     // Si el indicador es 2 (distinto de 1), se estaría accediendo al mapa de categorías.
-    printMap(mapa);
     if (indicador == 1)
     {
+        printMap(mapa, 1);
         puts(MSJBUSQUEDA3);  // Mensaje de búsqueda de productos por supermercado.
         puts(MSJBUSQUEDA31); // Mensaje de búsqueda de productos por supermercado.
     }
     else
     {
+        printMap(mapa, 2);
         puts(MSJBUSQUEDA4);  // Mensaje de búsqueda de productos por categoría.
         puts(MSJBUSQUEDA41); // Mensaje de búsqueda de productos por categoría.
     }

@@ -98,7 +98,7 @@ void eliminarProduCanasta(List* canasta)
 
 void agregarProduCanasta(HashMap* mapaProductos,HashMap* mapaSupermercados,List* canasta)
 {
-    printMap(mapaProductos);
+    printMap(mapaProductos, 0);
     char nomProducto[MAXLEN + 1];
     do{
         printf("Ingrese el nombre del producto agregar a la canasta: ");

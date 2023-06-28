@@ -9,7 +9,7 @@ void printListS(List* Super); // Muestra lista de supermercados
 
 void printListP(List* Super); // Mostrar lista de productos 
 
-void printMap(HashMap* mapaProducto); //Mostrar todos los productos para que el usuario sepa qué producto agregar a la canasta
+void printMap(HashMap* mapaProducto, int indicadorMSJ); //Mostrar todos los productos para que el usuario sepa qué producto agregar a la canasta
 
 void mostrarProducto(tipoProducto* producto); // Opcion 2 del menú del usuario "Mostrar todos los productos"
 
