@@ -47,30 +47,30 @@ void destroyAllAdjacentListsCategorias(HashMap* mapaCategorias)
 }
 
 
-void destroyAllAdjacentListsBTree(BTreeNode *node)
+/*void destroyAllAdjacentListsBTree(BTreeNode *node)
 {
     if (node == NULL)
         return;
 
-    // Si el nodo no es una hoja, llamar a BTreeDestroy en cada hijo
     if (!isLeaf(node)) {
         for (int i = 0; node->children[i] != NULL; i++) {
-            if (node->children[i] != NULL)
                 destroyAllAdjacentListsBTree(node->children[i]);
         }
     }
-
-    // Liberar los recursos para las claves y los hijos
-    if (node->keys != NULL) {
-        free(node->keys);
-        node->keys = NULL;
+    
+    for (int i = 0; node->values[i] != NULL; i++)
+    {
+        List* listaCurrent = node->values[i];
+        
+        //tipoProducto* productoCurrent = firstList(listaCurrent);
+        
+        //for (int j = 0; productoCurrent != NULL; j++)
+        //{
+        //    if (productoCurrent->supermercados != NULL)
+        //        destroyList(productoCurrent->supermercados);
+        //    productoCurrent = nextList(listaCurrent);
+        //}
+        destroyList(listaCurrent);
     }
-    if (node->children != NULL) {
-        free(node->children);
-        node->children = NULL;
-    }
-
-    // Finalmente, liberar el nodo mismo
-    free(node);
 }
-
+¨*/

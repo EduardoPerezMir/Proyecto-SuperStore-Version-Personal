@@ -75,7 +75,7 @@ int main(void) {
     destroyAllAdjacentListsProductos(mapaProductos);
     destroyAllAdjacentListsSupermercados(mapaSupermercados);
     destroyAllAdjacentListsCategorias(mapaCategorias);
-    destroyAllAdjacentListsBTree(getRoot(arbolProductos));
+    //destroyAllAdjacentListsBTree(getRoot(arbolProductos));
     
     destroyHashMap(mapaProductos);
     destroyHashMap(mapaSupermercados);
@@ -83,7 +83,7 @@ int main(void) {
     destroyHashMap(mapaAdmin);
 
     destroyBTree(getRoot(arbolProductos));
-    free(arbolProductos);
+    destroyBTree(arbolProductos);
 
     
     return 0;

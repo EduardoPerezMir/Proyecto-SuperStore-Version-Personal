@@ -13,8 +13,8 @@
 typedef struct BTreeNode {
   int numKeys;                 // Número de claves almacenadas en el nodo
   int *keys;                   // Array de claves
-  List **values;               // Array de valores asociados a las claves
-  struct BTreeNode **children; // Array de punteros a los subárboles hijos
+  List **values;               // Array de listas de valores asociados a las claves
+  struct BTreeNode **children; // Array de punteros a los nodos hijos
   int leaf;                    // Es hoja?
 } BTreeNode;
 

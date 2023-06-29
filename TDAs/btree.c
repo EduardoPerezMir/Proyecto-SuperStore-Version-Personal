@@ -301,7 +301,6 @@ void destroyBTreeNodes(BTreeNode *node)
 
 void destroyBTree(BTree* BTree)
 {
-    free(BTree->root);
     free(BTree);
 }
 
