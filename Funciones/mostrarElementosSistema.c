@@ -70,23 +70,77 @@ void printMap(HashMap* mapa, int indicadorMSJ)
 }
 
 /* La funcion muesta un producto en especifico*/
-void mostrarProducto(tipoProducto* productoAMostrar)
+void mostrarProducto(List* lista)
 {
-    printf("┌──────────────────────────────────────────┐\n");
-    printf("  Nombre Producto: %s\n", productoAMostrar->nombre);
-    printf("  Precio: $%s\n", productoAMostrar->precio);
-    printf("  Categoria: %s\n", productoAMostrar->categoria);
-
+    int size = get_size(lista);
+    tipoProducto* productoAMostrar1 = firstList(lista);
+    tipoProducto* productoAMostrar2 = (tipoProducto*) malloc(sizeof(tipoProducto));
+    productoAMostrar2 = NULL;
+    if (size > 1)    productoAMostrar2 = nextList(lista);
+    tipoProducto* productoAMostrar3 = (tipoProducto*) malloc(sizeof(tipoProducto));
+    productoAMostrar3 = NULL;
+    if (size > 2)    productoAMostrar3 = nextList(lista);
+    
+    char caracterAux = ' ';
+    
+    for (int i = 0; i < size; i++)    printf("%-3c┌──────────────────────────────────────────┐%-3c", caracterAux, caracterAux);
+    printf("\n");
+    
+    if (productoAMostrar1 != NULL)    printf("%-4cNombre Producto: %-31s", caracterAux, productoAMostrar1->nombre);
+    if (productoAMostrar2 != NULL)    printf("%-4cNombre Producto: %-31s", caracterAux, productoAMostrar2->nombre);
+    if (productoAMostrar3 != NULL)    printf("%-4cNombre Producto: %-31s", caracterAux, productoAMostrar3->nombre);
+    printf("\n");
+    if (productoAMostrar1 != NULL)    printf("%-4cPrecio: $%-31s", caracterAux, productoAMostrar1->precio);
+    if (productoAMostrar2 != NULL)    printf("%-4c        Precio: $%-31s", caracterAux, productoAMostrar2->precio);
+    if (productoAMostrar3 != NULL)    printf("%-4c        Precio: $%-31s", caracterAux, productoAMostrar3->precio);
+    printf("\n");
+    if (productoAMostrar1 != NULL)    printf("%-4cCategoria: %-31s", caracterAux, productoAMostrar1->categoria);
+    if (productoAMostrar2 != NULL)    printf("%-4c      Categoria: %-31s", caracterAux, productoAMostrar2->categoria);
+    if (productoAMostrar3 != NULL)    printf("%-4c      Categoria: %-31s", caracterAux, productoAMostrar3->categoria);
+    printf("\n");
     // Variable utilizada para recorrer la lista de supermercados que tienen ese producto
-    tipoSupermercado* supermercadoPtr = firstList(productoAMostrar->supermercados);
-    printf("  Supermercado 1: %s\n", supermercadoPtr->nombre);
-    // Se recorren los supemercados
-    for (int i = 1; i < productoAMostrar->cantSupermercados; i++)
+
+    tipoSupermercado* supermercadoPtr1 = (tipoSupermercado*) malloc(sizeof(tipoSupermercado));
+    tipoSupermercado* supermercadoPtr2 = (tipoSupermercado*) malloc(sizeof(tipoSupermercado));
+    tipoSupermercado* supermercadoPtr3 = (tipoSupermercado*) malloc(sizeof(tipoSupermercado));
+
+    supermercadoPtr1 = NULL;
+    supermercadoPtr2 = NULL;
+    supermercadoPtr3 = NULL;
+    
+    if (productoAMostrar1 != NULL)    supermercadoPtr1 = firstList(productoAMostrar1->supermercados);
+    if (productoAMostrar2 != NULL)    supermercadoPtr2 = firstList(productoAMostrar2->supermercados);
+    if (productoAMostrar3 != NULL)    supermercadoPtr3 = firstList(productoAMostrar3->supermercados);
+    
+    if (supermercadoPtr1 != NULL)    printf("%-4cSupermercado 1: %-31s", caracterAux, supermercadoPtr1->nombre);
+    if (supermercadoPtr2 != NULL)    printf("%-4c Supermercado 1: %-31s", caracterAux, supermercadoPtr2->nombre);
+    if (supermercadoPtr3 != NULL)    printf("%-4c Supermercado 1: %-31s", caracterAux, supermercadoPtr3->nombre);
+    
+    printf("\n");
+    
+    int cont = 1; 
+    while (1)
     {
-        supermercadoPtr = nextList(productoAMostrar->supermercados);
-        printf("  Supermercado %d: %s\n", i + 1, supermercadoPtr->nombre);
+        if (supermercadoPtr1 != NULL)    supermercadoPtr1 = nextList(productoAMostrar1->supermercados);
+        if (supermercadoPtr2 != NULL)    supermercadoPtr2 = nextList(productoAMostrar2->supermercados);
+        if (supermercadoPtr3 != NULL)    supermercadoPtr3 = nextList(productoAMostrar3->supermercados);
+
+        if (supermercadoPtr1 == NULL && supermercadoPtr2 == NULL && supermercadoPtr3 == NULL)    break;
+        
+        if (supermercadoPtr1 != NULL)  printf("%-4cSupermercado %d: %-31s", caracterAux, cont + 1, supermercadoPtr1->nombre);
+        else     printf("%-4c                %-31c", caracterAux, caracterAux);
+        if (supermercadoPtr2 != NULL)    printf("%-4c Supermercado %d: %-31s", caracterAux, cont + 1, supermercadoPtr2->nombre);
+        else     printf("%-4c                 %-31c", caracterAux, caracterAux);
+        if (supermercadoPtr3 != NULL)    printf("%-4c Supermercado %d: %-31s", caracterAux, cont + 1, supermercadoPtr3->nombre);
+        else     printf("%-4c                 %-31c", caracterAux, caracterAux);
+        
+        printf("\n");
+        
+        cont++;
     }
-    printf("└──────────────────────────────────────────┘\n");
+    
+    for (int i = 0; i < size; i++)    printf("%-3c└──────────────────────────────────────────┘%-3c", caracterAux, caracterAux);
+    printf("\n");
 }
 
 /* Esta opcion muestra todos productos del mapa de productos*/
@@ -105,11 +159,34 @@ void mostrarOfertaNacional(HashMap* productos) {
     
     int cont = 1;
     // Se recorre el mapa de productos con la funcion nextMap y se va mostrando el producto llamando a la funcion mostrarProducto
-     while(current != NULL) {
+    List* productosAMostrar = createList();
+    while(current != NULL) {
         tipoProducto* producto = (tipoProducto*) current->value;
-        printf("\n%24s %d\n","PRODUCTO",cont);
-        mostrarProducto(producto);
-        cont++;
+        pushBack(productosAMostrar, producto);
         current = nextMap(productos);
-     }
+        if (cont % 3 == 0)
+        {
+            printf("%25s %-4d","PRODUCTO", cont - 2);
+            printf("%45s %-4d","PRODUCTO", cont - 1);
+            printf("%45s %-4d","PRODUCTO", cont);
+            printf("\n");
+            mostrarProducto(productosAMostrar);
+            cleanList(productosAMostrar);
+        }
+        cont++;
+    }
+    if ((cont  - 1) % 3 != 0)
+    {
+        if ((cont - 1) % 3 == 1)
+        {
+            printf("%25s %-4d","PRODUCTO", cont);
+        }    
+        else
+        {
+            printf("%25s %-4d","PRODUCTO", cont - 1);
+            printf("%45s %-4d","PRODUCTO", cont);
+        }
+        printf("\n");
+        mostrarProducto(productosAMostrar);
+    }
 }

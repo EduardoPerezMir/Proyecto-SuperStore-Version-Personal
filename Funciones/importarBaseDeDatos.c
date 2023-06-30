@@ -12,7 +12,7 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMa
     }
     
     char linea[1024];
-    char* token;
+    char* token = (char*) malloc(sizeof(MAXLEN + 1));
     fgets(linea, sizeof(linea), file_productos);
     
     while (fgets(linea, sizeof(linea), file_productos) != NULL) {   
@@ -37,6 +37,7 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMa
             strncpy(nuevaCategoria->nombre, token, sizeof(nuevaCategoria->nombre));
             nuevaCategoria->productos = createList();
             pushBack(nuevaCategoria->productos, nuevoProducto);
+            insertMap(mapaCategorias, nuevaCategoria->nombre, nuevaCategoria);
         }
         else
         {
@@ -51,9 +52,9 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMa
         nuevoProducto->supermercados = createList();
         
         Pair* parAux2 = (Pair*) malloc(sizeof(Pair)); 
-        
-        for (unsigned short i = 0; i < nuevoProducto->cantSupermercados; i++) {
-            if (i == nuevoProducto->cantSupermercados - 1)
+        int cantSupermercados = nuevoProducto->cantSupermercados;
+        for (unsigned short i = 0; i < cantSupermercados; i++) {
+            if (i == cantSupermercados - 1)
             {
                 token = strtok(NULL, ".");
             }
@@ -69,6 +70,7 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMa
                 pushBack(nuevoProducto->supermercados, nuevoSupermercado);      
                 nuevoSupermercado->productos = createList();
                 pushBack(nuevoSupermercado->productos, nuevoProducto);
+                insertMap(mapaSupermercados, nuevoSupermercado->nombre, nuevoSupermercado);
             }
             else
             {
@@ -88,29 +90,34 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMa
     }
     
     fclose(file_productos);
-//supermercados
+    
+    //supermercados
     fgets(linea, sizeof(linea), file_super);
-         while (fgets(linea, sizeof(linea), file_super) != NULL) {
-                 if (linea[strlen(linea) - 1] == '\n') {
-            linea[strlen(linea) - 1] = '\0';
+    while (fgets(linea, sizeof(linea), file_super) != NULL) {
+        token = strtok(linea, ".");
+         
+        if (searchMap(mapaSupermercados, token) == NULL)
+        {
+            tipoSupermercado* nuevoSupermercado2 = (tipoSupermercado*) malloc(sizeof(tipoSupermercado));
+            strncpy(nuevoSupermercado2->nombre, token, sizeof(nuevoSupermercado2->nombre));
+            nuevoSupermercado2->productos = createList();
+            insertMap(mapaSupermercados, nuevoSupermercado2->nombre, nuevoSupermercado2);
         }
-            tipoSupermercado* nuevoSupermercado = (tipoSupermercado*) malloc(sizeof(tipoSupermercado));
-            strncpy(nuevoSupermercado->nombre, linea, sizeof(nuevoSupermercado->nombre));
-            nuevoSupermercado->productos = createList();
-            insertMap(mapaSupermercados, nuevoSupermercado->nombre, nuevoSupermercado);
      }
 
     fclose(file_super);
-//categorias
+    
+    //categorias
     fgets(linea, sizeof(linea), file_categorias);
-         while (fgets(linea, sizeof(linea), file_categorias) != NULL) {
-                 if (linea[strlen(linea) - 1] == '\n') {
-            linea[strlen(linea) - 1] = '\0';
+     while (fgets(linea, sizeof(linea), file_categorias) != NULL) {
+        token = strtok(linea, ".");
+        if (searchMap(mapaCategorias, token) == NULL)
+        {
+            tipoCategoria* nuevaCategoria2 = (tipoCategoria*) malloc(sizeof(tipoCategoria));
+            strncpy(nuevaCategoria2->nombre, token, sizeof(nuevaCategoria2->nombre));
+            nuevaCategoria2->productos = createList();
+            insertMap(mapaCategorias, nuevaCategoria2->nombre, nuevaCategoria2);
         }
-            tipoCategoria* nuevaCategoria = (tipoCategoria*) malloc(sizeof(tipoCategoria));
-            strncpy(nuevaCategoria->nombre, linea, sizeof(nuevaCategoria->nombre));
-            nuevaCategoria->productos = createList();
-            insertMap(mapaCategorias, nuevaCategoria->nombre, nuevaCategoria);
      }
 
     fclose(file_categorias);

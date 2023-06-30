@@ -26,7 +26,9 @@ void busquedaProductosDirecta(HashMap* mapa) {
     else
     {
         tipoProducto* productoBuscado = parBuscado->value; //Se crea una variable auxiliar tipoProducto para almacenar la data del producto buscado por su nombre.
-        mostrarProducto(productoBuscado); //Se muestra el producto.
+        List* listaAux = createList();
+        pushBack(listaAux, productoBuscado);
+        mostrarProducto(listaAux); //Se muestra el producto.
     }
 }
 
@@ -67,13 +69,26 @@ void busquedaPorPrecio(BTree* arbolProductos)
         return; // Se termina el algoritmo.
     }
     
-    mostrarProducto(productoBuscado); // Se muestra la información del primer producto dentro del rango.
-    
+    List* listaAux = createList();
+    pushBack(listaAux, productoBuscado);
+    // Se muestra la información del primer producto dentro del rango.
+    int cont = 2;
     while (1)
     {
         productoBuscado = nextList(listaProductos); // Se accede al siguiente elemento de la lista.
         if (productoBuscado == NULL) break;         // Una vez que el producto buscado es NULL, se termina el ciclo.
-        mostrarProducto(productoBuscado); // Se van mostrando todos los elementos de la lista.
+        pushBack(listaAux, productoBuscado);
+        if (cont % 3 == 0)
+        {
+            mostrarProducto(listaAux);
+            cleanList(listaAux);
+        }
+        cont++;// Se van mostrando todos los elementos de la lista.
+    }
+    if ((cont - 1) % 3 != 0)
+    {
+        mostrarProducto(listaAux);
+        cleanList(listaAux);
     }
 }
 

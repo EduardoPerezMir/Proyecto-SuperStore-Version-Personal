@@ -71,11 +71,11 @@ int main(void) {
             }    
         }
     } while (opcion != 0);
-
+    
     destroyAllAdjacentListsProductos(mapaProductos);
     destroyAllAdjacentListsSupermercados(mapaSupermercados);
     destroyAllAdjacentListsCategorias(mapaCategorias);
-    //destroyAllAdjacentListsBTree(getRoot(arbolProductos));
+    destroyAllAdjacentListsBTree(getRoot(arbolProductos));
     
     destroyHashMap(mapaProductos);
     destroyHashMap(mapaSupermercados);
@@ -85,6 +85,5 @@ int main(void) {
     destroyBTree(getRoot(arbolProductos));
     destroyBTree(arbolProductos);
 
-    
     return 0;
 }

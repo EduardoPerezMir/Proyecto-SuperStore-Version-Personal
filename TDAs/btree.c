@@ -271,6 +271,12 @@ BTreeNode* searchBTree(BTreeNode* root, int key) {
     return searchBTree(root->children[i], key);
 }
 
+int getNumChildren(BTreeNode* node)
+{
+    if (isLeaf(node))    return 0;
+    return node->numKeys + 1;
+}
+
 
 void destroyBTreeNodes(BTreeNode *node)
 {
@@ -290,17 +296,26 @@ void destroyBTreeNodes(BTreeNode *node)
         free(node->keys);
         node->keys = NULL;
     }
-    if (node->children != NULL) {
+    
+    if (node->children != NULL) 
+    {
         free(node->children);
         node->children = NULL;
+    }
+    
+    if (node->values != NULL)
+    {
+        free(node->values);
+        node->values = NULL;
     }
 
     // Finalmente, liberar el nodo mismo
     free(node);
+    node = NULL;
 }
 
 void destroyBTree(BTree* BTree)
 {
     free(BTree);
+    BTree = NULL;
 }
-

@@ -64,7 +64,7 @@ void menuAdmin(HashMap* mapaProductos,HashMap* mapaSupermercados,HashMap* mapaCa
         break;
     case 5:
         printf("\nOpción 5 ingresada\n");
-        guardarDatosCSV(mapaProductos, mapaSupermercados,  mapaCategorias);
+        guardarDatosCSV(mapaProductos);
         guardarDatosCSV2(mapaSupermercados, mapaCategorias);
         printf("GURDANDO CAMBIOS ...");
         return;
@@ -290,7 +290,7 @@ void quitarProductos(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* m
     menuAdmin(mapaProductos, mapaSupermercados, mapaCategorias);
 }
 
-void guardarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMap* mapaCategorias) {
+void guardarDatosCSV(HashMap* mapaProductos) {
     FILE* archivo = fopen("Base de datos/db_productos.csv", "w");
 
     if (archivo == NULL) {
@@ -315,20 +315,21 @@ void guardarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMap
                 int cantidadSupermercados = get_size_list(producto->supermercados);
                 fprintf(archivo, "%d,", cantidadSupermercados);
 //ARREGLAR
-                Node* nodoSupermercado = producto->supermercados->head;
-                while (nodoSupermercado != NULL) {
-                    char* supermercado = (char*)nodoSupermercado->data;
-                    fprintf(archivo, "%s", supermercado);
+                tipoSupermercado* supermercado = firstList(producto->supermercados);
+                
+                for (int i = 0; i < cantidadSupermercados; i++){
+                    fprintf(archivo, "%s", supermercado->nombre);
+                    supermercado = nextList(producto->supermercados);
                     
-                    nodoSupermercado = nodoSupermercado->next;
-                    
-                    if (nodoSupermercado != NULL) {
+                    if (i == cantidadSupermercados - 1)
+                        fprintf(archivo, ".");
+                    else
                         fprintf(archivo, ",");
-                    }
                 }
             } else {
                 fprintf(archivo, "0");
             }
+            fprintf(archivo, "\n");
         }
 
         currentProducto = nextMap(mapaProductos);
@@ -354,21 +355,21 @@ void guardarDatosCSV2 (HashMap* mapaSupermercados, HashMap* mapaCategorias){
     while(currentSupermercado != NULL) {
         if (supermercadoAux->nombre[0] != '\0') {
             printf("test: %s\n", supermercadoAux->nombre);
-        fprintf(file_super, "%s\n", supermercadoAux->nombre);
+        fprintf(file_super, "%s.\n", supermercadoAux->nombre);
         }
         currentSupermercado = nextMap(mapaSupermercados);
         supermercadoAux = currentSupermercado->value;
     }
-    
     fclose(file_super);
 //categoria
-fprintf(file_categoria, "Categorias\n");
-Pair* currentCategoria = firstMap(mapaCategorias);
+    fprintf(file_categoria, "Categorias\n");
+    Pair* currentCategoria = firstMap(mapaCategorias);
     tipoSupermercado* categoriaAux = currentCategoria->value;
-    while(currentCategoria != NULL) {
+    while(currentCategoria != NULL)
+    {
         if (categoriaAux->nombre[0] != '\0') {
             printf("test: %s\n", categoriaAux->nombre);
-        fprintf(file_categoria, "%s\n", categoriaAux->nombre);
+            fprintf(file_categoria, "%s.\n", categoriaAux->nombre);
         }
         currentCategoria = nextMap(mapaCategorias);
         categoriaAux = currentCategoria->value;

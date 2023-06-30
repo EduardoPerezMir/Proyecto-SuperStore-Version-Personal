@@ -10,7 +10,10 @@ void destroyAllAdjacentListsProductos(HashMap* mapaProductos)
     {
         productoCurrent = parAux->value;
         if (productoCurrent->supermercados != NULL)
+        {
             destroyList(productoCurrent->supermercados);
+            productoCurrent->supermercados = NULL;
+        }
         parAux = nextMap(mapaProductos);
     }
 }
@@ -26,7 +29,11 @@ void destroyAllAdjacentListsSupermercados(HashMap* mapaSupermercados)
     {
         supermercadoCurrent = parAux->value;
         if (supermercadoCurrent->productos != NULL)
+        {
             destroyList(supermercadoCurrent->productos);
+            supermercadoCurrent->productos = NULL;
+        }
+            
         parAux = nextMap(mapaSupermercados);
     }
 }
@@ -41,13 +48,16 @@ void destroyAllAdjacentListsCategorias(HashMap* mapaCategorias)
     {
         categoriaCurrent = parAux->value;
         if (categoriaCurrent->productos != NULL)
+        {
             destroyList(categoriaCurrent->productos);
+            categoriaCurrent->productos = NULL;
+        }
         parAux = nextMap(mapaCategorias);
     }
 }
 
 
-/*void destroyAllAdjacentListsBTree(BTreeNode *node)
+void destroyAllAdjacentListsBTree(BTreeNode *node)
 {
     if (node == NULL)
         return;
@@ -62,15 +72,16 @@ void destroyAllAdjacentListsCategorias(HashMap* mapaCategorias)
     {
         List* listaCurrent = node->values[i];
         
-        //tipoProducto* productoCurrent = firstList(listaCurrent);
+        tipoProducto* productoCurrent = firstList(listaCurrent);
         
-        //for (int j = 0; productoCurrent != NULL; j++)
-        //{
-        //    if (productoCurrent->supermercados != NULL)
-        //        destroyList(productoCurrent->supermercados);
-        //    productoCurrent = nextList(listaCurrent);
-        //}
-        destroyList(listaCurrent);
+        for (int j = 0; productoCurrent != NULL; j++)
+        {
+            if (productoCurrent->supermercados != NULL)
+            {
+                destroyList(productoCurrent->supermercados);
+                productoCurrent->supermercados = NULL;
+            }
+            productoCurrent = nextList(listaCurrent);
+        }
     }
 }
-¨*/

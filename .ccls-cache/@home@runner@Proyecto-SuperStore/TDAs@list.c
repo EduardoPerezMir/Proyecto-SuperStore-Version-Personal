@@ -201,14 +201,14 @@ void destroyList(List* list)
         return;
     }
     
-    Node* next = (Node*) malloc(sizeof(Node));
-    
     while (current != NULL) {
-        next = current->next;
+        Node* next = current->next;
         free(current);
         current = next;
     }
 
     list->head = NULL; // Para evitar el acceso a una dirección de memoria ya liberada
+    
     free(list);
+    list = NULL;
 }

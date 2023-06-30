@@ -21,7 +21,7 @@ void quitarProductos(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* m
 
 void eliminarProductoLista(List* productos,char* nomProducto);
 
-void guardarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMap* mapaCategorias);
+void guardarDatosCSV(HashMap* mapaProductos);
 
 void guardarDatosCSV2 (HashMap* mapaSupermercados, HashMap* mapaCategoria);
 

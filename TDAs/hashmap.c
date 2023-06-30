@@ -106,7 +106,7 @@ Pair * searchMap(HashMap * map,  char * key) {
     long indice = hash(key,map->capacity);
     while (map->buckets[indice] != NULL && map->buckets[indice]->key != NULL) // Mapea por la clave
     {
-        if (strcmp(key,map->buckets[indice]->key) == 0 )
+        if (strcmp(key, map->buckets[indice]->key) == 0 )
         {
             map->current=indice;
             return map->buckets[indice];
@@ -167,8 +167,23 @@ void destroyNode(Pair* node) {
 
 void destroyHashMap(HashMap* map)
 {
-    for (int i = 0; i < map->size; i++)
-        destroyNode(map->buckets[i]);
-    free(map->buckets);
+    if (map == NULL)
+        return;
+
+    if (map->buckets != NULL)
+    {
+        for (int i = 0; i < map->size; i++)
+        {
+            if (map->buckets[i] != NULL) {
+                destroyNode(map->buckets[i]);
+                map->buckets[i] = NULL;
+            }
+        }
+        
+        free(map->buckets);
+        map->buckets = NULL;
+    }
+    
     free(map);
+    map = NULL;
 }
