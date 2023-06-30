@@ -3,9 +3,12 @@
 
 tipoCanasta* searchListCanasta(List* canasta,char* producto,char* supermercado)
 {
+    // Con variable tipo current recorremos la lista de elementos de la canasta.
     for (tipoCanasta* current=firstList(canasta);current!=NULL;current=nextList(canasta))
     {
+        // Con función strcmp comparamos si el producto a buscar de la canasta coincide con el current, es decir se comparan los nombres de ambos.
         if (strcmp(producto,current->nombre)==0)
+            // Si coinciden los nombres del producto, se busca que coincida el supermercado ingresado, si es asi retorna el elemento de la lista encontrado.
             if (strcmp(current->supermercado,supermercado)==0)
                 return current;
     }
@@ -23,11 +26,12 @@ void armarCanasta(List* canasta, HashMap* mapaProductos, HashMap* mapaSupermerca
         scanf("%i",&opcion);
         getchar();
         printf("\n");
-        // Opciones dependiendo de lo ingresado
+        // Opciones dependiendo de lo ingresado.
         switch(opcion)
         {
             case 1:
             {
+                // Si esta vacia.
                 if (isListEmpty(canasta))
                     printf("No existen productos en la canasta\n");
                 else printListPC(canasta);
@@ -59,14 +63,14 @@ void armarCanasta(List* canasta, HashMap* mapaProductos, HashMap* mapaSupermerca
 
 void eliminarProduCanasta(List* canasta)
 {
-    // Si la lista esta vacia finaliza la ejecucion
+    // Si la lista esta vacia finaliza la ejecucion.
     if (isListEmpty(canasta))
     {
         printf("No existen productos en la canasta\n");
         return;
     }
     printf("Lista de productos en la canasta\n");
-    // Se muestran todos los elementos de la lista
+    // Se muestran todos los elementos de la lista.
     printListS(canasta);
     char nomProductoE[MAXLEN + 1];
     do{
@@ -76,11 +80,11 @@ void eliminarProduCanasta(List* canasta)
         printf("\n");
     }while(strlen(nomProductoE) > MAXLEN);
 
-    // Se transforma la cadena ingresada a la primera letra mayuscula y demas minusculas para ser buscado luego
+    // Se transforma la cadena ingresada a la primera letra mayuscula y demas minusculas para ser buscado luego.
     nomProductoE[0] = toupper(nomProductoE[0]);
     for (char i = 1; nomProductoE[i] != '\0'; i++)
         nomProductoE[i] = tolower(nomProductoE[i]);
-    
+    // Variable entro se utiliza para saber si el producto se encuentra o no en la canasta.
     int entro = 0;
     tipoCanasta* currentCanasta = firstList(canasta);
     while (currentCanasta != NULL)//ciclo que recorre canasta
@@ -89,7 +93,7 @@ void eliminarProduCanasta(List* canasta)
         {
             printf("El producto %s se ha eliminado de la canasta\n", nomProductoE);
             popCurrent(canasta);
-            entro = 1;
+            entro = 1;//quiere decir que el producto ingresado se encuentra
         }
         currentCanasta = nextList(canasta);    
     }
@@ -110,11 +114,11 @@ void agregarProduCanasta(HashMap* mapaProductos,HashMap* mapaSupermercados,List*
         getchar();
         printf("\n");
     }while(strlen(nomProducto) > MAXLEN);
-
+    // Se transforma la cadena ingresada a la primera letra mayuscula y demas minusculas para ser buscado luego
     nomProducto[0] = toupper(nomProducto[0]);
     for (char i = 1; nomProducto[i] != '\0'; i++)
         nomProducto[i] = tolower(nomProducto[i]);
-    
+    //se verifica si el producto existe ,si existe se muestran los supermercados
     Pair* current;
     if( (current = searchMap(mapaProductos, nomProducto)) == NULL) {
         printf("El producto a buscar no se encuentra en la base de datos\n");
@@ -130,7 +134,7 @@ void agregarProduCanasta(HashMap* mapaProductos,HashMap* mapaSupermercados,List*
         getchar();
         printf("\n");
     }while(strlen(nomSupermercado) > MAXLEN);
-
+    // Se transforma la cadena ingresada a la primera letra mayuscula y demas minusculas para ser buscado luego
     nomSupermercado[0] = toupper(nomSupermercado[0]);
     for (char i = 1; nomSupermercado[i] != '\0'; i++)
     {
@@ -138,22 +142,24 @@ void agregarProduCanasta(HashMap* mapaProductos,HashMap* mapaSupermercados,List*
         if (isspace(nomSupermercado[i - 1]))
             nomSupermercado[i] = toupper(nomSupermercado[i]);
     }
-    
+    // Si el supermercado no se encuentra en el mapa de supermercados.
     if(searchMap(mapaSupermercados, nomSupermercado) == NULL) {
         printf("El supermercado a buscar no se encuentra en la base de datos\n");
         return;
     }
         
     size_t cantidad=0;
+    // Se busca el producto junto al supermercado en la canasta.
     tipoCanasta* productoBuscado = searchListCanasta(canasta, nomProducto, nomSupermercado);
         
-    if (productoBuscado == NULL) //Si es null quiere decir que no está.
+    if (productoBuscado == NULL) // Si es null quiere decir que no está.
     {
         printf("Ingrese la cantidad de %s que desea agregar a la canasta: ", nomProducto);
         do {
             scanf("%zd", &cantidad);
         } while(cantidad <= 0);
-    
+
+        // Se crea el tipoCanasta para ser ingresado a la canasta.
         tipoCanasta* elemCanasta = (tipoCanasta *) malloc(sizeof(tipoCanasta));
         strcpy(elemCanasta->nombre,nomProducto);
         strcpy(elemCanasta->supermercado,nomSupermercado);
@@ -167,12 +173,14 @@ void agregarProduCanasta(HashMap* mapaProductos,HashMap* mapaSupermercados,List*
     else
     {
         printf("El producto %s se encuentra en la canasta con una cantidad de %zd\n", nomProducto, productoBuscado->cantidad);
+        // Si el producto se encuentra en la canasta se despliega un submenu para confirma la accion del usuario.
         subMenuCanastaCantidad();
-        unsigned short opcion=0;
+        unsigned short opcion = 0;
         do{
             scanf("%hu",&opcion);
         }while(opcion!=1 && opcion!=2);
-        if (opcion == 2)return;
+        if (opcion == 2) return;
+        
         printf("Ingrese la cantidad ha agregar: ");
         do{
             scanf("%zd",&cantidad);

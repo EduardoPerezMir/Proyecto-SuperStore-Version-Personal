@@ -23,28 +23,28 @@ typedef struct BTree {
   struct BTreeNode *root; // Puntero al nodo raíz del árbol
 } BTree;
 
-BTree *createBTree(int order);
+BTree *createBTree(int order); // Crea un árbol B
 
-BTreeNode *newBTreeNode(BTree *tree, int leaf);
+BTreeNode *newBTreeNode(BTree *tree, int leaf); // Crea un nodo de árbol B
 
-BTreeNode *searchBTree(BTreeNode *root, int value);
+BTreeNode *searchBTree(BTreeNode *root, int value); //Busca por clave en el árbol B
 
-int insertBTree(BTree *tree, int key, void *value);
+int insertBTree(BTree *tree, int key, void *value); // Inserta un nuevo elemento en el árbol B
 
-int splitChildBTree(BTree *tree, BTreeNode *x, int i);
+int splitChildBTree(BTree *tree, BTreeNode *x, int i); // Divide a un nodo en dos: un padre y un hijo, para efectos de funcionamiento de la TDA
 
-int insertNonFullBTree(BTree *tree, BTreeNode *x, int key, void *value);
+int insertNonFullBTree(BTree *tree, BTreeNode *x, int key, void *value); //Inserta un elemento en un nodo no lleno
 
-void searchByRangeBTree(BTreeNode *root, int key1, int key2, List *listaP);
+void searchByRangeBTree(BTreeNode *root, int key1, int key2, List *listaP); // Busca por rango en el árbol B
 
-BTreeNode *getRoot(BTree *tree);
+BTreeNode *getRoot(BTree *tree); // Consigue la raíz del árbol B
 
-int getNumChildren(BTreeNode* node);
+int getNumChildren(BTreeNode* node); // Consigue el número de hijos del árbol B
 
-void destroyBTreeNodes(BTreeNode *node);
+void destroyBTreeNodes(BTreeNode *node); // Libera memoria de los nodos del árbol B y establece los nodos como valores nulos
 
-void destroyBTree(BTree *BTree);
+void destroyBTree(BTree *BTree); // Libera la memoria del árbol B y establece al árbol B como valor nulo
 
-int isLeaf(BTreeNode *node);
+int isLeaf(BTreeNode *node); // Función corta que indica si un nodo es hoja, gracias al componente leaf de la struct BTreeNode
 
 #endif

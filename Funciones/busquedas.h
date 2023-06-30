@@ -2,10 +2,10 @@
 #define BUSQUEDAS_H
 
 #include "constantesYRegistros.h"
+#include "mostrarElementosSistema.h"
 #include "../TDAs/list.h"
 #include "../TDAs/hashmap.h"
 #include "../TDAs/btree.h"
-#include "mostrarElementosSistema.h"
 
 // Mostrar productos por nombre
 void busquedaProductosDirecta(HashMap* mapa);

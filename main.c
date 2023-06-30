@@ -6,13 +6,13 @@
 #include "Funciones/opcionesAdmin.h"
 #include "Funciones/opcionesCanasta.h"
 #include "Funciones/busquedas.h"
-#include "Funciones/adjacentListsDestroyer.h"
+#include "Funciones/adjListsDestroyer.h"
 
 int main(void) {
     HashMap* mapaProductos = createMap(MAPINITIALCAPAC);
     HashMap* mapaSupermercados = createMap(MAPINITIALCAPAC);
     HashMap* mapaCategorias = createMap(MAPINITIALCAPAC);
-    BTree* arbolProductos = createBTree(1 + MAPINITIALCAPAC / 6); // Debe ser impar
+    BTree* arbolProductos = createBTree(1 + MAPINITIALCAPAC / 6); // El orden del árbol B debe ser impar
     
     HashMap* mapaAdmin = createMap(MAPADMINITIALCAPAC);
     
@@ -72,17 +72,17 @@ int main(void) {
         }
     } while (opcion != 0);
     
-    destroyAllAdjacentListsProductos(mapaProductos);
-    destroyAllAdjacentListsSupermercados(mapaSupermercados);
-    destroyAllAdjacentListsCategorias(mapaCategorias);
-    destroyAllAdjacentListsBTree(getRoot(arbolProductos));
+    destroyAdjListsProductos(mapaProductos);
+    destroyAdjListsSupermercados(mapaSupermercados);
+    destroyAdjListsCategorias(mapaCategorias);
+    destroyAdjListsBTree(getRoot(arbolProductos));
     
     destroyHashMap(mapaProductos);
     destroyHashMap(mapaSupermercados);
     destroyHashMap(mapaCategorias);
     destroyHashMap(mapaAdmin);
 
-    destroyBTree(getRoot(arbolProductos));
+    destroyBTreeNodes(getRoot(arbolProductos));
     destroyBTree(arbolProductos);
 
     return 0;

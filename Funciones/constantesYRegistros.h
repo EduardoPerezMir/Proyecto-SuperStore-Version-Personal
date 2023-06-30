@@ -25,7 +25,11 @@
 #define MSJBUSQUEDA4 "            BUSQUEDA DE PRODUCTOS POR CATEGORÍA"
 #define MSJBUSQUEDA41 "            INGRESE EL NOMBRE DE LA CATEGORÍA A BUSCAR"
 #define MSJBUSQUEDASC "            NO HAY COINCIDENCIAS EN LA BÚSQUEDA"
-// MSJBUSQUEDASC: Mensaje de busqueda para los casos en que no haya coincidencias.
+#define MSJBUSQUEDASCP1 "            NO HAY PRODUCTOS ASOCIADOS AL SUPERMERCADO INGRESADO"
+#define MSJBUSQUEDASCP2 "            NO HAY PRODUCTOS ASOCIADOS A LA CATEGORÍA INGRESADA"
+
+// MSJBUSQUEDASC: Mensaje de busqueda para los casos en que no haya coincidencias en las búsquedas en mapas.
+// MSJBUSQUEDASCP: Mensaje de búsqueda para los casos en que no haya productos en las listas adyacentes.
 
 typedef struct{
     char nombre[MAXLEN + 1];

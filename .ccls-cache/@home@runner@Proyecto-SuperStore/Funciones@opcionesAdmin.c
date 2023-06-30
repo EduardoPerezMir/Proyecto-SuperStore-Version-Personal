@@ -262,7 +262,7 @@ void quitarProductos(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* m
     while(currentListSuper != NULL)//ciclo para recorrer todos los supermercados de la lista del producto a eliminar
     {
         Pair* parSuper = searchMap(mapaSupermercados,currentListSuper->nombre);
-        tipoSupermercado* elemenMapSuper = parSuper->value;
+        tipoSupermercado* elemenMapSuper = parSuper->value;//se busca la posicion del supermercado en el mapa de supermercados
 
         //(eliminarProductoLista)ciclo para recorrer lista del mapa de supermercado para eliminar producto
         eliminarProductoLista(elemenMapSuper->productos, nomProducto);
@@ -354,8 +354,7 @@ void guardarDatosCSV2 (HashMap* mapaSupermercados, HashMap* mapaCategorias){
     tipoSupermercado* supermercadoAux = currentSupermercado->value;
     while(currentSupermercado != NULL) {
         if (supermercadoAux->nombre[0] != '\0') {
-            printf("test: %s\n", supermercadoAux->nombre);
-        fprintf(file_super, "%s.\n", supermercadoAux->nombre);
+            fprintf(file_super, "%s.\n", supermercadoAux->nombre);
         }
         currentSupermercado = nextMap(mapaSupermercados);
         supermercadoAux = currentSupermercado->value;
@@ -368,7 +367,6 @@ void guardarDatosCSV2 (HashMap* mapaSupermercados, HashMap* mapaCategorias){
     while(currentCategoria != NULL)
     {
         if (categoriaAux->nombre[0] != '\0') {
-            printf("test: %s\n", categoriaAux->nombre);
             fprintf(file_categoria, "%s.\n", categoriaAux->nombre);
         }
         currentCategoria = nextMap(mapaCategorias);

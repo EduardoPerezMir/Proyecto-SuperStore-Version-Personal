@@ -8,7 +8,7 @@ void busquedaProductosDirecta(HashMap* mapa) {
     puts(MSJBUSQUEDA1); //Mensaje de búsqueda de productos por nombre.
     
     char nombreProductoBuscado[MAXLEN + 1]; //Variable que almacenará la cadena ingresada por el usuario para este caso.
-    printf("INGRESE EL NOMBRE DEL PRODUCTO A BUSCAR: ");
+    printf("Ingrese el nombre del producto a buscar: ");
     scanf("%30[^\n]s", nombreProductoBuscado); //Se pide al usuario ingresar el nombre exacto del producto (incluyendo la mayúscula inicial).
     while (getchar() != '\n'); // Limpiar el buffer del teclado.
     
@@ -28,7 +28,8 @@ void busquedaProductosDirecta(HashMap* mapa) {
         tipoProducto* productoBuscado = parBuscado->value; //Se crea una variable auxiliar tipoProducto para almacenar la data del producto buscado por su nombre.
         List* listaAux = createList();
         pushBack(listaAux, productoBuscado);
-        mostrarProducto(listaAux); //Se muestra el producto.
+        mostrarProductos(listaAux); //Se muestra el producto.
+        destroyList(listaAux); // Se libera memoria.
     }
 }
 
@@ -78,18 +79,18 @@ void busquedaPorPrecio(BTree* arbolProductos)
         productoBuscado = nextList(listaProductos); // Se accede al siguiente elemento de la lista.
         if (productoBuscado == NULL) break;         // Una vez que el producto buscado es NULL, se termina el ciclo.
         pushBack(listaAux, productoBuscado);
-        if (cont % 3 == 0)
+        if (cont % 3 == 0) // Cada 3 productos se llama a la función mostrarProductos (para que muestre cada 3 productos uno al lado del otro).
         {
-            mostrarProducto(listaAux);
+            mostrarProductos(listaAux);
             cleanList(listaAux);
         }
         cont++;// Se van mostrando todos los elementos de la lista.
     }
-    if ((cont - 1) % 3 != 0)
+    if ((cont - 1) % 3 != 0) // Si el resto es distinto de cero, quedaron 1 o 2 productos por mostrar.
     {
-        mostrarProducto(listaAux);
-        cleanList(listaAux);
+        mostrarProductos(listaAux);
     }
+    destroyList(listaAux); // Se libera memoria.
 }
 
 // Busqueda de Productos en Listas Adyacentes (en el mapa de supermercados y en el mapa de categorías):
@@ -137,39 +138,76 @@ void busquedaProductosAdyacentes(HashMap* mapa, int indicador)
         if (indicador == 1) // Si el indicador es 1 se crea una variable tipoSupermercado para almacenar el supermercado encontrado.
         {
             tipoSupermercado* supermercadoEncontrado = parBuscado->value; // Se le asigna el valor del par encontrado a la variable tipoSupermercado.
+            if (isListEmpty(supermercadoEncontrado->productos))
+            {
+                puts(MSJBUSQUEDASCP1); 
+                return;
+            }
             tipoProducto* productoAsociado = firstList(supermercadoEncontrado->productos); // Se accede al primer elemento de la lista.
+
             if (productoAsociado == NULL) //Esta condición fue puesta por seguridad en fugas de memoria.
             {
                 printf("ERROR DE MEMORIA.");
                 return; // Se termina el algoritmo.
             }
-            mostrarProducto(productoAsociado);    // Se muestra el producto.
-
+            List* listaProductos = createList();
+            pushBack(listaProductos, productoAsociado);    // Se muestra el producto.
+            int cont = 2;
             while (1)
             {
                 productoAsociado = nextList(supermercadoEncontrado->productos); // Se accede al siguiente elemento de la lista.
                 if (productoAsociado == NULL) break;         // Una vez que el producto buscado es NULL, se termina el ciclo.
-                mostrarProducto(productoAsociado); // Se van mostrando todos los elementos de la lista.
+                pushBack(listaProductos, productoAsociado); // Se van mostrando todos los elementos de la lista.
+                if (cont % 3 == 0)
+                {
+                    mostrarProductos(listaProductos);
+                    cleanList(listaProductos);
+                }
+                cont++;// Se van mostrando todos los elementos de la lista.
             }
+            if ((cont - 1) % 3 != 0)
+            {
+                mostrarProductos(listaProductos);
+            }
+            destroyList(listaProductos); // Se libera memoria.
         }
         else
         {
             tipoCategoria* categoriaEncontrada = parBuscado->value;
+            if (isListEmpty(categoriaEncontrada->productos))
+            {
+                puts(MSJBUSQUEDASCP2); 
+                return;
+            }
             //int cantProductoAsociados = get_size_list(categoriaEncontrada->productos);
             tipoProducto* productoAsociado = firstList(categoriaEncontrada->productos);
-            mostrarProducto(productoAsociado);
             if (productoAsociado == NULL) //Esta condición fue puesta por seguridad en fugas de memoria.
             {
                 printf("ERROR DE MEMORIA.");
                 return; // Se termina el algoritmo.
             }
+            
+            List* listaAsociada = createList();
+            pushBack(listaAsociada, productoAsociado);
+            int cont2 = 2;
 
             while (1)
             {
                 productoAsociado = nextList(categoriaEncontrada->productos); // Se accede al siguiente elemento de la lista.
                 if (productoAsociado == NULL) break;         // Una vez que el producto buscado es NULL, se termina el ciclo.
-                mostrarProducto(productoAsociado); // Se van mostrando todos los elementos de la lista.
+                pushBack(listaAsociada, productoAsociado); // Se van mostrando todos los elementos de la lista.
+                if (cont2 % 3 == 0) // Cada 3 productos se llama a la función mostrarProductos (para que muestre cada 3 productos uno al lado del otro).
+                {
+                    mostrarProductos(listaAsociada);
+                    cleanList(listaAsociada);
+                }
+                cont2++;// Se van mostrando todos los elementos de la lista.
             }
+            if ((cont2 - 1) % 3 != 0) // Si el resto es distinto de cero, quedaron 1 o 2 productos por mostrar.
+            {
+                mostrarProductos(listaAsociada);
+            }
+            destroyList(listaAsociada); // Se libera memoria.
         }
     }
 }

@@ -160,13 +160,13 @@ Pisco,4500,Bebida,2,Lider,Unimarc.
 Caballete para pintar,4000,Arte,1,Tottus.
 Cebolla,500,Verdura,3,Lider,Jumbo,Santa Isabel.
 Lienzo para pintar,2000,Arte,1,Tottus.
+Whisky escoces,8000,Bebida,3,Tottus,Santa Isabel,Lider.
+Vodka,4000,Bebida,2,Santa Isabel,Jumbo.
+Pan de espelta,2000,Alimento,1,Santa Isabel.
 Hilo dental,200,Higiene,2,Lider,Santa Isabel.
 Pintalabios larga duracion,2400,Belleza,2,Santa Isabel,Lider.
 Cera para el cabello,2500,Higiene,2,Cugat,Santa Isabel.
 Sake,6000,Bebida,1,Tottus.
-Vodka,4000,Bebida,2,Santa Isabel,Jumbo.
-Whisky escoces,8000,Bebida,3,Tottus,Santa Isabel,Lider.
-Pan de espelta,2000,Alimento,1,Santa Isabel.
 Pepino,500,Verdura,3,Lider,Jumbo,Santa Isabel.
 Queso rallado,1800,Alimento,3,Santa Isabel,Jumbo,Lider.
 Microondas,50000,Electrodomestico,2,Lider,Jumbo.
@@ -276,9 +276,7 @@ Harina de trigo,2500,Alimento,1,Lider.
 Vasos de vidrio,500,Utensilio,1,Jumbo.
 Vodka de frutas,4500,Bebida,3,Tottus,Santa Isabel,Lider.
 Yogur de frutas,1200,Alimento,3,Santa Isabel,Jumbo,Lider.
-Televisor LED,200000,Electronica,2,Lider,Jumbo.
 Galletas,1500,Snack,2,Jumbo,Lider.
-Reproductor DVD,7000,Electronica,2,Lider,Unimarc.
 Mascara facial,2000,Belleza,2,Cugat,Santa Isabel.
 Naranjas,700,Fruta,2,Lider,Jumbo.
 Cerveza,3500,Bebida,2,Lider,Jumbo.

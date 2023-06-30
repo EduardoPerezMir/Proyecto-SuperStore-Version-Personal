@@ -1,5 +1,7 @@
 #include "btree.h"
 
+// TDA implementada desde cero con ayuda de ChatGPT.
+
 BTree* createBTree(int order) {
     BTree* tree = (BTree*)calloc(1, sizeof(BTree));
     if(tree == NULL) {
@@ -253,6 +255,7 @@ void searchByRangeBTree(BTreeNode* node, int key1, int key2, List* listaP) {
         }
     }
 }
+
 BTreeNode* getRoot(BTree *tree)
 {
     return tree->root;
@@ -283,7 +286,7 @@ void destroyBTreeNodes(BTreeNode *node)
     if (node == NULL)
         return;
 
-    // Si el nodo no es una hoja, llamar a BTreeDestroy en cada hijo
+    // Si el nodo no es una hoja, llamar a destroyBTreeNodes en cada hijo
     if (!isLeaf(node)) {
         for (int i = 0; node->children[i] != NULL; i++) {
             if (node->children[i] != NULL)

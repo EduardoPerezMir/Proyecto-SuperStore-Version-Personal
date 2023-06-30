@@ -1,6 +1,6 @@
-#include "adjacentListsDestroyer.h"
+#include "adjListsDestroyer.h"
 
-void destroyAllAdjacentListsProductos(HashMap* mapaProductos)
+void destroyAdjListsProductos(HashMap* mapaProductos)
 {
     Pair* parAux = firstMap(mapaProductos);
     tipoProducto* productoCurrent = parAux->value;
@@ -19,7 +19,7 @@ void destroyAllAdjacentListsProductos(HashMap* mapaProductos)
 }
 
 
-void destroyAllAdjacentListsSupermercados(HashMap* mapaSupermercados)
+void destroyAdjListsSupermercados(HashMap* mapaSupermercados)
 {
     Pair* parAux = firstMap(mapaSupermercados);
     tipoSupermercado* supermercadoCurrent = parAux->value;
@@ -38,7 +38,7 @@ void destroyAllAdjacentListsSupermercados(HashMap* mapaSupermercados)
     }
 }
 
-void destroyAllAdjacentListsCategorias(HashMap* mapaCategorias)
+void destroyAdjListsCategorias(HashMap* mapaCategorias)
 {
     Pair* parAux = firstMap(mapaCategorias);
     tipoSupermercado* categoriaCurrent = parAux->value;
@@ -57,14 +57,14 @@ void destroyAllAdjacentListsCategorias(HashMap* mapaCategorias)
 }
 
 
-void destroyAllAdjacentListsBTree(BTreeNode *node)
+void destroyAdjListsBTree(BTreeNode *node)
 {
     if (node == NULL)
         return;
 
     if (!isLeaf(node)) {
         for (int i = 0; node->children[i] != NULL; i++) {
-                destroyAllAdjacentListsBTree(node->children[i]);
+                destroyAdjListsBTree(node->children[i]);
         }
     }
     

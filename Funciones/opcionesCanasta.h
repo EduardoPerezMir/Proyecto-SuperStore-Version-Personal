@@ -3,6 +3,7 @@
 
 #include "constantesYRegistros.h"
 #include "mostrarMenus.h"
+#include "mostrarElementosSistema.h"
 #include "../TDAs/list.h"
 #include "../TDAs/hashmap.h"
 
