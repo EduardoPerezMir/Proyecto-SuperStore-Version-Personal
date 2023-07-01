@@ -186,7 +186,7 @@ int get_size(List* lista)
     return cont;
 }
 
-
+/*La función destroyList libera memoria de la lista y todos sus nodos.*/
 void destroyList(List* list)
 {
     if (list == NULL) {
@@ -210,5 +210,5 @@ void destroyList(List* list)
     list->head = NULL; // Para evitar el acceso a una dirección de memoria ya liberada
     
     free(list);
-    list = NULL;
+    list = NULL; // Todo después de liberarlo se deja en NULL para efectos del funcionamiento de los algoritmos del programa.
 }

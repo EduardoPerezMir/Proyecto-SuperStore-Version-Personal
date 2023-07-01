@@ -1,6 +1,6 @@
 #include "mostrarElementosSistema.h"
 
-/* La opcion imprime la lista de supermercados, recorriendo la lista de inicio a fin*/
+/*La opcion imprime la lista de supermercados, recorriendo la lista de inicio a fin*/
 void printListS(List* Super) {
     // Se recorre con variable current y se inicializa con primer elemento de la lista
     tipoSupermercado* current = firstList(Super);
@@ -15,7 +15,7 @@ void printListS(List* Super) {
     printf("└──────────────────────────────────┘\n");
 }
 
-/* La opción imprime la lista de productos, recorriendo la lista de inicio a fin*/
+/*La opción imprime la lista de productos, recorriendo la lista de inicio a fin*/
 void printListP(List* Super) {
     // Se recorre con variable current y se inicializa con primer elemento de la lista
     tipoProducto* current = firstList(Super);
@@ -73,7 +73,7 @@ void printMap(HashMap* mapa, int indicadorMSJ)
     printf("└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘\n\n");
 }
 
-/* La funcion muesta una lista de HASTA 3 productos de forma secuencial por pantalla (un producto al lado del otro).*/
+/*La funcion muesta una lista de HASTA 3 productos de forma secuencial por pantalla (un producto al lado del otro).*/
 void mostrarProductos(List* lista)
 {
     int size = get_size(lista);
@@ -152,7 +152,7 @@ void mostrarProductos(List* lista)
     printf("\n");
 }
 
-/* Esta opcion muestra todos productos del mapa de productos*/
+/*Esta opcion muestra todos productos del mapa de productos*/
 void mostrarOfertaNacional(HashMap* productos) {
     puts(MSJVISUALIZACIONOFERTA);
 
@@ -175,9 +175,9 @@ void mostrarOfertaNacional(HashMap* productos) {
         current = nextMap(productos);
         if (cont % 3 == 0) // Se usa esta condición para mostrar productos de 3 en 3.
         {
-            printf("%25s %-4d","PRODUCTO", cont - 2);
-            printf("%45s %-4d","PRODUCTO", cont - 1);
-            printf("%45s %-4d","PRODUCTO", cont);
+            printf("%26s %-4d","PRODUCTO", cont - 2);
+            printf("%46s %-4d","PRODUCTO", cont - 1);
+            printf("%46s %-4d","PRODUCTO", cont);
             printf("\n");
             mostrarProductos(productosAMostrar);
             cleanList(productosAMostrar);
@@ -189,12 +189,12 @@ void mostrarOfertaNacional(HashMap* productos) {
     {
         if ((cont - 1) % 3 == 1) // Si el resto es 1, entonces hay 1 producto que queda por mostrar.
         {
-            printf("%25s %-4d","PRODUCTO", cont);
+            printf("%26s %-4d","PRODUCTO", cont);
         }    
         else // Si el resto es 2, entonces hay 2 productos que quedan por mostrar.
         {
-            printf("%25s %-4d","PRODUCTO", cont - 1);
-            printf("%45s %-4d","PRODUCTO", cont);
+            printf("%26s %-4d","PRODUCTO", cont - 1);
+            printf("%46s %-4d","PRODUCTO", cont);
         }
         printf("\n");
         mostrarProductos(productosAMostrar); // Se llama a la función productosAMostrar (está generalizada para 1, 2 o 3 productos).

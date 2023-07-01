@@ -160,13 +160,13 @@ Pisco,4500,Bebida,2,Lider,Unimarc.
 Caballete para pintar,4000,Arte,1,Tottus.
 Cebolla,500,Verdura,3,Lider,Jumbo,Santa Isabel.
 Lienzo para pintar,2000,Arte,1,Tottus.
+Sake,6000,Bebida,1,Tottus.
+Pintalabios larga duracion,2400,Belleza,2,Santa Isabel,Lider.
+Cera para el cabello,2500,Higiene,2,Cugat,Santa Isabel.
 Whisky escoces,8000,Bebida,3,Tottus,Santa Isabel,Lider.
 Vodka,4000,Bebida,2,Santa Isabel,Jumbo.
 Pan de espelta,2000,Alimento,1,Santa Isabel.
 Hilo dental,200,Higiene,2,Lider,Santa Isabel.
-Pintalabios larga duracion,2400,Belleza,2,Santa Isabel,Lider.
-Cera para el cabello,2500,Higiene,2,Cugat,Santa Isabel.
-Sake,6000,Bebida,1,Tottus.
 Pepino,500,Verdura,3,Lider,Jumbo,Santa Isabel.
 Queso rallado,1800,Alimento,3,Santa Isabel,Jumbo,Lider.
 Microondas,50000,Electrodomestico,2,Lider,Jumbo.
@@ -287,5 +287,3 @@ Teclado para computadora,20000,Electronica,2,Lider,Jumbo.
 Sandia,1500,Fruta,1,Jumbo.
 Salsa de tomate,1000,Condimento,3,Santa Isabel,Lider,Cugat.
 Set de crayones,1000,Arte,1,Tottus.
-Champu,500,Higiene,3,Santa Isabel,Lider,Jumbo.
-Ron,4500,Bebida,2,Santa Isabel,Jumbo.

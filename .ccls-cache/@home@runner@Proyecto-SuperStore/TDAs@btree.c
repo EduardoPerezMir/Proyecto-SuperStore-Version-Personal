@@ -2,6 +2,7 @@
 
 // TDA implementada desde cero con ayuda de ChatGPT.
 
+/*Se crea el árbol B.*/
 BTree* createBTree(int order) {
     BTree* tree = (BTree*)calloc(1, sizeof(BTree));
     if(tree == NULL) {
@@ -11,6 +12,7 @@ BTree* createBTree(int order) {
     return tree;
 }
 
+/*Función para insertar un nodo hoja en el árbol B.*/
 BTreeNode* newBTreeNode(BTree* tree, int leaf) {
     int order = tree->order;
     BTreeNode* newNode = (BTreeNode*)calloc(1, sizeof(BTreeNode));
@@ -59,12 +61,14 @@ BTreeNode* newBTreeNode(BTree* tree, int leaf) {
     return newNode;
 }
 
+/*Función que indica si un nodo es hoja en el árbol B.*/
 int isLeaf(BTreeNode* node)
 {
     if (node->leaf)    return 1;
     else    return 0;
 }
 
+/*Función que divide un nodo en padre e hijo para efectos del correcto funcionamiento del árbol B.*/
 int splitChildBTree(BTree* tree, BTreeNode* x, int i) {
     int order = tree->order;
     BTreeNode* y = NULL;
@@ -119,6 +123,7 @@ int splitChildBTree(BTree* tree, BTreeNode* x, int i) {
     return 0;
 }
 
+/*Función que inserta elementos en un nodo no lleno del árbol B.*/
 int insertNonFullBTree(BTree* tree, BTreeNode* x, int key, void* value) {
     int i = x->numKeys - 1;
 
@@ -171,6 +176,7 @@ int insertNonFullBTree(BTree* tree, BTreeNode* x, int key, void* value) {
     return 0;
 }
 
+/*Función que inserta un elemento el árbol B, haciendo llamadas a splitChildBTree e insertNonFullBTree.*/
 int insertBTree(BTree* tree, int key, void* value) {
     BTreeNode* root = tree->root;
     BTreeNode* nodeForKey = searchBTree(getRoot(tree), key);
@@ -225,18 +231,19 @@ int insertBTree(BTree* tree, int key, void* value) {
     return 0;
 }
 
+/*Búsqueda por rango en árbol B. La función recibe como parámetros de entrada el nodo (nodo raíz), el precio mínimo y máximo del rango y una lista que será la lista donde se insertan los productos dentro del rango.*/
 void searchByRangeBTree(BTreeNode* node, int key1, int key2, List* listaP) {
     if (node == NULL) {
         return;
     }
-
+    
     int i = 0;
     
-    while (i < node->numKeys && node->keys[i] < key1) {
+    while (i < node->numKeys && node->keys[i] < key1) { // Se sigue aumentando el índice hasta que la clave sea mayor que el mínimo del rango.
         i++;
     }
 
-    while (i < node->numKeys && node->keys[i] <= key2) {
+    while (i < node->numKeys && node->keys[i] <= key2) { // Si la clave del nodo está dentro del rango, se cumple la condición.
         int cantidadAux = get_size_list(node->values[i]);
         pushBack(listaP, firstList(node->values[i]));
         for (int cont = 1; cont < cantidadAux; cont++) {
@@ -251,16 +258,18 @@ void searchByRangeBTree(BTreeNode* node, int key1, int key2, List* listaP) {
     else{
         for (int j = 0; j <= node->numKeys; j++)
         {
-            searchByRangeBTree(node->children[j], key1, key2, listaP);
+            searchByRangeBTree(node->children[j], key1, key2, listaP); // La función se implementa de manera recursiva.
         }
     }
 }
 
+/*Función que retorna la raíz del árbol.*/
 BTreeNode* getRoot(BTree *tree)
 {
     return tree->root;
 }
 
+/*Función de búsqueda simple en el árbol B.*/
 BTreeNode* searchBTree(BTreeNode* root, int key) {
     if (root == NULL)    return NULL;
 
@@ -274,13 +283,14 @@ BTreeNode* searchBTree(BTreeNode* root, int key) {
     return searchBTree(root->children[i], key);
 }
 
+/*Función que retorna el número de hijos de un nodo, a partir del número de claves del nodo.*/
 int getNumChildren(BTreeNode* node)
 {
     if (isLeaf(node))    return 0;
     return node->numKeys + 1;
 }
 
-
+/*La función destroyBTreeNodes libera memoria de los nodos del árbol B.*/
 void destroyBTreeNodes(BTreeNode *node)
 {
     if (node == NULL)
@@ -314,11 +324,12 @@ void destroyBTreeNodes(BTreeNode *node)
 
     // Finalmente, liberar el nodo mismo
     free(node);
-    node = NULL;
+    node = NULL; //Todo después de liberarlo se deja en NULL para efectos del funcionamiento de los algoritmos del programa.
 }
 
+/*La función destroyBTree libera memoria del árbol B.*/
 void destroyBTree(BTree* BTree)
 {
     free(BTree);
-    BTree = NULL;
+    BTree = NULL; // El árbol B se deja en NULL, para efectos del funcionamiento de los algoritmos del programa.
 }

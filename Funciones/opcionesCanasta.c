@@ -1,10 +1,10 @@
 #include "opcionesCanasta.h"
 
-
-tipoCanasta* searchListCanasta(List* canasta,char* producto,char* supermercado)
+/*Se busca en la lista de la canasta.*/
+tipoCanasta* searchListCanasta(List* canasta, char* producto, char* supermercado)
 {
     // Con variable tipo current recorremos la lista de elementos de la canasta.
-    for (tipoCanasta* current=firstList(canasta);current!=NULL;current=nextList(canasta))
+    for (tipoCanasta* current = firstList(canasta);current!=NULL;current=nextList(canasta))
     {
         // Con función strcmp comparamos si el producto a buscar de la canasta coincide con el current, es decir se comparan los nombres de ambos.
         if (strcmp(producto,current->nombre)==0)
@@ -15,6 +15,7 @@ tipoCanasta* searchListCanasta(List* canasta,char* producto,char* supermercado)
     return NULL;
 }
 
+/*La función armarCanasta se encarga de mostrar y dar a elegir la opción del menú de armado de canasta.*/
 void armarCanasta(List* canasta, HashMap* mapaProductos, HashMap* mapaSupermercados)
 {
     int opcion;
@@ -30,37 +31,29 @@ void armarCanasta(List* canasta, HashMap* mapaProductos, HashMap* mapaSupermerca
         switch(opcion)
         {
             case 1:
-            {
                 // Si esta vacia.
                 if (isListEmpty(canasta))
                     printf("No existen productos en la canasta\n");
                 else printListPC(canasta);
                 break;
-            }
             case 2:
-            {
                 agregarProduCanasta(mapaProductos,mapaSupermercados,canasta);
                 break;
-            }
             case 3:
-            {
                 eliminarProduCanasta(canasta);
                 break; 
-            }
             case 0:
-            {
                 printf("Has salido al menú principal.");
                 return;
-            }
             default:
-            {
+            
                 printf("Opción no válida.");
                 break;
-            }
         }
     }
 }
 
+/*La función eliminarProduCanasta se encarga de eliminar un producto de la lista de productos de la canasta.*/
 void eliminarProduCanasta(List* canasta)
 {
     // Si la lista esta vacia finaliza la ejecucion.
@@ -69,6 +62,7 @@ void eliminarProduCanasta(List* canasta)
         printf("No existen productos en la canasta\n");
         return;
     }
+    
     printf("Lista de productos en la canasta\n");
     // Se muestran todos los elementos de la lista.
     printListS(canasta);
@@ -104,7 +98,8 @@ void eliminarProduCanasta(List* canasta)
     }
 }
 
-void agregarProduCanasta(HashMap* mapaProductos,HashMap* mapaSupermercados,List* canasta)
+/*La función agregarProduCanasta se encarga de agregar un producto a la lista de productos de la canasta.*/
+void agregarProduCanasta(HashMap* mapaProductos, HashMap* mapaSupermercados, List* canasta)
 {
     printMap(mapaProductos, 0);
     char nomProducto[MAXLEN + 1];
@@ -134,6 +129,7 @@ void agregarProduCanasta(HashMap* mapaProductos,HashMap* mapaSupermercados,List*
         getchar();
         printf("\n");
     }while(strlen(nomSupermercado) > MAXLEN);
+    
     // Se transforma la cadena ingresada a la primera letra mayuscula y demas minusculas para ser buscado luego
     nomSupermercado[0] = toupper(nomSupermercado[0]);
     for (char i = 1; nomSupermercado[i] != '\0'; i++)
@@ -179,6 +175,7 @@ void agregarProduCanasta(HashMap* mapaProductos,HashMap* mapaSupermercados,List*
         do{
             scanf("%hu",&opcion);
         }while(opcion!=1 && opcion!=2);
+        
         if (opcion == 2) return;
         
         printf("Ingrese la cantidad ha agregar: ");
@@ -190,7 +187,7 @@ void agregarProduCanasta(HashMap* mapaProductos,HashMap* mapaSupermercados,List*
     }  
 }
 
-/* Impresion de canasta con informacion de productos y total a pagar*/
+/* La función printListPC se encarga de realizar una impresion de la canasta con informacion de productos y total a pagar.*/
 void printListPC(List* Super) {
     tipoCanasta* current = firstList(Super);
     int cont = 1;

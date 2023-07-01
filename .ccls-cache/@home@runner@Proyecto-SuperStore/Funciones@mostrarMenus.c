@@ -43,7 +43,6 @@ void subMenuCanasta() {
     printf("║ 4. INGRESE 0 SI DESEA SALIR AL MENÚ PRINCIPAL.              ║\n");
     printf("║                                                             ║\n");
     printf("╚═════════════════════════════════════════════════════════════╝\n\n");
-    printf("Opción: ");
 }
 
 // Muestra submenu en el submenu de armar canasta al momento de ingresar un producto este ya se encuentra
@@ -59,13 +58,13 @@ void subMenuCanastaCantidad()
 }
 
 
-// Logo
+// El logo de SuperStore (se imprime por pantalla al comenzar la ejecución de la aplicación).
 void printLogo(){
     FILE *fptr = fopen("Base de datos/image.txt","r");
     char read_string[MAXLEN];
      
-        while(fgets(read_string,sizeof(read_string),fptr) != NULL)
-            printf("%s",read_string);
+    while(fgets(read_string, sizeof(read_string), fptr) != NULL)
+        printf("%s",read_string);
             
     fclose(fptr);
 }

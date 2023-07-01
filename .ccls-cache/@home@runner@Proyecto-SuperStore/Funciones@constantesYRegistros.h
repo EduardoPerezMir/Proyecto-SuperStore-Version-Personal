@@ -21,9 +21,9 @@
 #define MSJBUSQUEDA1 "            BUSQUEDA DE PRODUCTOS POR NOMBRE"
 #define MSJBUSQUEDA2 "            BUSQUEDA DE PRODUCTOS POR RANGO DE PRECIOS"
 #define MSJBUSQUEDA3 "            BUSQUEDA DE PRODUCTOS POR SUPERMERCADO"
-#define MSJBUSQUEDA31 "            INGRESE EL NOMBRE DEL SUPERMERCADO A BUSCAR"
+#define MSJBUSQUEDA31 "Ingrese el nombre del supermercado a buscar: "
 #define MSJBUSQUEDA4 "            BUSQUEDA DE PRODUCTOS POR CATEGORÍA"
-#define MSJBUSQUEDA41 "            INGRESE EL NOMBRE DE LA CATEGORÍA A BUSCAR"
+#define MSJBUSQUEDA41 "Ingrese el nombre de la categoría a buscar: "
 #define MSJBUSQUEDASC "            NO HAY COINCIDENCIAS EN LA BÚSQUEDA"
 #define MSJBUSQUEDASCP1 "            NO HAY PRODUCTOS ASOCIADOS AL SUPERMERCADO INGRESADO"
 #define MSJBUSQUEDASCP2 "            NO HAY PRODUCTOS ASOCIADOS A LA CATEGORÍA INGRESADA"
@@ -34,7 +34,7 @@
 typedef struct{
     char nombre[MAXLEN + 1];
     char precio[PRICELEN + 1];
-    int price;
+    int price;                // Este precio en tipo int fue exclusivamente implementado para la opción de búsqueda por rango de precios.
     char categoria[MAXLEN + 1];
     int cantSupermercados;
     List *supermercados;
@@ -49,6 +49,7 @@ typedef struct{
     char nombre[MAXLEN + 1];
     List *productos;
 }tipoSupermercado;
+
 
 typedef struct{
     char rut[MAXLEN + 1];

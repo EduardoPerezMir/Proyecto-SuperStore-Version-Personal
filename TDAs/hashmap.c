@@ -157,6 +157,7 @@ long sizeMap(HashMap * map)
     return map->size;
 }
 
+/*La función destroyNode libera la memoria de un elemento Pair de la tabla hash.*/
 void destroyNode(Pair* node) {
     if (node == NULL)
         return;
@@ -164,7 +165,7 @@ void destroyNode(Pair* node) {
     free(node);
 }
 
-
+/*La función destroyHashMap libera memoria de la tabla hash junto a todos los punteros derivados.*/
 void destroyHashMap(HashMap* map)
 {
     if (map == NULL)
@@ -185,5 +186,5 @@ void destroyHashMap(HashMap* map)
     }
     
     free(map);
-    map = NULL;
+    map = NULL; // Todo después de liberarlo se deja en NULL para efectos del funcionamiento de los algoritmos del programa.
 }

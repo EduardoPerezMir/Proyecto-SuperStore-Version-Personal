@@ -1,8 +1,7 @@
 #include "busquedas.h"
 
-// Mostrar producto por nombre
-
-/*La función busquedaProductosDirecta consiste en una busqueda por el nombre del producto en el mapa de productos.*/
+/*La función busquedaProductosDirecta consiste en una busqueda por clave el nombre del producto en el mapa de productos. 
+Si no hay coincidencias, se muestra un mensaje que lo indique.*/
 void busquedaProductosDirecta(HashMap* mapa) {
     printMap(mapa, 0);    // Muestra todos los productos disponibles.
     puts(MSJBUSQUEDA1); //Mensaje de búsqueda de productos por nombre.
@@ -25,7 +24,8 @@ void busquedaProductosDirecta(HashMap* mapa) {
     }
     else
     {
-        tipoProducto* productoBuscado = parBuscado->value; //Se crea una variable auxiliar tipoProducto para almacenar la data del producto buscado por su nombre.
+        tipoProducto* productoBuscado = parBuscado->value; //Se crea una variable auxiliar tipoProducto 
+                                                           //para almacenar la data del producto buscado por su nombre.
         List* listaAux = createList();
         pushBack(listaAux, productoBuscado);
         mostrarProductos(listaAux); //Se muestra el producto.
@@ -34,8 +34,7 @@ void busquedaProductosDirecta(HashMap* mapa) {
 }
 
 
-// Mostrar por precio Opcion 4
-
+/*La función busquedaPorPrecio consiste en una búsqueda por rango de precios en el árbol B. El usuario establece un rango y el algoritmo se encarga de llamar a las funciones correspondientes para realizar la búsqueda y mostrar todas las coincidencias que correspondan.*/
 void busquedaPorPrecio(BTree* arbolProductos)
 {
     puts(MSJBUSQUEDA2); // Mensaje de búsqueda de productos por precio.
@@ -47,9 +46,9 @@ void busquedaPorPrecio(BTree* arbolProductos)
     
     while (precio1 > precio2 || precio1 <= 0 || precio2 <= 0) // Se pide al usuario ingresar dos precios hasta que el precio 1 sea menor que el precio 2 y ambos precios sean mayores que cero.
     {
-        printf("INGRESE EL PRECIO MENOR.\n"); 
+        printf("Ingrese el precio menor: "); 
         scanf("%d", &precio1); // El precio 1 es el precio menor.
-        printf("INGRESE EL PRECIO MAYOR.\n");
+        printf("Ingrese el precio mayor: ");
         scanf("%d", &precio2);  // El precio 2 es el precio mayor.
     }
     printf("            PRODUCTOS ENTRE $%d y $%d PESOS: \n", precio1, precio2);
@@ -93,8 +92,8 @@ void busquedaPorPrecio(BTree* arbolProductos)
     destroyList(listaAux); // Se libera memoria.
 }
 
-// Busqueda de Productos en Listas Adyacentes (en el mapa de supermercados y en el mapa de categorías):
-
+/* La función busquedaProductosAdyacentes se encarga de realizar una búsqueda de productos en listas adyacentes (en el mapa de 
+supermercados y en el mapa de categorías). Esto lo logra con funciones propias de la TDA hashmap y list. Además, antes de realizar la búsqueda se hace una conversión a mayúsculas y minúsculas según corresponda para evitar case sensitive.*/
 void busquedaProductosAdyacentes(HashMap* mapa, int indicador)
 {
     // Si el indicador es 1, se estaría accediendo al mapa de supemercados.
@@ -103,18 +102,18 @@ void busquedaProductosAdyacentes(HashMap* mapa, int indicador)
     {
         printMap(mapa, 1);
         puts(MSJBUSQUEDA3);  // Mensaje de búsqueda de productos por supermercado.
-        puts(MSJBUSQUEDA31); // Mensaje de búsqueda de productos por supermercado.
+        printf(MSJBUSQUEDA31); // Mensaje de búsqueda de productos por supermercado.
     }
     else
     {
         printMap(mapa, 2);
         puts(MSJBUSQUEDA4);  // Mensaje de búsqueda de productos por categoría.
-        puts(MSJBUSQUEDA41); // Mensaje de búsqueda de productos por categoría.
+        printf(MSJBUSQUEDA41); // Mensaje de búsqueda de productos por categoría.
     }
     
     char nombreElementoBuscado[MAXLEN + 1]; // Cadena para almacenar el nombre del elemento a buscar.
     
-    printf("\n");
+    //printf("\n");
     scanf("%30[^\n]s", nombreElementoBuscado);
     while (getchar() != '\n'); // Limpiar el buffer del teclado.
     
@@ -137,7 +136,8 @@ void busquedaProductosAdyacentes(HashMap* mapa, int indicador)
     {
         if (indicador == 1) // Si el indicador es 1 se crea una variable tipoSupermercado para almacenar el supermercado encontrado.
         {
-            tipoSupermercado* supermercadoEncontrado = parBuscado->value; // Se le asigna el valor del par encontrado a la variable tipoSupermercado.
+            tipoSupermercado* supermercadoEncontrado = parBuscado->value; // Se le asigna el valor del par encontrado a 
+                                                                          // la variable tipoSupermercado.
             if (isListEmpty(supermercadoEncontrado->productos))
             {
                 puts(MSJBUSQUEDASCP1); 

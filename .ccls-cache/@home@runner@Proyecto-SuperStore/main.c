@@ -57,7 +57,7 @@ int main(void) {
             case 7:
             {
                 if(loginAdmin(mapaAdmin) != 0)
-                   menuAdmin(mapaProductos,mapaSupermercados,mapaCategorias);
+                   menuAdmin(mapaProductos, mapaSupermercados, mapaCategorias);
                 break;
             }        
             case 0:
@@ -71,7 +71,8 @@ int main(void) {
             }    
         }
     } while (opcion != 0);
-    
+
+    // Las siguientes 10 llamadas a funciones son para liberar toda la memoria de todas las estructuras de datos utilizadas.
     destroyAdjListsProductos(mapaProductos);
     destroyAdjListsSupermercados(mapaSupermercados);
     destroyAdjListsCategorias(mapaCategorias);
