@@ -2,20 +2,27 @@
 
 BPlusTree* createBPlusTree() {
     BPlusTree* tree = malloc(sizeof(BPlusTree));
+    if (tree == NULL)     return NULL;
+    
     tree->root = NULL;
     return tree;
 }
 
 BPlusNode* createBPlusTreeNode() {
     BPlusNode* node = malloc(sizeof(BPlusNode));
+    
+    if (node == NULL)    return NULL;
+    
     for (int i = 0; i < M; i++) {
         node->ptr[i] = (PtrElement*) malloc(sizeof(PtrElement));
+        if (node->ptr[i] == NULL)    return NULL;
         node->ptr[i]->node = NULL;
         node->ptr[i]->list = createList();
     }
     node->next = NULL;
     node->is_leaf = 0;
     node->num_keys = 0;
+    node->parent = NULL;
     return node;
 }
 
@@ -24,9 +31,8 @@ void insertBPlusTree(BPlusTree* tree, int key, void* value) {
     BPlusNode* node;
     
     int i, j;
-    int num;
+
     // Si el árbol está vacío, inicializamos el nodo raíz
-    
     if (root == NULL) {
         root = createBPlusTreeNode();
         root->is_leaf = 1;
@@ -48,7 +54,18 @@ void insertBPlusTree(BPlusTree* tree, int key, void* value) {
         node = (BPlusNode*) node->ptr[i]->node;
     }
 
-    // Insertamos la clave en la hoja encontrada
+    // Comprobamos si el nodo está lleno antes de intentar la inserción
+    if (node->num_keys == M - 1) {
+        splitNode(tree, node);
+
+        // Si la clave a insertar es mayor que la última clave del nodo,
+        // deberíamos insertarla en el nuevo nodo creado tras la división
+        if (key > node->keys[node->num_keys - 1]) {
+            node = node->next;
+        }
+    }
+
+    // Ahora que sabemos que hay espacio en el nodo, buscamos la posición de inserción correcta
     for (i = 0; i < node->num_keys; i++) {
         if (key <= node->keys[i]) {
             break;
@@ -60,19 +77,20 @@ void insertBPlusTree(BPlusTree* tree, int key, void* value) {
         return;
     }
     
+    // Movemos las claves y los punteros existentes hacia la derecha para hacer espacio para la nueva clave
     for (j = node->num_keys; j > i; j--) {
         node->keys[j] = node->keys[j - 1];
         node->ptr[j] = node->ptr[j - 1];
     }
+
+    // Insertamos la nueva clave y el puntero
     node->keys[i] = key;
+    node->ptr[i] = (PtrElement*) malloc(sizeof(PtrElement));
+    node->ptr[i]->list = createList();
     pushBack(node->ptr[i]->list, value);
     node->num_keys++;
-
-    // Si el nodo está lleno, debemos dividirlo
-    if (node->num_keys == M) {
-        splitNode(tree, node);
-    }
 }
+
 
 void splitNode(BPlusTree* tree, BPlusNode* node) {
     int i, mid;
@@ -81,31 +99,31 @@ void splitNode(BPlusTree* tree, BPlusNode* node) {
     // Creamos el nuevo nodo
     newNode = createBPlusTreeNode();
     newNode->is_leaf = node->is_leaf;
-    newNode->next = node->next;
-    node->next = newNode;
 
     // Encontramos la clave del medio
-    mid = node->keys[M / 2];
+    mid = node->keys[(M - 1) / 2];
 
     // Si el nodo no es una hoja, movemos la mitad de las claves y punteros al nuevo nodo
     if (!node->is_leaf) {
-        for (i = M / 2; i < M; i++) {
-            newNode->keys[i - M / 2] = node->keys[i];
-            newNode->ptr[i - M / 2] = node->ptr[i];
+        for (i = (M - 1) / 2 + 1; i < M; i++) {
+            newNode->keys[i - (M - 1) / 2 - 1] = node->keys[i];
+            newNode->ptr[i - (M - 1) / 2 - 1] = node->ptr[i];
             newNode->num_keys++;
             node->num_keys--;
         }
-        node->ptr[i - M / 2] = node->ptr[i];
+        newNode->ptr[i - (M - 1) / 2 - 1] = node->ptr[i];
+        node->ptr[(M - 1) / 2 + 1] = NULL;
     }
     // Si el nodo es una hoja, movemos la mitad de las claves y punteros al nuevo nodo
     else {
-        for (i = M / 2; i < M; i++) {
-            newNode->keys[i - M / 2] = node->keys[i];
-            newNode->ptr[i - M / 2] = node->ptr[i];
+        for (i = (M - 1) / 2; i < M; i++) {
+            newNode->keys[i - (M - 1) / 2] = node->keys[i];
+            newNode->ptr[i - (M - 1) / 2] = node->ptr[i];
             newNode->num_keys++;
             node->num_keys--;
         }
-        node->next = newNode;  // Asegura que los nodos hoja estén correctamente enlazados
+        newNode->next = node->next;
+        node->next = newNode;
     }
 
     // Si el nodo es la raíz, creamos una nueva raíz y actualizamos los punteros
@@ -114,6 +132,8 @@ void splitNode(BPlusTree* tree, BPlusNode* node) {
         parent->keys[0] = mid;
         parent->ptr[0]->node = node;
         parent->ptr[1]->node = newNode;
+        newNode->parent = parent;
+        node->parent = parent;
         parent->num_keys++;
         tree->root = parent;
     }
@@ -125,7 +145,7 @@ void splitNode(BPlusTree* tree, BPlusNode* node) {
 
 void insertIntoParent(BPlusTree* tree, BPlusNode* node, int key, BPlusNode* newNode) {
     int i, j;
-    BPlusNode *parent = findParent(tree->root, node, key);
+    BPlusNode *parent = node->parent;
 
     // Encontramos la posición correcta para insertar la nueva clave
     for (i = 0; i < parent->num_keys; i++) {
@@ -141,6 +161,7 @@ void insertIntoParent(BPlusTree* tree, BPlusNode* node, int key, BPlusNode* newN
     }
     parent->keys[i] = key;
     parent->ptr[i + 1]->node = newNode;
+    newNode->parent = parent;
     parent->num_keys++;
 
     // Si el nodo padre está lleno, lo dividimos
@@ -148,28 +169,6 @@ void insertIntoParent(BPlusTree* tree, BPlusNode* node, int key, BPlusNode* newN
         splitNode(tree, parent);
     }
 }
-
-BPlusNode* findParent(BPlusNode* root, BPlusNode* child, int key) {
-    if (root == NULL || root->is_leaf) {
-        return NULL;
-    }
-
-    BPlusNode* parent = NULL;
-    for (int i = 0; i <= root->num_keys; i++) {
-        if (root->ptr[i]->node == child) {
-            return root;
-        }
-        if (root->ptr[i] && root->ptr[i]->node && key < root->ptr[i]->node->keys[0]) {
-            parent = findParent(root->ptr[i]->node, child, key);
-            if (parent) {
-                return parent;
-            }
-        }
-    }
-
-    return NULL;
-}
-
 
 void searchRangeBPlusTree(BPlusTree* tree, int key1, int key2, List* lista) {
     BPlusNode* node;

@@ -19,6 +19,7 @@ typedef struct PtrElement {
 struct BPlusNode {
     int keys[M - 1];
     PtrElement* ptr[M];
+    struct BPlusNode* parent;
     struct BPlusNode* next;
     int is_leaf;
     int num_keys;
