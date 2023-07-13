@@ -14,8 +14,11 @@ int main(void) {
     HashMap* mapaCategorias = createMap(MAPINITIALCAPAC);
     BPlusTree* arbolProductos = createBPlusTree();
     HashMap* mapaAdmin = createMap(MAPADMINITIALCAPAC);
+    trieTree* trieProductos = createTrieTree();
+    trieTree* trieCategorias = createTrieTree();
+    trieTree* trieSupermercados = createTrieTree();
     
-    importarDatosCSV(mapaProductos, mapaSupermercados, mapaCategorias, arbolProductos);
+    importarDatosCSV(mapaProductos, mapaSupermercados, mapaCategorias, arbolProductos, trieProductos, trieCategorias, trieSupermercados);
     importarCredencialesAdmin(mapaAdmin);
     List* canasta = createList();
     int opcion;

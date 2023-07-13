@@ -6,7 +6,11 @@ poder manipularlos en la aplicación. Esto, se logra a través de la creación d
 Primero, se lee línea a línea el archivo de productos, siguiendo el formato del archivo: 
 "Nombre,Precio,Categoría,Cantidad de Supermercados,Supermercados", y cada elemento se guarda en las structs respectivas para 
 ir almacenandolas en los mapas respectivamente.*/
-void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMap* mapaCategorias, BPlusTree* arbolP) {
+void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, 
+                      HashMap* mapaCategorias, BPlusTree* arbolP, 
+                      trieTree* trieProductos, trieTree* trieCategorias, 
+                      trieTree* trieSupermercados)
+{
     FILE* file_productos = fopen("Base de datos/db_productos.csv", "r");
     FILE* file_super = fopen("Base de datos/db_supermercados.csv", "r");
     FILE* file_categorias = fopen("Base de datos/db_categorias.csv", "r");
@@ -43,6 +47,8 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMa
             strncpy(nuevaCategoria->nombre, token, sizeof(nuevaCategoria->nombre));
             nuevaCategoria->productos = createList();
             pushBack(nuevaCategoria->productos, nuevoProducto);
+            //trieNode* rootCategorias1 = getRootTrie(trieCategorias);
+            //insert(rootCategorias1, nuevaCategoria->nombre, nuevaCategoria, trieCategorias);
             insertMap(mapaCategorias, nuevaCategoria->nombre, nuevaCategoria);
         }
         else
@@ -76,6 +82,8 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMa
                 pushBack(nuevoProducto->supermercados, nuevoSupermercado);      
                 nuevoSupermercado->productos = createList();
                 pushBack(nuevoSupermercado->productos, nuevoProducto);
+                //trieNode* rootSupermercados1 = getRootTrie(trieSupermercados);
+                //insert(rootSupermercados1, nuevoSupermercado->nombre, nuevoSupermercado, trieSupermercados);
                 insertMap(mapaSupermercados, nuevoSupermercado->nombre, nuevoSupermercado);
             }
             else
@@ -92,7 +100,8 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMa
             superAux = nextList(nuevoProducto->supermercados);
         }
         insertMap(mapaProductos, nuevoProducto->nombre, nuevoProducto);
-        
+        trieNode* rootProductos = getRootTrie(trieProductos);
+        insert(rootProductos, nuevoProducto->nombre, nuevoProducto, trieProductos);
         insertBPlusTree(arbolP, nuevoProducto->price, nuevoProducto);
     }
     
@@ -108,6 +117,8 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMa
             tipoSupermercado* nuevoSupermercado2 = (tipoSupermercado*) malloc(sizeof(tipoSupermercado));
             strncpy(nuevoSupermercado2->nombre, token, sizeof(nuevoSupermercado2->nombre));
             nuevoSupermercado2->productos = createList();
+           // trieNode* rootSupermercados = getRootTrie(trieSupermercados);
+           // insert(rootSupermercados, nuevoSupermercado2->nombre, nuevoSupermercado2, trieSupermercados);
             insertMap(mapaSupermercados, nuevoSupermercado2->nombre, nuevoSupermercado2);
         }
     }
@@ -123,6 +134,8 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMa
             tipoCategoria* nuevaCategoria2 = (tipoCategoria*) malloc(sizeof(tipoCategoria));
             strncpy(nuevaCategoria2->nombre, token, sizeof(nuevaCategoria2->nombre));
             nuevaCategoria2->productos = createList();
+            //trieNode* rootCategorias = getRootTrie(trieCategorias);
+            //insert(rootCategorias, nuevaCategoria2->nombre, nuevaCategoria2, trieCategorias);
             insertMap(mapaCategorias, nuevaCategoria2->nombre, nuevaCategoria2);
         }
     }

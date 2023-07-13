@@ -14,8 +14,9 @@ int main(void) {
     HashMap* mapaCategorias = createMap(MAPINITIALCAPAC);
     BPlusTree* arbolProductos = createBPlusTree();
     HashMap* mapaAdmin = createMap(MAPADMINITIALCAPAC);
+    trieTree* trieProductos = createTrieTree();
     
-    importarDatosCSV(mapaProductos, mapaSupermercados, mapaCategorias, arbolProductos);
+    importarDatosCSV(mapaProductos, mapaSupermercados, mapaCategorias, arbolProductos, trieProductos);
     importarCredencialesAdmin(mapaAdmin);
     List* canasta = createList();
     int opcion;
@@ -58,7 +59,12 @@ int main(void) {
                 if(loginAdmin(mapaAdmin) != 0)
                    menuAdmin(mapaProductos, mapaSupermercados, mapaCategorias);
                 break;
-            }        
+            }
+            case 8:
+            {
+                busquedaProductosPorNombreParcial(mapaProductos, trieProductos);
+                break;
+            }
             case 0:
             {
                 printf("CERRANDO EL PROGRAMA...\n");

@@ -27,6 +27,7 @@
 #define MSJBUSQUEDASC "            NO HAY COINCIDENCIAS EN LA BÚSQUEDA"
 #define MSJBUSQUEDASCP1 "            NO HAY PRODUCTOS ASOCIADOS AL SUPERMERCADO INGRESADO"
 #define MSJBUSQUEDASCP2 "            NO HAY PRODUCTOS ASOCIADOS A LA CATEGORÍA INGRESADA"
+#define MSJBUSQUEDA5 "            BUSQUEDA DE PRODUCTOS POR NOMBRE PARCIAL"
 
 // MSJBUSQUEDASC: Mensaje de busqueda para los casos en que no haya coincidencias en las búsquedas en mapas.
 // MSJBUSQUEDASCP: Mensaje de búsqueda para los casos en que no haya productos en las listas adyacentes.

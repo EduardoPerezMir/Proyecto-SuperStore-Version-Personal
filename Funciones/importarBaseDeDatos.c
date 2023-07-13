@@ -6,7 +6,10 @@ poder manipularlos en la aplicación. Esto, se logra a través de la creación d
 Primero, se lee línea a línea el archivo de productos, siguiendo el formato del archivo: 
 "Nombre,Precio,Categoría,Cantidad de Supermercados,Supermercados", y cada elemento se guarda en las structs respectivas para 
 ir almacenandolas en los mapas respectivamente.*/
-void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMap* mapaCategorias, BPlusTree* arbolP) {
+void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados,
+                      HashMap* mapaCategorias, BPlusTree* arbolP,
+                      trieTree* trieProductos)
+{
     FILE* file_productos = fopen("Base de datos/db_productos.csv", "r");
     FILE* file_super = fopen("Base de datos/db_supermercados.csv", "r");
     FILE* file_categorias = fopen("Base de datos/db_categorias.csv", "r");
@@ -92,7 +95,8 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados, HashMa
             superAux = nextList(nuevoProducto->supermercados);
         }
         insertMap(mapaProductos, nuevoProducto->nombre, nuevoProducto);
-        
+        trieNode* rootProductos = getRootTrie(trieProductos);
+        insert(rootProductos, nuevoProducto->nombre, nuevoProducto, trieProductos);
         insertBPlusTree(arbolP, nuevoProducto->price, nuevoProducto);
     }
     

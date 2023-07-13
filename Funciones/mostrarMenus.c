@@ -12,7 +12,8 @@ void mostrarOpciones()
     printf("║ 5. INGRESE 5 SI DESEA MOSTRAR PRODUCTO POR SUPERMERCADO     ║\n");
     printf("║ 6. INGRESE 6 SI DESEA MOSTRAR PRODUCTO POR CATEGORIA        ║\n");
     printf("║ 7. INGRESE 7 SI DESEA INICIAR SESION COMO ADMINISTRADOR     ║\n");
-    printf("║ 8. INGRESE 0 SI DESEA SALIR                                 ║\n");
+    printf("║ 8. INGRESE 8 SI DESEA BUSCAR PRODUCTOS POR NOMBRE PARCIAL   ║\n");
+    printf("║ 0. INGRESE 0 SI DESEA SALIR                                 ║\n");
     printf("║                                                             ║\n");
     printf("╚═════════════════════════════════════════════════════════════╝\n\n");
 }

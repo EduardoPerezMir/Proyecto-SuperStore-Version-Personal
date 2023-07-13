@@ -213,3 +213,59 @@ void busquedaProductosAdyacentes(HashMap* mapa, int indicador)
         }
     }
 }
+
+
+
+void busquedaProductosPorNombreParcial(HashMap *mapa, trieTree* trie)
+{
+    printMap(mapa, 0);    // Muestra todos los productos disponibles.
+    puts(MSJBUSQUEDA5); //Mensaje de búsqueda de productos por nombre.
+
+    List* listaProductos = createList();
+    char nombreProductoBuscado[MAXLEN + 1]; //Variable que almacenará la cadena ingresada por el usuario para este caso.
+    printf("Ingrese el nombre o nombre parcial del producto a buscar: ");
+    scanf("%30[^\n]s", nombreProductoBuscado); //Se pide al usuario ingresar el nombre exacto del producto (incluyendo la mayúscula inicial).
+    while (getchar() != '\n'); // Limpiar el buffer del teclado.
+    
+    trieNode* rootTrie = getRootTrie(trie);
+    searchWordsStartingWith(rootTrie, nombreProductoBuscado, listaProductos);
+    
+    if (isListEmpty(listaProductos))
+    {
+        puts(MSJBUSQUEDASC); // Mensaje para indicar que no hay coincidencias de búsqueda.
+        return;              // En este caso, se termina el algoritmo.
+    }
+    
+    printf("            PRODUCTOS ENCONTRADOS: \n");
+    
+    tipoProducto* productoBuscado = firstList(listaProductos); 
+
+    if (productoBuscado == NULL) //Esta condición fue puesta por seguridad en fugas de memoria.
+    {
+        printf("ERROR DE MEMORIA.");
+        return; // Se termina el algoritmo.
+    }
+    
+    List* listaAux = createList();
+    pushBack(listaAux, productoBuscado);
+    // Se muestra la información del primer producto dentro del rango.
+    int cont = 2;
+    while (1)
+    {
+        productoBuscado = nextList(listaProductos); // Se accede al siguiente elemento de la lista.
+        if (productoBuscado == NULL) break;         // Una vez que el producto buscado es NULL, se termina el ciclo.
+        pushBack(listaAux, productoBuscado);
+        if (cont % 3 == 0) // Cada 3 productos se llama a la función mostrarProductos (para que muestre cada 3 productos uno al lado del otro).
+        {
+            mostrarProductos(listaAux);
+            cleanList(listaAux);
+        }
+        cont++;// Se van mostrando todos los elementos de la lista.
+    }
+    if ((cont - 1) % 3 != 0) // Si el resto es distinto de cero, quedaron 1 o 2 productos por mostrar.
+    {
+        mostrarProductos(listaAux);
+    }
+    destroyList(listaAux); // Se libera memoria.
+    
+}
