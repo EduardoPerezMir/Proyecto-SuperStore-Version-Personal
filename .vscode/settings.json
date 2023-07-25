@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "mostrarelementossistema.h": "c",
+        "string.h": "c",
+        "constantesyregistros.h": "c",
+        "busquedas.h": "c",
+        "gtk.h": "c",
+        "list.h": "c",
+        "adjlistsdestroyer.h": "c",
+        "opcionesadmin.h": "c"
+    }
+}

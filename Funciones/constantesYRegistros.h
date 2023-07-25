@@ -7,7 +7,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <ctype.h>
-
+#include <gtk/gtk.h>
+#include <glib.h>
 #include "../TDAs/list.h"
 
 #define MAXLEN 30
