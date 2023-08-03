@@ -94,63 +94,87 @@ void mostrarProductos(List* lista)
     if (productoAMostrar2 != NULL)    printf("%-4cNombre Producto: %-31s", caracterAux, productoAMostrar2->nombre);
     if (productoAMostrar3 != NULL)    printf("%-4cNombre Producto: %-31s", caracterAux, productoAMostrar3->nombre);
     printf("\n");
-    if (productoAMostrar1 != NULL)    printf("%-5cPrecio: $%-31s", caracterAux, productoAMostrar1->precio);
-    if (productoAMostrar2 != NULL)    printf("%-4c        Precio: $%-31s", caracterAux, productoAMostrar2->precio);
-    if (productoAMostrar3 != NULL)    printf("%-4c        Precio: $%-31s", caracterAux, productoAMostrar3->precio);
-    printf("\n");
     if (productoAMostrar1 != NULL)    printf("%-5cCategoria: %-31s", caracterAux, productoAMostrar1->categoria);
     if (productoAMostrar2 != NULL)    printf("%-4c      Categoria: %-31s", caracterAux, productoAMostrar2->categoria);
     if (productoAMostrar3 != NULL)    printf("%-4c      Categoria: %-31s", caracterAux, productoAMostrar3->categoria);
     printf("\n");
     // Variable utilizada para recorrer la lista de supermercados que tienen ese producto
 
-    tipoSupermercado* supermercadoPtr1 = (tipoSupermercado*) malloc(sizeof(tipoSupermercado));
-    tipoSupermercado* supermercadoPtr2 = (tipoSupermercado*) malloc(sizeof(tipoSupermercado));
-    tipoSupermercado* supermercadoPtr3 = (tipoSupermercado*) malloc(sizeof(tipoSupermercado));
+    tipoProductoEspecifico* preciosYSupermecados1 = (tipoProductoEspecifico*) malloc(sizeof(tipoProductoEspecifico));
+    tipoProductoEspecifico* preciosYSupermecados2 = (tipoProductoEspecifico*) malloc(sizeof(tipoProductoEspecifico));
+    tipoProductoEspecifico* preciosYSupermecados3 = (tipoProductoEspecifico*) malloc(sizeof(tipoProductoEspecifico));
 
-    // Importante haber inicializado en NULL, ya que de esta manera es útil hacer condiciones de valor nulo.
-    supermercadoPtr1 = NULL; 
-    supermercadoPtr2 = NULL;
-    supermercadoPtr3 = NULL;
+
+    // Importante inicializar en NULL.
+    preciosYSupermecados1 = NULL;
+    preciosYSupermecados2 = NULL;
+    preciosYSupermecados3 = NULL;
 
     //Si un producto no es nulo, entonces tiene supermercados asociados.
-    if (productoAMostrar1 != NULL)    supermercadoPtr1 = firstList(productoAMostrar1->supermercados); 
-    if (productoAMostrar2 != NULL)    supermercadoPtr2 = firstList(productoAMostrar2->supermercados);
-    if (productoAMostrar3 != NULL)    supermercadoPtr3 = firstList(productoAMostrar3->supermercados);
+    if (productoAMostrar1 != NULL)  preciosYSupermecados1 = firstList(productoAMostrar1->preciosPorSupermercado);
+    if (productoAMostrar2 != NULL)  preciosYSupermecados2 = firstList(productoAMostrar2->preciosPorSupermercado);
+    if (productoAMostrar3 != NULL)  preciosYSupermecados3 = firstList(productoAMostrar3->preciosPorSupermercado);
 
     //Si un supermercado no es nulo, entonces tiene un nombre.
-    if (supermercadoPtr1 != NULL)    printf("%-5cSupermercado 1: %-31s", caracterAux, supermercadoPtr1->nombre);
-    if (supermercadoPtr2 != NULL)    printf("%-4c Supermercado 1: %-31s", caracterAux, supermercadoPtr2->nombre);
-    if (supermercadoPtr3 != NULL)    printf("%-4c Supermercado 1: %-31s", caracterAux, supermercadoPtr3->nombre);
-    
+    if (preciosYSupermecados1 != NULL)    printf("%-5cSupermercado 1: %-31s", caracterAux, preciosYSupermecados1->nombreSupermercado);
+    if (preciosYSupermecados2 != NULL)    printf("%-4c Supermercado 1: %-31s", caracterAux, preciosYSupermecados2->nombreSupermercado);
+    if (preciosYSupermecados3 != NULL)    printf("%-4c Supermercado 1: %-31s", caracterAux, preciosYSupermecados3->nombreSupermercado);
     printf("\n");
     
+    if (preciosYSupermecados1 != NULL)    printf("%-5cPrecio 1: $%-31s", caracterAux, preciosYSupermecados1->precio);
+    if (preciosYSupermecados2 != NULL)    printf("%-4c      Precio 1: $%-31s", caracterAux, preciosYSupermecados2->precio);
+    if (preciosYSupermecados3 != NULL)    printf("%-4c      Precio 1: $%-31s", caracterAux, preciosYSupermecados3->precio);
+    
+    printf("\n");
+
     int cont = 1; // Este contador es para indicar que supermercado se mostrará respecto a la lista asociada a cada producto.
     while (1)
     {
         // Se recorre las listas de supermercados respectivamente.
-        if (supermercadoPtr1 != NULL)    supermercadoPtr1 = nextList(productoAMostrar1->supermercados);
-        if (supermercadoPtr2 != NULL)    supermercadoPtr2 = nextList(productoAMostrar2->supermercados);
-        if (supermercadoPtr3 != NULL)    supermercadoPtr3 = nextList(productoAMostrar3->supermercados);
+        if (preciosYSupermecados1 != NULL)    preciosYSupermecados1 = nextList(productoAMostrar1->preciosPorSupermercado);
+        if (preciosYSupermecados2 != NULL)    preciosYSupermecados2 = nextList(productoAMostrar2->preciosPorSupermercado);
+        if (preciosYSupermecados3 != NULL)    preciosYSupermecados3 = nextList(productoAMostrar3->preciosPorSupermercado);
 
         // El bucle termina cuando ya no hay más supermercados en ninguna de las tres posibles listas.
-        if (supermercadoPtr1 == NULL && supermercadoPtr2 == NULL && supermercadoPtr3 == NULL)    break;
+        if (preciosYSupermecados1 == NULL && preciosYSupermecados2 == NULL && preciosYSupermecados3 == NULL)    break;
         
-        if (supermercadoPtr1 != NULL)  printf("%-5cSupermercado %d: %-31s", caracterAux, cont + 1, supermercadoPtr1->nombre);
+        if (preciosYSupermecados1 != NULL)  printf("%-5cSupermercado %d: %-31s", caracterAux, cont + 1, preciosYSupermecados1->nombreSupermercado);
         else     printf("%-5c                %-31c", caracterAux, caracterAux);
-        if (supermercadoPtr2 != NULL)    printf("%-4c Supermercado %d: %-31s", caracterAux, cont + 1, supermercadoPtr2->nombre);
+        if (preciosYSupermecados2 != NULL)  printf("%-4c Supermercado %d: %-31s", caracterAux, cont + 1, preciosYSupermecados2->nombreSupermercado);
         else     printf("%-4c                 %-31c", caracterAux, caracterAux);
-        if (supermercadoPtr3 != NULL)    printf("%-4c Supermercado %d: %-31s", caracterAux, cont + 1, supermercadoPtr3->nombre);
+        if (preciosYSupermecados3 != NULL)  printf("%-4c Supermercado %d: %-31s", caracterAux, cont + 1, preciosYSupermecados3->nombreSupermercado);
         else     printf("%-4c                 %-31c", caracterAux, caracterAux);
-        
+
         printf("\n");
-        
-        cont++; 
+
+        if (preciosYSupermecados1 != NULL)  printf("%-5cPrecio %d: $%-31s", caracterAux, cont + 1,preciosYSupermecados1->precio);
+        else     printf("%-5c           %-31c", caracterAux, caracterAux);
+        if (preciosYSupermecados2 != NULL)  printf("%-4c      Precio %d: $%-31s", caracterAux, cont + 1,  preciosYSupermecados2->precio);
+        else     printf("%-4c                 %-31c", caracterAux, caracterAux);
+        if (preciosYSupermecados3 != NULL)  printf("%-4c      Precio %d: $%-31s", caracterAux, cont + 1, preciosYSupermecados3->precio);
+        else     printf("%-4c                 %-31c", caracterAux, caracterAux);
+
+        printf("\n");
+        cont++;
     }
+    
+   // if (productoAMostrar1 != NULL)  preciosYSupermecados1 = firstList(productoAMostrar1->preciosPorSupermercado);
+   // if (productoAMostrar2 != NULL)  preciosYSupermecados2 = firstList(productoAMostrar2->preciosPorSupermercado);
+   // if (productoAMostrar3 != NULL)  preciosYSupermecados3 = firstList(productoAMostrar3->preciosPorSupermercado);
+/*
+    if (preciosYSupermecados1 != NULL)  printf("%13s","Precios:");
+    else     printf("%-5c                %-31c", caracterAux, caracterAux);
+    if (preciosYSupermecados2 != NULL)  printf("%55s","Precios:");
+    else     printf("%-4c                 %-31c", caracterAux, caracterAux);
+    if (preciosYSupermecados3 != NULL)  printf("%55s","Precios:");
+    else     printf("%-4c                 %-31c", caracterAux, caracterAux);*/
     
     for (int i = 0; i < size; i++)    printf("%-3c|--------------------------------------------|%-3c", caracterAux, caracterAux);
     printf("\n");
 }
+
+
+
 
 /*Esta opcion muestra todos productos del mapa de productos*/
 void mostrarOfertaNacional(HashMap* productos) {

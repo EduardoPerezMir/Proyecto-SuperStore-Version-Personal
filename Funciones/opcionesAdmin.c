@@ -82,7 +82,8 @@ void agregarProducto(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* m
     char precio[PRICELEN + 1];
     char categoria[MAXLEN + 1];
     int cantSupermercados;
-
+    tipoProductoEspecifico* preciosAAgregar = (tipoProductoEspecifico*) malloc(sizeof(tipoProductoEspecifico));
+    
     printf("Ingrese el nombre del producto: ");
     scanf("%s", nombre);
     while (getchar() != '\n');
@@ -95,14 +96,7 @@ void agregarProducto(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* m
     printf("El prodcuto ya existe en el mapa de productos.\n");
     mostrarMenuAdmin();
     }
-
-    printf("Ingrese el precio del producto: ");
-    scanf("%s", precio);
-    while (getchar() != '\n');
     
-    // Convertir el precio de cadena de caracteres a entero
-    int price = atoi(precio);
-
     printf("Ingrese la categoría del producto: ");
     scanf("%s", categoria);
     while (getchar() != '\n');
@@ -113,17 +107,15 @@ void agregarProducto(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* m
 
     // Crear una estructura para el nuevo producto
     tipoProducto* nuevoProducto = (tipoProducto*)malloc(sizeof(tipoProducto));
+    nuevoProducto->preciosPorSupermercado = createList();
     strncpy(nuevoProducto->nombre, nombre, sizeof(nuevoProducto->nombre));
-    strncpy(nuevoProducto->precio, precio, sizeof(nuevoProducto->precio));
-    nuevoProducto->price = price;
+    strncpy(preciosAAgregar->nombreProducto, nuevoProducto->nombre, sizeof(preciosAAgregar->nombreProducto));
+
     strncpy(nuevoProducto->categoria, categoria, sizeof(nuevoProducto->categoria));
     
     nuevoProducto->cantSupermercados = cantSupermercados;
     nuevoProducto->supermercados = createList();
 
-    // Insertar el nuevo producto en el mapa de productos
-    insertMap(mapaProductos, nombre, nuevoProducto);
-  
    /// Verificar si la categoría existe en el mapa de categorías
     Pair* categoriaProducto = searchMap(mapaCategorias, categoria);
   
@@ -142,7 +134,8 @@ void agregarProducto(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* m
     
     pushBack(((tipoCategoria *)categoriaProducto->value)->productos, nuevoProducto);
     // Agregar el producto a la lista de productos de la categoría
-    for (int i = 0; i < cantSupermercados; i++) {
+    for (int i = 0; i < cantSupermercados; i++)
+    {
         char nombreSupermercado[MAXLEN + 1];
         printf("Ingrese el nombre del supermercado %d: ", i + 1);
         scanf("%s", nombreSupermercado);
@@ -163,8 +156,20 @@ void agregarProducto(HashMap* mapaProductos, HashMap* mapaCategorias, HashMap* m
 
         pushBack(((tipoSupermercado *)auxSupermercado->value)->productos, nuevoProducto);
         pushBack(nuevoProducto->supermercados, ((tipoSupermercado *)auxSupermercado->value)->nombre);
+        
+        printf("Ingrese el precio del producto en %s: ", nombreSupermercado);
+        scanf("%s", precio);
+        while (getchar() != '\n');
+        // Convertir el precio de cadena de caracteres a entero
+        int price = atoi(precio);
+
+        strncpy(preciosAAgregar->nombreSupermercado, nombreSupermercado, sizeof(preciosAAgregar->nombreSupermercado));        
+        strncpy(preciosAAgregar->precio, precio, sizeof(preciosAAgregar->precio));
+        preciosAAgregar->price = price;
     }
-    
+
+    // Insertar el nuevo producto en el mapa de productos
+    insertMap(mapaProductos, nombre, nuevoProducto);
     printf("Producto agregado exitosamente.\n");
 }
 
@@ -295,18 +300,19 @@ void guardarDatosCSV(HashMap* mapaProductos) {
 
         // Verificar si el nombre del producto no es nulo
         if (producto->nombre[0] != '\0') {
-            fprintf(archivo, "%s,%s,%s,", producto->nombre, producto->precio, producto->categoria);
+            fprintf(archivo, "%s,%s,%s,", producto->nombre, producto->categoria);
 
             // Verificar si la lista de supermercados no es nula
             if (producto->supermercados != NULL) {
                 int cantidadSupermercados = get_size_list(producto->supermercados);
                 fprintf(archivo, "%d,", cantidadSupermercados);
 //ARREGLAR
-                tipoSupermercado* supermercado = firstList(producto->supermercados);
+                tipoProductoEspecifico* precios = firstList(producto->preciosPorSupermercado);
                 
                 for (int i = 0; i < cantidadSupermercados; i++) {
-                    fprintf(archivo, "%s", supermercado->nombre);
-                    supermercado = nextList(producto->supermercados);
+                    fprintf(archivo, "%s", precios->nombreSupermercado);
+                    fprintf(archivo, "%s", precios->precio);
+                    precios = nextList(producto->preciosPorSupermercado);
                     
                     if (i == cantidadSupermercados - 1)
                         fprintf(archivo, ".");
@@ -348,7 +354,7 @@ void guardarDatosCSV2 (HashMap* mapaSupermercados, HashMap* mapaCategorias){
         supermercadoAux = currentSupermercado->value;
     }
     fclose(file_super);
-//categoria
+    //categoria
     fprintf(file_categoria, "Categorias\n");
     Pair* currentCategoria = firstMap(mapaCategorias);
     tipoSupermercado* categoriaAux = currentCategoria->value;

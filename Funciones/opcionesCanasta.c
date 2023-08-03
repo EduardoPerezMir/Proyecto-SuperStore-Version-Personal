@@ -159,9 +159,9 @@ void agregarProduCanasta(HashMap* mapaProductos, HashMap* mapaSupermercados, Lis
         tipoCanasta* elemCanasta = (tipoCanasta *) malloc(sizeof(tipoCanasta));
         strcpy(elemCanasta->nombre,nomProducto);
         strcpy(elemCanasta->supermercado,nomSupermercado);
-        strcpy(elemCanasta->precio,((tipoProducto *)current->value)->precio);
+        strcpy(elemCanasta->precio,((tipoProductoEspecifico*)((tipoProducto *)current->value)->preciosPorSupermercado)->precio);
         elemCanasta->cantidad=cantidad;
-            
+        
         pushBack(canasta,elemCanasta);
         printf("\nEl producto %s del supermercado %s ha sido agregado a la canasta.\n\n", nomProducto, nomSupermercado);
             

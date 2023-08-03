@@ -7,8 +7,6 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <ctype.h>
-#include <gtk/gtk.h>
-#include <glib.h>
 #include "../TDAs/list.h"
 
 #define MAXLEN 30
@@ -35,12 +33,19 @@
 
 typedef struct{
     char nombre[MAXLEN + 1];
-    char precio[PRICELEN + 1];
-    int price;                // Este precio en tipo int fue exclusivamente implementado para la opción de búsqueda por rango de precios.
     char categoria[MAXLEN + 1];
     int cantSupermercados;
     List *supermercados;
+    List *preciosPorSupermercado;
 }tipoProducto;
+
+typedef struct{
+    char nombreProducto[MAXLEN + 1];
+    char nombreSupermercado[MAXLEN + 1];
+    char precio[PRICELEN + 1];
+    int price;                // Este precio en tipo int fue exclusivamente implementado para la opción de búsqueda por rango de precios.
+}tipoProductoEspecifico;
+
 
 typedef struct{
     char nombre[MAXLEN + 1];

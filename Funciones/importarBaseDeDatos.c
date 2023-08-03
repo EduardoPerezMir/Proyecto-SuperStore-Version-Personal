@@ -10,7 +10,7 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados,
                       HashMap* mapaCategorias, BPlusTree* arbolP,
                       trieTree* trieProductos)
 {
-    FILE* file_productos = fopen("Base de datos/db_productos.csv", "r");
+    FILE* file_productos = fopen("Base de datos/db_productos2.csv", "r");
     FILE* file_super = fopen("Base de datos/db_supermercados.csv", "r");
     FILE* file_categorias = fopen("Base de datos/db_categorias.csv", "r");
     // Si no se puede abrir alguno de los archivos, el algoritmo termina.
@@ -26,17 +26,12 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados,
     
     while (fgets(linea, sizeof(linea), file_productos) != NULL) { // Se lee línea a línea el archivo de productos.
         tipoProducto* nuevoProducto = (tipoProducto*) malloc(sizeof(tipoProducto));
-
+        
         token = strtok(linea, ",");
         strncpy(nuevoProducto->nombre, token, sizeof(nuevoProducto->nombre)); // El primer texto hasta antes de la primera coma de cada línea
-                                                                              // es el nombre del producto, y así sucesivamente.
+                                                                              // es el nombre del producto, y así sucesivamente
         token = strtok(NULL, ",");
-        strncpy(nuevoProducto->precio, token, sizeof(nuevoProducto->precio));
         
-        nuevoProducto->price = atoi(nuevoProducto->precio);
-        
-        token = strtok(NULL, ",");
-
         strncpy(nuevoProducto->categoria, token, sizeof(nuevoProducto->categoria));
         Pair* parAux = searchMap(mapaCategorias, token);
         
@@ -59,18 +54,13 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados,
         nuevoProducto->cantSupermercados = atoi(token);
         
         nuevoProducto->supermercados = createList();
+        nuevoProducto->preciosPorSupermercado = createList();
         
         Pair* parAux2 = (Pair*) malloc(sizeof(Pair)); 
         int cantSupermercados = nuevoProducto->cantSupermercados;
+        
         for (unsigned short i = 0; i < cantSupermercados; i++) {
-            if (i == cantSupermercados - 1)
-            {
-                token = strtok(NULL, "."); // En el último supermercado, se copia la cadena hasta antes del punto en token.
-            }
-            else
-            {
-                token = strtok(NULL, ",");
-            }
+            token = strtok(NULL, ",");
             parAux2 = searchMap(mapaSupermercados, token);
             if (parAux2 == NULL)
             {
@@ -80,6 +70,7 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados,
                 nuevoSupermercado->productos = createList();
                 pushBack(nuevoSupermercado->productos, nuevoProducto);
                 insertMap(mapaSupermercados, nuevoSupermercado->nombre, nuevoSupermercado);
+
             }
             else
             {
@@ -87,6 +78,20 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados,
                 pushBack(nuevoProducto->supermercados, supermercadoExistente);
                 pushBack(supermercadoExistente->productos, nuevoProducto);
             }
+                tipoProductoEspecifico* NuevoProductoEspecifico = (tipoProductoEspecifico*) malloc(sizeof(tipoProductoEspecifico));
+                strncpy(NuevoProductoEspecifico->nombreProducto, nuevoProducto->nombre, sizeof(NuevoProductoEspecifico->nombreProducto));
+                strncpy(NuevoProductoEspecifico->nombreSupermercado, token, sizeof(NuevoProductoEspecifico->nombreSupermercado));
+                
+                if (i == cantSupermercados - 1)
+                    token = strtok(NULL, ".");
+                else
+                    token = strtok(NULL, ",");
+                
+                
+                strncpy(NuevoProductoEspecifico->precio, token, sizeof(NuevoProductoEspecifico->precio));
+                NuevoProductoEspecifico->price = atoi(NuevoProductoEspecifico->precio);
+                pushBack(nuevoProducto->preciosPorSupermercado, NuevoProductoEspecifico);
+                insertBPlusTree(arbolP, NuevoProductoEspecifico->price, nuevoProducto);
         }
         
         tipoSupermercado *superAux = firstList(nuevoProducto->supermercados);
@@ -97,7 +102,6 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados,
         insertMap(mapaProductos, nuevoProducto->nombre, nuevoProducto);
         trieNode* rootProductos = getRootTrie(trieProductos);
         insert(rootProductos, nuevoProducto->nombre, nuevoProducto, trieProductos);
-        insertBPlusTree(arbolP, nuevoProducto->price, nuevoProducto);
     }
     
     fclose(file_productos);
@@ -130,7 +134,6 @@ void importarDatosCSV(HashMap* mapaProductos, HashMap* mapaSupermercados,
             insertMap(mapaCategorias, nuevaCategoria2->nombre, nuevaCategoria2);
         }
     }
-
     fclose(file_categorias);
 }
 
